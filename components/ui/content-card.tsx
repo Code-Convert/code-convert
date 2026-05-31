@@ -3,12 +3,12 @@ import Link from 'next/link';
 
 interface ContentCardProps {
   href: string;
-  image?: string;
+  image?: string | null;
   title: string;
   subtitle?: string;
-  tags?: string[];
-  excerpt?: string;
-  date?: string;
+  tags?: string[] | null;
+  excerpt?: string | null;
+  date?: string | null;
 }
 
 export function ContentCard({ href, image, title, subtitle, tags, excerpt, date }: ContentCardProps) {

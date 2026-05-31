@@ -1,5 +1,5 @@
 interface ImageGalleryProps {
-  images: string[];
+  images: string[] | null;
   alt: string;
   columns?: { md?: number };
 }

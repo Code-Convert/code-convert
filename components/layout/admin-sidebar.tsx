@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { X } from 'lucide-react';
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 import { 

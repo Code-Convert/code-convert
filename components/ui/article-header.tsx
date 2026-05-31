@@ -4,7 +4,7 @@ interface ArticleHeaderProps {
   title: string;
   subtitle?: string;
   date?: string;
-  tags?: string[];
+  tags?: string[] | null;
   backLink?: { href: string; label: string };
 }
 

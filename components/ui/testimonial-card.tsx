@@ -1,10 +1,12 @@
 interface TestimonialCardProps {
   quote: string;
-  author: string;
-  role?: string;
+  author: string | null;
+  role?: string | null;
 }
 
 export function TestimonialCard({ quote, author, role }: TestimonialCardProps) {
+  if (!author) return null;
+  
   return (
     <div className="bg-white/5 rounded-lg p-8 mb-12">
       <p className="text-xl italic mb-4">"{quote}"</p>
