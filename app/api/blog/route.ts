@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/supabase/auth'
-import type { Database } from '@/types/database'
+// import type { Database } from '@/types/database'
+
+import type { Database } from '@/lib/database.type'
 
 export async function GET() {
   try {

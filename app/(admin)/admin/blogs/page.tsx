@@ -65,7 +65,7 @@ export default async function BlogsManagement() {
                 </tr>
               ) : (
                 blogs.map((blog) => (
-                  <tr key={blog.id} className="hover:bg-white/5">
+                   <tr key={blog.id} className="hover:bg-white/5">
                     <td className="px-6 py-4">
                       <div>
                         <div className="text-sm font-medium text-white">
