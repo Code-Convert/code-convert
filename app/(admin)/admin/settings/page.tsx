@@ -16,7 +16,7 @@ export default function Settings() {
             </div>
             <div>
               <label className="text-sm text-white/70">Site URL</label>
-              <p className="text-white mt-1">http://localhost:3000</p>
+              <p className="text-white mt-1">{process.env.NEXT_PUBLIC_SITE_URL}</p>
             </div>
           </div>
         </div>

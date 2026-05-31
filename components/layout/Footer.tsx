@@ -51,8 +51,9 @@ export default function Footer() {
 
         <div className="h-px w-full mb-8 bg-linear-to-r from-transparent via-white/5 to-transparent" />
 
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-4 md:gap-6">
-          <div className="flex flex-col items-center lg:items-start gap-3 md:gap-4 text-center lg:text-left w-full lg:w-auto">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+          {/* Logo & Copyright - Full width on mobile, auto on tablet+ */}
+          <div className="hidden sm:flex flex-col items-center md:items-start gap-3 text-center md:text-left w-full md:w-auto">
             <a href="/" className="flex items-center gap-2">
               <div className="flex h-7 px-2 rounded-lg items-center justify-center bg-[#FF1E1E] shrink-0">
                 <span className="font-bold text-[10px] sm:text-xs tracking-tighter text-white">C&C</span>
@@ -67,9 +68,24 @@ export default function Footer() {
               © {new Date().getFullYear()} Code & Convert (Pty) Ltd. All rights reserved.
             </p>
           </div>
+
+          {/* Contact Details - Full width on mobile, auto on tablet+ */}
+          <div className="flex flex-col items-center gap-2 text-center w-full md:w-auto">
+            <a href="mailto:hello@codeandconvert.com" className="text-[16px] sm:text-md text-neutral-400 hover:text-white transition-colors font-medium">
+              hello@codeandconvert.com
+            </a>
+            <a href="tel:+27123456789" className="text-[16px] sm:text-md text-neutral-400 hover:text-white transition-colors font-medium">
+              +27 12 345 6789
+            </a>
+            <a href="/contact" className="px-3 py-1.5 rounded-full border border-white/5 bg-white/2 hover:bg-white/6 hover:border-white/10 transition-all text-[10px] font-bold tracking-widest uppercase text-neutral-400 hover:text-white flex items-center gap-1 group">
+              Book 1:1 Meeting
+              <ArrowUpRight className="w-3 h-3 text-neutral-500 group-hover:text-white transition-colors" />
+            </a>
+          </div>
           
-          <a href="/" className="px-4 py-2 rounded-full border border-white/5 bg-white/2 hover:bg-white/6 hover:border-white/10 transition-all text-[10px] font-bold tracking-wideset uppercase text-neutral-400 flex items-center gap-1.5 group w-full lg:w-auto justify-center">
-            Powered by Code & Convert 
+          {/* Powered By - Full width on mobile, auto on tablet+ */}
+          <a href="/" className="px-4 py-2 rounded-full border border-white/5 bg-white/2 hover:bg-white/6 hover:border-white/10 transition-all text-[10px] font-bold tracking-widest uppercase text-neutral-400 flex items-center gap-1.5 group w-full md:w-auto justify-center md:justify-start">
+            Powered by Amari&C 
             <ArrowUpRight className="w-3 h-3 text-neutral-500 group-hover:text-white transition-colors" />
           </a>
         </div>

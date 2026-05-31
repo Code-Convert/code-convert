@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface FeaturedImageProps {
   src: string;
   alt: string;
@@ -12,11 +14,12 @@ const aspectClasses = {
 
 export function FeaturedImage({ src, alt, aspectRatio = 'video' }: FeaturedImageProps) {
   return (
-    <div className={`${aspectClasses[aspectRatio]} bg-white/5 rounded-lg overflow-hidden mb-12`}>
-      <img
+    <div className={`${aspectClasses[aspectRatio]} bg-white/5 rounded-lg overflow-hidden mb-12 relative`}>
+      <Image
         src={src}
         alt={alt}
-        className="w-full h-full object-cover"
+        fill
+        className="object-cover"
       />
     </div>
   );

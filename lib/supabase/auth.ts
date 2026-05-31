@@ -4,38 +4,24 @@ import type { User } from '@/types/user'
 
 export async function getUser(): Promise<User | null> {
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
   
-  try {
-    const { data: { user }, error } = await supabase.auth.getUser()
-    
-    if (error || !user) {
-      return null
-    }
+  if (!user) return null
 
-    // Get user role using RPC to bypass RLS
-    const { data: role } = await supabase
-      .rpc('get_user_role', { user_id: user.id })
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role, created_at, updated_at')
+    .eq('id', user.id)
+    .single()
 
-    if (!role) {
-      return null
-    }
+  if (!profile) return null
 
-    // Get profile timestamps
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('created_at, updated_at')
-      .eq('id', user.id)
-      .maybeSingle()
-
-    return {
-      id: user.id,
-      email: user.email || '',
-      role: role,
-      created_at: profile?.created_at,
-      updated_at: profile?.updated_at
-    }
-  } catch (error) {
-    return null
+  return {
+    id: user.id,
+    email: user.email || '',
+    role: profile.role,
+    created_at: profile.created_at,
+    updated_at: profile.updated_at
   }
 }
 
@@ -43,16 +29,6 @@ export async function requireAuth(): Promise<User> {
   const user = await getUser()
   
   if (!user) {
-    redirect('/admin-login')
-  }
-  
-  return user
-}
-
-export async function requireAdmin(): Promise<User> {
-  const user = await requireAuth()
-  
-  if (user.role !== 'admin') {
     redirect('/admin-login')
   }
   

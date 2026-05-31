@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
+import { ImageUpload } from '@/components/ui/image-upload'
 import { slugify } from '@/lib/utils'
 import { INDUSTRIES, SERVICES } from '@/types/case-study'
 
@@ -159,19 +161,17 @@ export default function CreateCaseStudy() {
           rows={4}
         />
 
-        <Textarea
-          label="Content"
-          value={formData.content}
-          onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-          placeholder="Full case study content"
-          rows={8}
+        <ImageUpload
+          label="Featured Image"
+          value={formData.featured_image}
+          onChange={(url) => setFormData(prev => ({ ...prev, featured_image: url }))}
         />
 
-        <Input
-          label="Featured Image URL"
-          value={formData.featured_image}
-          onChange={(e) => setFormData(prev => ({ ...prev, featured_image: e.target.value }))}
-          placeholder="https://..."
+        <RichTextEditor
+          label="Content"
+          value={formData.content}
+          onChange={(content) => setFormData(prev => ({ ...prev, content }))}
+          placeholder="Full case study content"
         />
 
         <div className="border-t border-white/10 pt-6">

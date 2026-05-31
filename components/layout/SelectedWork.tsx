@@ -164,7 +164,7 @@ function ProjectCard({ project, index }: { project: CaseStudy; index: number }) 
         <h3 className="text-base md:text-lg font-bold tracking-tight mb-2">{project.client}</h3>
         <p className="text-[11px] md:text-xs text-neutral-500 leading-relaxed mb-4 md:mb-5" dangerouslySetInnerHTML={{ __html: project.results.substring(0, 150) + '...' }} />
         <div className="flex flex-wrap gap-1.5">
-          {project.services.slice(0, 3).map((tag) => (
+          {project.services?.slice(0, 3).map((tag) => (
             <span key={tag} className="text-[10px] font-bold text-neutral-600 px-2.5 py-1 rounded-md bg-white/3 uppercase tracking-wider">
               {tag}
             </span>

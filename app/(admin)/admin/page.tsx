@@ -4,24 +4,54 @@ async function getDashboardStats() {
   const supabase = await createClient()
   
   try {
-    const [
-      { count: totalBlogs },
-      { count: publishedBlogs },
-      { count: totalCaseStudies },
-      { count: publishedCaseStudies }
-    ] = await Promise.all([
-      supabase.from('blogs').select('*', { count: 'exact', head: true }),
-      supabase.from('blogs').select('*', { count: 'exact', head: true }).eq('published', true),
-      supabase.from('case_studies').select('*', { count: 'exact', head: true }),
-      supabase.from('case_studies').select('*', { count: 'exact', head: true }).eq('published', true)
-    ])
+    // Get all blogs count
+    const { count: totalBlogs, error: blogsError } = await supabase
+      .from('blogs')
+      .select('*', { count: 'exact', head: true })
 
-    return {
+    if (blogsError) {
+      console.error('Error fetching total blogs:', blogsError)
+    }
+
+    // Get published blogs count
+    const { count: publishedBlogs, error: publishedBlogsError } = await supabase
+      .from('blogs')
+      .select('*', { count: 'exact', head: true })
+      .eq('published', true)
+
+    if (publishedBlogsError) {
+      console.error('Error fetching published blogs:', publishedBlogsError)
+    }
+
+    // Get all case studies count
+    const { count: totalCaseStudies, error: caseStudiesError } = await supabase
+      .from('case_studies')
+      .select('*', { count: 'exact', head: true })
+
+    if (caseStudiesError) {
+      console.error('Error fetching total case studies:', caseStudiesError)
+    }
+
+    // Get published case studies count
+    const { count: publishedCaseStudies, error: publishedCaseStudiesError } = await supabase
+      .from('case_studies')
+      .select('*', { count: 'exact', head: true })
+      .eq('published', true)
+
+    if (publishedCaseStudiesError) {
+      console.error('Error fetching published case studies:', publishedCaseStudiesError)
+    }
+
+    const stats = {
       totalBlogs: totalBlogs || 0,
       publishedBlogs: publishedBlogs || 0,
       totalCaseStudies: totalCaseStudies || 0,
       publishedCaseStudies: publishedCaseStudies || 0
     }
+
+    console.log('Dashboard stats:', stats)
+    return stats
+    
   } catch (error) {
     console.error('Dashboard stats error:', error)
     return {

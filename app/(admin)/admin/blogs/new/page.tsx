@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
+import { ImageUpload } from '@/components/ui/image-upload'
 import { slugify } from '@/lib/utils'
 
 export default function CreateBlogPost() {
@@ -15,6 +17,7 @@ export default function CreateBlogPost() {
     slug: '',
     excerpt: '',
     content: '',
+    featured_image: '',
     seo_title: '',
     seo_description: '',
     published: false
@@ -46,10 +49,13 @@ export default function CreateBlogPost() {
       if (response.ok) {
         router.push('/admin/blogs')
       } else {
-        console.error('Failed to create blog post')
+        const errorData = await response.json()
+        console.error('Failed to create blog post:', errorData)
+        alert(`Failed to create blog post: ${errorData.error || 'Unknown error'}`)
       }
     } catch (error) {
       console.error('Error creating blog post:', error)
+      alert('Error creating blog post. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -89,12 +95,17 @@ export default function CreateBlogPost() {
           rows={3}
         />
 
-        <Textarea
+        <ImageUpload
+          label="Featured Image"
+          value={formData.featured_image}
+          onChange={(url) => setFormData(prev => ({ ...prev, featured_image: url }))}
+        />
+
+        <RichTextEditor
           label="Content"
           value={formData.content}
-          onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+          onChange={(content) => setFormData(prev => ({ ...prev, content }))}
           placeholder="Write your blog post content here..."
-          rows={12}
         />
 
         <div className="border-t border-white/10 pt-6">

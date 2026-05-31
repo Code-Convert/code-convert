@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { requireAdmin } from '@/lib/supabase/auth'
+import { requireAuth } from '@/lib/supabase/auth'
 import type { Database } from '@/types/database'
 
 export async function GET() {
   try {
-    await requireAdmin()
     const supabase = await createClient()
     
     const { data: blogs, error } = await supabase
@@ -26,7 +25,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const user = await requireAdmin()
+    const user = await requireAuth()
     const supabase = await createClient()
     
     const body = await request.json()

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface ContentCardProps {
@@ -16,13 +17,18 @@ export function ContentCard({ href, image, title, subtitle, tags, excerpt, date 
       href={href}
       className="group block bg-white/5 rounded-lg overflow-hidden hover:bg-white/10 transition-colors"
     >
-      {image && (
-        <div className="aspect-video bg-white/5 overflow-hidden">
-          <img
+      {image ? (
+        <div className="aspect-video bg-white/5 overflow-hidden relative">
+          <Image
             src={image}
             alt={title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
+        </div>
+      ) : (
+        <div className="aspect-video bg-white/5 flex items-center justify-center">
+          <span className="text-white/30">No image</span>
         </div>
       )}
       <div className="p-4 sm:p-5 md:p-6">

@@ -34,17 +34,13 @@ export default function AdminLogin() {
       }
 
       if (data.user) {
-        // Check if user is admin using RPC call to bypass RLS issues
-        const { data: profile, error: profileError } = await supabase
-          .rpc('get_user_role', { user_id: data.user.id })
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', data.user.id)
+          .single()
 
-        if (profileError || !profile) {
-          setError('Unable to verify admin status. Please contact administrator.')
-          await supabase.auth.signOut()
-          return
-        }
-
-        if (profile !== 'admin') {
+        if (!profile || profile.role !== 'admin') {
           setError('Access denied. Admin privileges required.')
           await supabase.auth.signOut()
           return

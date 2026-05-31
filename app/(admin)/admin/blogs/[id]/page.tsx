@@ -1,14 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
+import { ImageUpload } from '@/components/ui/image-upload'
 import { slugify } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 
-export default function EditBlogPost({ params }: { params: { id: string } }) {
+export default function EditBlogPost({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [fetching, setFetching] = useState(true)
@@ -17,6 +20,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
     slug: '',
     excerpt: '',
     content: '',
+    featured_image: '',
     seo_title: '',
     seo_description: '',
     published: false
@@ -25,10 +29,10 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
   useEffect(() => {
     async function fetchBlog() {
       const supabase = createClient()
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('blogs')
         .select('*')
-        .eq('id', params.id)
+        .eq('id', id)
         .single()
 
       if (data) {
@@ -37,6 +41,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
           slug: data.slug || '',
           excerpt: data.excerpt || '',
           content: data.content || '',
+          featured_image: data.featured_image || '',
           seo_title: data.seo_title || '',
           seo_description: data.seo_description || '',
           published: data.published || false
@@ -45,7 +50,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
       setFetching(false)
     }
     fetchBlog()
-  }, [params.id])
+  }, [id])
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value
@@ -62,7 +67,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
     setLoading(true)
 
     try {
-      const response = await fetch(`/api/blogs/${params.id}`, {
+      const response = await fetch(`/api/blogs/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -83,7 +88,7 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
 
     setLoading(true)
     try {
-      const response = await fetch(`/api/blogs/${params.id}`, {
+      const response = await fetch(`/api/blogs/${id}`, {
         method: 'DELETE',
       })
 
@@ -135,12 +140,17 @@ export default function EditBlogPost({ params }: { params: { id: string } }) {
           rows={3}
         />
 
-        <Textarea
+        <ImageUpload
+          label="Featured Image"
+          value={formData.featured_image}
+          onChange={(url) => setFormData(prev => ({ ...prev, featured_image: url }))}
+        />
+
+        <RichTextEditor
           label="Content"
           value={formData.content}
-          onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+          onChange={(content) => setFormData(prev => ({ ...prev, content }))}
           placeholder="Write your blog post content here..."
-          rows={12}
         />
 
         <div className="border-t border-white/10 pt-6">

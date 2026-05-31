@@ -1,15 +1,18 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
+import { ImageUpload } from '@/components/ui/image-upload'
 import { slugify } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 import { INDUSTRIES, SERVICES } from '@/types/case-study'
 
-export default function EditCaseStudy({ params }: { params: { id: string } }) {
+export default function EditCaseStudy({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [fetching, setFetching] = useState(true)
@@ -35,10 +38,10 @@ export default function EditCaseStudy({ params }: { params: { id: string } }) {
   useEffect(() => {
     async function fetchCaseStudy() {
       const supabase = createClient()
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('case_studies')
         .select('*')
-        .eq('id', params.id)
+        .eq('id', id)
         .single()
 
       if (data) {
@@ -64,7 +67,7 @@ export default function EditCaseStudy({ params }: { params: { id: string } }) {
       setFetching(false)
     }
     fetchCaseStudy()
-  }, [params.id])
+  }, [id])
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value
@@ -90,7 +93,7 @@ export default function EditCaseStudy({ params }: { params: { id: string } }) {
     setLoading(true)
 
     try {
-      const response = await fetch(`/api/case-studies/${params.id}`, {
+      const response = await fetch(`/api/case-studies/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -111,7 +114,7 @@ export default function EditCaseStudy({ params }: { params: { id: string } }) {
 
     setLoading(true)
     try {
-      const response = await fetch(`/api/case-studies/${params.id}`, {
+      const response = await fetch(`/api/case-studies/${id}`, {
         method: 'DELETE',
       })
 
@@ -218,19 +221,17 @@ export default function EditCaseStudy({ params }: { params: { id: string } }) {
           rows={4}
         />
 
-        <Textarea
-          label="Content"
-          value={formData.content}
-          onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-          placeholder="Full case study content"
-          rows={8}
+        <ImageUpload
+          label="Featured Image"
+          value={formData.featured_image}
+          onChange={(url) => setFormData(prev => ({ ...prev, featured_image: url }))}
         />
 
-        <Input
-          label="Featured Image URL"
-          value={formData.featured_image}
-          onChange={(e) => setFormData(prev => ({ ...prev, featured_image: e.target.value }))}
-          placeholder="https://..."
+        <RichTextEditor
+          label="Content"
+          value={formData.content}
+          onChange={(content) => setFormData(prev => ({ ...prev, content }))}
+          placeholder="Full case study content"
         />
 
         <div className="border-t border-white/10 pt-6">

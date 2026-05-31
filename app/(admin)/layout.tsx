@@ -1,4 +1,4 @@
-import { requireAdmin } from '@/lib/supabase/auth'
+import { requireAuth } from '@/lib/supabase/auth'
 import AdminSidebar from '../../components/layout/admin-sidebar'
 
 export default async function AdminLayout({
@@ -6,7 +6,7 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
-  await requireAdmin()
+  await requireAuth()
 
   return (
     <div className="min-h-screen bg-[#050505] text-white">

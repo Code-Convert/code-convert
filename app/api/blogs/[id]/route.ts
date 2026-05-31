@@ -1,23 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { requireAdmin } from '@/lib/supabase/auth'
+import { requireAuth } from '@/lib/supabase/auth'
 import type { BlogUpdatePayload } from '@/types/api'
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await requireAdmin()
+    await requireAuth()
     const supabase = await createClient()
     const body = await request.json()
-    const { id } = params
+    const { id } = await params
 
     const updateData: BlogUpdatePayload = {
       title: body.title,
       slug: body.slug,
       excerpt: body.excerpt ?? null,
       content: body.content ?? null,
+      featured_image: body.featured_image ?? null,
       seo_title: body.seo_title ?? null,
       seo_description: body.seo_description ?? null,
       published: body.published ?? false,
@@ -39,12 +40,12 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await requireAdmin()
+    await requireAuth()
     const supabase = await createClient()
-    const { id } = params
+    const { id } = await params
 
     const { error } = await supabase
       .from('blogs')
