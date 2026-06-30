@@ -55,6 +55,19 @@ interface FormData {
   additionalInfo: string;
 }
 
+interface FormErrors {
+  name?: string;
+  email?: string;
+  company?: string;
+  profession?: string;
+  industry?: string;
+  primaryGoal?: string;
+  targetAudience?: string;
+  stylePreference?: string;
+  budget?: string;
+  timeline?: string;
+}
+
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
@@ -69,6 +82,7 @@ const contentVariants = {
 const OnboardingForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -90,6 +104,10 @@ const OnboardingForm = () => {
 
   const updateFormData = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    // Clear error for this field when user starts typing
+    if (errors[field as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
   };
 
   const toggleFeature = (feature: string) => {
@@ -114,30 +132,126 @@ const OnboardingForm = () => {
     });
   };
 
+  // Email validation
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Name validation (at least 2 characters, only letters and spaces)
+  const isValidName = (name: string): boolean => {
+    const nameRegex = /^[a-zA-Z\s]{2,}$/;
+    return nameRegex.test(name.trim());
+  };
+
+  // Validate current step
+  const validateStep = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    switch (currentStep) {
+      case 0: // Personal Info
+        if (!formData.name.trim()) {
+          newErrors.name = "Name is required";
+        } else if (!isValidName(formData.name)) {
+          newErrors.name = "Please enter a valid name (letters only, minimum 2 characters)";
+        }
+
+        if (!formData.email.trim()) {
+          newErrors.email = "Email is required";
+        } else if (!isValidEmail(formData.email)) {
+          newErrors.email = "Please enter a valid email address";
+        }
+        break;
+
+      case 1: // Professional Background
+        if (!formData.profession.trim()) {
+          newErrors.profession = "Profession is required";
+        } else if (formData.profession.trim().length < 2) {
+          newErrors.profession = "Profession must be at least 2 characters";
+        }
+
+        if (!formData.industry) {
+          newErrors.industry = "Please select an industry";
+        }
+        break;
+
+      case 2: // Website Goals
+        if (!formData.primaryGoal) {
+          newErrors.primaryGoal = "Please select a primary goal";
+        }
+        break;
+
+      case 3: // Design Preferences
+        if (!formData.stylePreference) {
+          newErrors.stylePreference = "Please select a style preference";
+        }
+        break;
+
+      case 4: // Budget & Timeline
+        if (!formData.budget) {
+          newErrors.budget = "Please select a budget range";
+        }
+
+        if (!formData.timeline) {
+          newErrors.timeline = "Please select a timeline";
+        }
+        break;
+
+      case 5: // Additional Requirements (optional step)
+        // No required fields in this step
+        break;
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const nextStep = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep((prev) => prev + 1);
+    if (validateStep()) {
+      if (currentStep < steps.length - 1) {
+        setCurrentStep((prev) => prev + 1);
+        setErrors({}); // Clear errors when moving to next step
+      }
+    } else {
+      // Show specific error message based on what's wrong
+      const errorMessages = Object.values(errors).filter(Boolean);
+      if (errorMessages.length > 0) {
+        toast.error(errorMessages[0] as string);
+      }
     }
   };
 
   const prevStep = () => {
     if (currentStep > 0) {
       setCurrentStep((prev) => prev - 1);
+      setErrors({}); // Clear errors when going back
     }
   };
 
   const handleSubmit = () => {
+    if (!validateStep()) {
+      const errorMessages = Object.values(errors).filter(Boolean);
+      if (errorMessages.length > 0) {
+        toast.error(errorMessages[0] as string);
+      }
+      return;
+    }
+
     setIsSubmitting(true);
 
     // Simulate API call
     setTimeout(() => {
+      console.log("Form Data:", formData);
       toast.success("Form submitted successfully!");
       setIsSubmitting(false);
+      // Optionally reset form or redirect
+      // setFormData({ ... initial state ... });
+      // setCurrentStep(0);
     }, 1500);
   };
 
-  // Check if step is valid for next button
-  const isStepValid = () => {
+  // Check if step has been filled (for progress indicator)
+  const isStepFilled = () => {
     switch (currentStep) {
       case 0:
         return formData.name.trim() !== "" && formData.email.trim() !== "";
@@ -220,7 +334,7 @@ const OnboardingForm = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <Card className="border shadow-md rounded-3xl overflow-hidden">
+        <Card className="border border-white/10 shadow-2xl rounded-3xl overflow-hidden bg-white/5 backdrop-blur-xl">
           <div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -707,7 +821,7 @@ const OnboardingForm = () => {
                   onClick={
                     currentStep === steps.length - 1 ? handleSubmit : nextStep
                   }
-                  disabled={!isStepValid() || isSubmitting}
+                  disabled={!isStepFilled() || isSubmitting}
                   className={cn(
                     "flex items-center gap-1 transition-all duration-300 rounded-2xl",
                     currentStep === steps.length - 1 ? "" : "",
