@@ -68,7 +68,7 @@ function ProjectCard({
 
   return (
     <div className={`min-h-screen flex items-center ${isLast ? 'mb-0' : ''}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+      <div className="max-w-7xl px-0 sm:px-6 w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Content */}
           <motion.div style={{ opacity, scale }} className="space-y-4 md:space-y-6">
@@ -78,7 +78,7 @@ function ProjectCard({
             
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold">{project.name}</h3>
             
-            <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-xl">
+            <p className="text-gray-400 text-base sm:text-sm md:text-lg leading-relaxed max-w-xl">
               {project.description}
             </p>
 

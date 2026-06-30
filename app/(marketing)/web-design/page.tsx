@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { createClient } from '@/lib/supabase/client';
 import HeroBackgroundPaths from '@/components/layout/HeroBackgroundPaths';
 import StickyScroll from '@/components/layout/StickyScroll';
 import WebsiteCarousel from '@/components/layout/WebsiteCarousel';
@@ -82,59 +84,33 @@ const stats = [
   { value: '100', suffix: '%', label: 'Custom Built' },
 ];
 
-// Testimonials data
-const testimonials = [
-  {
-    rating: 5,
-    quote:
-      'Working with this team transformed our online presence. Our conversion rate increased by 240% in the first three months, and customer feedback has been exceptional.',
-    name: 'Sarah Mitchell',
-    company: 'StyleHub Fashion',
-    role: 'Founder & CEO',
-  },
-  {
-    rating: 5,
-    quote:
-      'The attention to detail and strategic thinking behind every design decision was impressive. Our bounce rate dropped by 60% and time on site doubled.',
-    name: 'David Khumalo',
-    company: 'Prime Estates',
-    role: 'Marketing Director',
-  },
-  {
-    rating: 5,
-    quote:
-      'Not only did they deliver a stunning website, but the SEO foundation they built helped us rank on page 1 for our most competitive keywords within 6 months.',
-    name: 'Lisa Chen',
-    company: 'Apex Consulting',
-    role: 'Managing Partner',
-  },
-  {
-    rating: 5,
-    quote:
-      'The mobile experience they created for our e-commerce store resulted in a 180% increase in mobile conversions. Our customers love the new checkout flow.',
-    name: 'James van der Merwe',
-    company: 'Verde Organics',
-    role: 'E-Commerce Manager',
-  },
-  {
-    rating: 5,
-    quote:
-      'From discovery to launch, the process was seamless. They truly understood our brand and translated it into a digital experience that resonates with our audience.',
-    name: 'Thandiwe Nkosi',
-    company: 'Mbali Jewellery',
-    role: 'Creative Director',
-  },
-  {
-    rating: 5,
-    quote:
-      'The performance optimisation work they did was game-changing. Our site now loads in under 2 seconds, and Google PageSpeed scores are consistently in the 90s.',
-    name: 'Michael Roberts',
-    company: 'Fintech Solutions',
-    role: 'CTO',
-  },
-];
+interface Testimonial {
+  id: string;
+  testimonial_text: string;
+  testimonial_author: string;
+  testimonial_role: string;
+  client: string;
+}
 
 export default function WebDesignPage() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  
+    useEffect(() => {
+      async function fetchTestimonials() {
+        const supabase = createClient();
+        const { data } = await supabase
+          .from('case_studies')
+          .select('id, testimonial_text, testimonial_author, testimonial_role, client')
+          .eq('published', true)
+          .not('testimonial_text', 'is', null)
+          .order('published_at', { ascending: false })
+          .limit(6);
+        
+        if (data) setTestimonials(data);
+      }
+      fetchTestimonials();
+    }, []);
+
   return (
     <div className="relative min-h-screen text-white overflow-hidden selection:bg-[#FF1E1E]/20 selection:text-white">
       {/* Content */}
@@ -156,7 +132,7 @@ export default function WebDesignPage() {
 
         {/* SECTION 2: STICKY PROJECT SHOWCASE */}
         <Section id="projects" className="py-24 md:py-32">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-16 md:mb-24">
+          <div className="max-w-7xl px-4 sm:px-6 z-100">
             <SectionHeader
               subtitle="Selected Projects"
               title="See How Strategy, Design & Performance Combine"
