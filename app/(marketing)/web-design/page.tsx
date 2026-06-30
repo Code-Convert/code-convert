@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import HeroBackgroundPaths from '@/components/layout/HeroBackgroundPaths';
-import StickyScroll from '@/components/layout/StickyScroll';
+import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 import WebsiteCarousel from '@/components/layout/WebsiteCarousel';
 import AnimatedStats from '@/components/ui/animated-stats';
 import TestimonialsGrid from '@/components/ui/testimonials-grid';
@@ -12,7 +12,7 @@ import Section, { SectionHeader } from '@/components/ui/section';
 import CTAButton from '@/components/ui/CTA_Button';
 
 // Project data for sticky scroll
-const projects = [
+const content = [
   {
     industry: 'E-Commerce',
     name: 'StyleHub Fashion',
@@ -140,11 +140,11 @@ export default function WebDesignPage() {
             />
           </div>
 
-          <StickyScroll projects={projects} />
+          <StickyScroll content={content} />
         </Section>
 
         {/* SECTION 3: WEBSITE SHOWCASE CAROUSEL */}
-        <Section className="py-24 md:py-32 overflow-hidden">
+        <Section className="overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-12 md:mb-16">
             <SectionHeader
               subtitle="Recent Launches"
@@ -229,7 +229,7 @@ export default function WebDesignPage() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="text-gray-400 text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed"
                 >
-                  From idea to investment, MVP to market — we adapt to your goals and build around
+                  From idea to investment, MVP to market. We adapt to your goals and build around
                   what your product truly needs.
                 </motion.p>
 

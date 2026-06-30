@@ -17,44 +17,52 @@ interface WebsiteCarouselProps {
 export default function WebsiteCarousel({ websites }: WebsiteCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
   const x = useMotionValue(0);
   const xSmooth = useSpring(x, { damping: 50, stiffness: 400 });
 
-  // Auto-scroll
-  useEffect(() => {
-    if (isPaused || isDragging) return;
+  const cardWidth = 400; // Width including gap
+  const totalWidth = websites.length * cardWidth;
 
-    const controls = animate(x, -((websites.length * 400) / 2), {
+  // Auto-scroll with infinite loop
+  useEffect(() => {
+    if (isDragging) return;
+
+    const controls = animate(x, -totalWidth, {
       duration: 30,
       repeat: Infinity,
       ease: 'linear',
-      onUpdate: (latest) => {
-        if (latest <= -((websites.length * 400) / 2)) {
-          x.set(0);
-        }
+      repeatType: 'loop',
+      onRepeat: () => {
+        x.set(0);
       },
     });
 
     return controls.stop;
-  }, [x, websites.length, isPaused, isDragging]);
+  }, [x, totalWidth, isDragging]);
 
   return (
     <div
       ref={containerRef}
       className="relative overflow-hidden py-4"
-      onMouseEnter={() => setIsPaused(false)}
-      onMouseLeave={() => setIsPaused(false)}
     >
       <motion.div
         style={{ x: xSmooth }}
         drag="x"
-        dragConstraints={{ left: -((websites.length - 1) * 400), right: 0 }}
+        dragConstraints={{ left: -totalWidth, right: 0 }}
         onDragStart={() => setIsDragging(true)}
-        onDragEnd={() => setIsDragging(false)}
+        onDragEnd={() => {
+          setIsDragging(false);
+          // Wrap around if dragged past boundaries
+          const currentX = x.get();
+          if (currentX <= -totalWidth) {
+            x.set(currentX + totalWidth);
+          } else if (currentX > 0) {
+            x.set(currentX - totalWidth);
+          }
+        }}
         className="flex gap-6 cursor-grab active:cursor-grabbing"
       >
-        {[...websites, ...websites].map((website, idx) => (
+        {[...websites, ...websites, ...websites].map((website, idx) => (
           <WebsiteCard key={idx} website={website} />
         ))}
       </motion.div>
@@ -67,9 +75,9 @@ function WebsiteCard({ website }: { website: WebsiteShowcase }) {
     <motion.div
       whileHover={{ scale: 1.02, y: -5 }}
       transition={{ duration: 0.3 }}
-      className="flex-shrink-0 w-[350px] sm:w-[400px] group"
+      className="shrink-0 w-87.5  sm:w-100 group"
     >
-      <div className="relative h-[450px] rounded-xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-xl">
+      <div className="relative h-112.5 rounded-xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-xl">
         <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent z-10" />
         <Image
           src={website.image}

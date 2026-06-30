@@ -27,7 +27,7 @@ export default function Loader() {
           id="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] bg-[#050505] flex flex-col items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-9999 bg-[#050505] flex flex-col items-center justify-center overflow-hidden"
         >
           <div className="relative z-10 text-center px-4">
             <div className="flex items-center justify-center gap-2 mb-6">
