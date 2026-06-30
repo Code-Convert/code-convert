@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import AnimatedStats from '@/components/ui/animated-stats';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 32 },
@@ -18,33 +18,14 @@ const scaleIn = {
   transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] as any }
 };
 
-function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let start = 0;
-    const duration = 2000;
-    const increment = target / (duration / 16);
-    
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-
-    return () => clearInterval(timer);
-  }, [target]);
-
-  return (
-    <span>{count}{suffix}</span>
-  );
-}
-
 export default function Hero() {
+  const stats = [
+    { value: '30', suffix: '+', label: 'Custom Full-Stack Builds' },
+    { value: '24', suffix: '/7', label: 'Automated Lead Capture' },
+    { value: '94', suffix: '%', label: 'Client Retention' },
+    { value: '100', suffix: '%', label: 'Built to Convert Leads' },
+  ];
+
   return (
     <section className="relative z-10 min-h-screen flex items-center bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')]" id="hero">
       <div className="absolute top-20 left-1/3 w-96 h-96 rounded-full blur-3xl bg-[#FF1E1E]/2.5" />
@@ -87,25 +68,8 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <div className="mt-12 md:mt-16 lg:mt-24 grid grid-cols-4 gap-2 sm:gap-3">
-          {[
-            { label: 'Custom Full-Stack Builds', target: 30, suffix: '+', isCounter: true, textValue: '' },
-            { label: 'Automated Lead Capture', target: 0, suffix: '', isCounter: false, textValue: '24/7' },
-            { label: 'Client Retention', target: 94, suffix: '%', isCounter: true, textValue: '' },
-            { label: 'Convert Leads', target: 0, suffix: '', isCounter: false, textValue: 'Built to' }
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              {...scaleIn}
-              transition={{ ...scaleIn.transition, delay: 0.3 + i * 0.1 } as any}
-              className="bg-[#050505]/40 border border-white/5 backdrop-blur-lg rounded-2xl p-3 md:p-4 lg:p-5 hover:bg-white/[0.035] hover:border-[#FF1E1E]/10 hover:-translate-y-0.5 transition-all duration-400"
-            >
-              <div className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight">
-                {stat.isCounter ? <Counter target={stat.target} suffix={stat.suffix} /> : stat.textValue}
-              </div>
-              <div className="text-[10px] md:text-xs text-neutral-500 mt-1">{stat.label}</div>
-            </motion.div>
-          ))}
+        <div className="mt-12 md:mt-16 lg:mt-24">
+          <AnimatedStats stats={stats} />
         </div>
       </div>
 
