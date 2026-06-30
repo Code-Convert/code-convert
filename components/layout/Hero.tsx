@@ -87,7 +87,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <div className="mt-12 md:mt-16 lg:mt-24 grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+        <div className="mt-12 md:mt-16 lg:mt-24 grid grid-cols-4 gap-2 sm:gap-3">
           {[
             { label: 'Custom Full-Stack Builds', target: 30, suffix: '+', isCounter: true, textValue: '' },
             { label: 'Automated Lead Capture', target: 0, suffix: '', isCounter: false, textValue: '24/7' },

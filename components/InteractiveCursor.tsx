@@ -61,7 +61,7 @@ export default function InteractiveCursor() {
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 pointer-events-none z-[100] hidden sm:block"
+      className="fixed top-0 left-0 pointer-events-none z-100 hidden sm:block"
     >
       <div 
         className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ease-out ${

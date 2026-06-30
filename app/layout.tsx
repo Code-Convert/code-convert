@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
+<meta name="apple-mobile-web-app-title" content="Code & Convert" />
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
   title: {
     default: 'Code & Convert - We Build, Market & Scale Digital Brands',
     template: '%s | Code & Convert'

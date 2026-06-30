@@ -63,9 +63,9 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <a
               href="/contact"
-              className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold px-2.5 sm:px-3 py-1.5 rounded-full bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 group whitespace-nowrap"
+              className="inline-flex items-center gap-1 text-[12px] sm:text-[10px] font-bold px-2.5 sm:px-3 py-1.5 rounded-full bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 group whitespace-nowrap"
             >
-              Book 1:1
+              Book 1:1 Meeting
               <ArrowUpRight className="w-2.5 sm:w-3 h-2.5 sm:h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300 hidden sm:block" />
             </a>
             <button

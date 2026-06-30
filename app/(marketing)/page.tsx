@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 import Loader from '@/components/Loader';
 import VoidBackground from '@/components/VoidBackground';
@@ -14,6 +14,19 @@ import Testimonials from '@/components/layout/Testimonials';
 import CTA from '@/components/layout/CTA';
 
 export default function HomePage() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleLoad = () => setIsLoaded(true);
+    
+    if (document.readyState === 'complete') {
+      setIsLoaded(true);
+    } else {
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
+  }, []);
+
   useEffect(() => {
     const lenis = new Lenis({
       lerp: 0.1,
@@ -44,18 +57,22 @@ export default function HomePage() {
   return (
     <div className="relative selection:bg-[#FF1E1E]/20 selection:text-white overflow-x-hidden">
       <Loader />
-      <VoidBackground />
-      <InteractiveCursor />
-      
-      <div className="relative z-10">
-        <Hero />
-        <Marquee />
-        <SelectedWork />
-        <Services />
-        <Process />
-        <Testimonials />
-        <CTA />
-      </div>
+      {isLoaded && (
+        <>
+          <VoidBackground />
+          <InteractiveCursor />
+          
+          <div className="relative z-10">
+            <Hero />
+            <Marquee />
+            <SelectedWork />
+            <Services />
+            <Process />
+            <Testimonials />
+            <CTA />
+          </div>
+        </>
+      )}
     </div>
   );
 }
