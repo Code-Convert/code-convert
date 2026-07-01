@@ -62,7 +62,7 @@ START: User visits website
 │   │           └─ components/ui/image-gallery.tsx
 │   │
 │   ├─► Service Pages
-│   │   ├─ E-commerce: app/(marketing)/marketing/page.tsx
+│   │   ├─ Marketing: app/(marketing)/marketing/page.tsx
 │   │   └─ Web Design: app/(marketing)/web-design/page.tsx
 │   │
 │   └─► Legal Pages
