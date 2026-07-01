@@ -45,7 +45,7 @@
       page.tsx             # Web design service page
       loading.tsx          # Service page loading
     
-    /e-commerce  
+    /marketing  
       page.tsx             # E-commerce service page
       loading.tsx          # Service page loading
     
@@ -69,7 +69,7 @@
         error.tsx          # Blog post error boundary
         not-found.tsx      # 404 for invalid slug
     
-    /contact
+    /contact-us
       page.tsx             # Contact page
       loading.tsx          # Contact form loading
   
@@ -347,12 +347,12 @@ CREATE POLICY "Admins can manage blogs" ON blogs
 ### Public Routes (No Auth Required)
 - `/` - Landing page
 - `/web-design` - Service pages
-- `/e-commerce` - Service pages  
+- `/marketing` - Service pages  
 - `/case-studies` - Public case studies
 - `/case-studies/[slug]` - Individual case study
 - `/blog` - Public blog
 - `/blog/[slug]` - Individual blog post
-- `/contact` - Contact page
+- `/contact-us` - Contact page
 
 ### Protected Routes (Admin Only)
 - `/admin/*` - All admin routes
@@ -1804,8 +1804,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 #### Service Pages
 - [ ] `/app/(marketing)/web-design/page.tsx`
 - [ ] `/app/(marketing)/web-design/loading.tsx`
-- [ ] `/app/(marketing)/e-commerce/page.tsx`
-- [ ] `/app/(marketing)/e-commerce/loading.tsx`
+- [ ] `/app/(marketing)/marketing/page.tsx`
+- [ ] `/app/(marketing)/marketing/loading.tsx`
 
 #### Blog
 - [ ] `/app/(marketing)/blog/page.tsx` - Blog listing
@@ -1826,8 +1826,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 - [ ] `/app/(marketing)/case-studies/[slug]/not-found.tsx` - Invalid slug
 
 #### Contact
-- [ ] `/app/(marketing)/contact/page.tsx`
-- [ ] `/app/(marketing)/contact/loading.tsx`
+- [ ] `/app/(marketing)/contact-us/page.tsx`
+- [ ] `/app/(marketing)/contact-us/loading.tsx`
 
 ### Admin Route Group
 - [ ] `/app/(admin)/layout.tsx` - Admin wrapper

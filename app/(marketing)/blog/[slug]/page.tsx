@@ -61,7 +61,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
           <h3 className="text-2xl font-bold mb-4">Ready to transform your business?</h3>
           <a
-            href="/contact"
+            href="/contact-us"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF1E1E] hover:bg-[#FF1E1E]/90 text-white font-bold rounded-lg transition-colors"
           >
             Get Started Today
