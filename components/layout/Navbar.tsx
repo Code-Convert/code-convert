@@ -55,7 +55,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-5 lg:gap-7">
           <a href="/" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Home</a>
           <a href="/web-design" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Web design</a>
-          <a href="/e-commerce" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">E-comm</a>
+          <a href="/marketing" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Marketing</a>
           <a href="/case-studies" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Case Studies</a>
           <a href="/blog" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Blog</a>
         </div>
@@ -132,11 +132,11 @@ export default function Navbar() {
                 <div className="h-px bg-[#FF1E1E]/20 my-1" />
                 
                 <a 
-                  href="/e-commerce" 
+                  href="/marketing" 
                   className="block text-sm font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-widest py-3" 
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  E-Commerce
+                  Marketing
                 </a>
                 <div className="h-px bg-[#FF1E1E]/20 my-1" />
                 
