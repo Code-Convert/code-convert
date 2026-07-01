@@ -4,18 +4,20 @@ import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import AnimatedStats from '@/components/ui/animated-stats';
 
+const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
+
 const fadeInUp = {
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] as any }
+  transition: { duration: 0.8, ease },
 };
 
 const scaleIn = {
   initial: { opacity: 0, scale: 0.94 },
   whileInView: { opacity: 1, scale: 1 },
   viewport: { once: true },
-  transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] as any }
+  transition: { duration: 0.8, ease },
 };
 
 export default function Hero() {
@@ -50,7 +52,7 @@ export default function Hero() {
 
           <motion.p
             {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.1 } as any}
+            transition={{ ...fadeInUp.transition, delay: 0.1 }}
             className="text-sm sm:text-base md:text-lg text-neutral-300 leading-relaxed max-w-lg mx-auto mb-6 md:mb-8 lg:mb-10 font-bold drop-shadow-[0_4px_24px_rgba(0,0,0,1)] text-shadow-sm px-4"
           >
             Elite web architecture designed with one objective: maximizing your conversion rate through data-backed design and psychological triggers.
@@ -58,7 +60,7 @@ export default function Hero() {
 
           <motion.div
             {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.2 } as any}
+            transition={{ ...fadeInUp.transition, delay: 0.2 }}
             className="flex flex-wrap items-center justify-center gap-3.5"
           >
             <a href="#work" className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 text-xs md:text-sm font-bold rounded-full bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 shadow-[0_0_20px_rgba(255,30,30,0.15)] group">
