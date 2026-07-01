@@ -12,13 +12,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 })
     }
 
-    const { error } = await supabase
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase as any)
       .from('contact_submissions')
-      .insert({
-        name,
-        email,
-        message,
-      })
+      .insert({ name, email, message })
 
     if (error) throw error
 
