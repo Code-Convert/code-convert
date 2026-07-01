@@ -160,7 +160,7 @@ export default function TermsPage() {
               For questions about these Terms of Service, please contact us at:
             </p>
             <p className="mt-4">
-              <strong>Email:</strong> <a href="mailto:legal@codeconvert.com" className="text-[#FF1E1E] hover:underline">legal@codeconvert.com</a>
+              <strong>Email:</strong> <a href="mailto:hello@codeandconvert.co.za" className="text-[#FF1E1E] hover:underline">hello@codeandconvert.co.za</a>
             </p>
           </section>
         </div>

@@ -16,7 +16,7 @@ export default function Footer() {
 
           <div className="flex items-center justify-center gap-x-6 sm:gap-x-10 flex-1">
             <a href="/web-design" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Web design</a>
-            <a href="/marketing" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">E-comm</a>
+            <a href="/marketing" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Marketing</a>
             <a href="/case-studies" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Case Studies</a>
             <a href="/blog" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Blog</a>
           </div>
@@ -32,7 +32,7 @@ export default function Footer() {
         <div className="lg:hidden space-y-6 mb-8">
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
             <a href="/web-design" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Web design</a>
-            <a href="/marketing" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">E-comm</a>
+            <a href="/marketing" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Marketing</a>
             <a href="/case-studies" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Case Studies</a>
             <a href="/blog" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Blog</a>
           </div>
