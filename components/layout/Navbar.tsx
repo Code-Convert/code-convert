@@ -62,7 +62,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2">
             <a
-              href="/contact"
+              href="/contact-us"
               className="inline-flex items-center gap-1 text-[12px] sm:text-[10px] font-bold px-2.5 sm:px-3 py-1.5 rounded-full bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 group whitespace-nowrap"
             >
               Book 1:1 Meeting
@@ -162,7 +162,7 @@ export default function Navbar() {
             {/* Bottom Button */}
             <div className="p-6 pb-8">
               <a
-                href="/contact"
+                href="/contact-us"
                 className="w-full inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3 rounded-lg bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] transition-all duration-300 uppercase tracking-widest"
                 onClick={() => setMobileMenuOpen(false)}
               >

@@ -9,6 +9,138 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      lead_submissions: {
+        Row: {
+          id: string
+          name: string
+          email: string
+          phone: string
+          source_page: string
+          source_url: string | null
+          utm_source: string | null
+          utm_medium: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_term: string | null
+          primary_goal: string | null
+          sells_to: string | null
+          growth_stage: string | null
+          biggest_challenge: string | null
+          exploring_reason: string | null
+          company_name: string | null
+          website_url: string | null
+          industry: string | null
+          industry_other: string | null
+          role: string | null
+          decision_authority: string | null
+          monthly_revenue: string | null
+          monthly_ad_spend: string | null
+          budget_allocated: string | null
+          implementation_timeline: string | null
+          action_likelihood: string | null
+          additional_context: string | null
+          meeting_preference: string | null
+          lead_score: number
+          lead_temperature: 'hot' | 'warm' | 'cold' | null
+          lifecycle_stage: string
+          lead_status: string
+          hubspot_contact_id: string | null
+          hubspot_sync_status: 'pending' | 'synced' | 'failed'
+          hubspot_synced_at: string | null
+          ip_address: string | null
+          user_agent: string | null
+          referrer: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          email: string
+          phone: string
+          source_page: string
+          source_url?: string | null
+          utm_source?: string | null
+          utm_medium?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_term?: string | null
+          primary_goal?: string | null
+          sells_to?: string | null
+          growth_stage?: string | null
+          biggest_challenge?: string | null
+          exploring_reason?: string | null
+          company_name?: string | null
+          website_url?: string | null
+          industry?: string | null
+          industry_other?: string | null
+          role?: string | null
+          decision_authority?: string | null
+          monthly_revenue?: string | null
+          monthly_ad_spend?: string | null
+          budget_allocated?: string | null
+          implementation_timeline?: string | null
+          action_likelihood?: string | null
+          additional_context?: string | null
+          meeting_preference?: string | null
+          lead_score?: number
+          lead_temperature?: 'hot' | 'warm' | 'cold' | null
+          lifecycle_stage?: string
+          lead_status?: string
+          hubspot_contact_id?: string | null
+          hubspot_sync_status?: 'pending' | 'synced' | 'failed'
+          hubspot_synced_at?: string | null
+          ip_address?: string | null
+          user_agent?: string | null
+          referrer?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          email?: string
+          phone?: string
+          source_page?: string
+          source_url?: string | null
+          utm_source?: string | null
+          utm_medium?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_term?: string | null
+          primary_goal?: string | null
+          sells_to?: string | null
+          growth_stage?: string | null
+          biggest_challenge?: string | null
+          exploring_reason?: string | null
+          company_name?: string | null
+          website_url?: string | null
+          industry?: string | null
+          industry_other?: string | null
+          role?: string | null
+          decision_authority?: string | null
+          monthly_revenue?: string | null
+          monthly_ad_spend?: string | null
+          budget_allocated?: string | null
+          implementation_timeline?: string | null
+          action_likelihood?: string | null
+          additional_context?: string | null
+          meeting_preference?: string | null
+          lead_score?: number
+          lead_temperature?: 'hot' | 'warm' | 'cold' | null
+          lifecycle_stage?: string
+          lead_status?: string
+          hubspot_contact_id?: string | null
+          hubspot_sync_status?: 'pending' | 'synced' | 'failed'
+          hubspot_synced_at?: string | null
+          ip_address?: string | null
+          user_agent?: string | null
+          referrer?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       blogs: {
         Row: {
           author_id: string | null

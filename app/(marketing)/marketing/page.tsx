@@ -18,7 +18,7 @@ export default function EcommercePage() {
             Transform your business with a high-converting online store built for growth.
           </p>
           <Link
-            href="/contact"
+            href="/contact-us"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF1E1E] text-white rounded-full font-bold hover:bg-white hover:text-[#050505] transition-all duration-300"
           >
             Launch Your Store
@@ -102,7 +102,7 @@ export default function EcommercePage() {
             Let's build an e-commerce platform that drives sales and scales with your success.
           </p>
           <Link
-            href="/contact"
+            href="/contact-us"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF1E1E] text-white rounded-full font-bold hover:bg-white hover:text-[#050505] transition-all duration-300"
           >
             Get Started

@@ -121,7 +121,7 @@ export default function WebDesignPage() {
           subtitle="We leverage data-backed Conversion Rate Optimisation and precision-driven digital strategy to help ambitious businesses break through revenue plateaus and unlock sustainable growth."
           primaryCTA={{
             text: "Book A Meeting",
-            href: "/contact",
+            href: "/contact-us",
             badge: "30-Minute Call • Free",
           }}
           secondaryCTA={{
@@ -240,11 +240,11 @@ export default function WebDesignPage() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
-                  <CTAButton href="/contact" variant="primary">
+                  <CTAButton href="/contact-us" variant="primary">
                     Book 1:1 Meeting
                   </CTAButton>
 
-                  <CTAButton href="/contact" variant="secondary">
+                  <CTAButton href="/contact-us" variant="secondary">
                     Request A Callback
                   </CTAButton>
                 </motion.div>
