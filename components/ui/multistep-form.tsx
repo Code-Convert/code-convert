@@ -281,50 +281,50 @@ const OnboardingForm = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="flex justify-between mb-2">
+        <div className="flex items-start justify-between">
           {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              className="flex flex-col items-center"
-              whileHover={{ scale: 1.1 }}
-            >
-              <motion.div
-                className={cn(
-                  "w-4 h-4 rounded-full cursor-pointer transition-colors duration-300",
-                  index < currentStep
-                    ? "bg-primary"
-                    : index === currentStep
-                      ? "bg-primary ring-4 ring-primary/20"
-                      : "bg-muted",
-                )}
-                onClick={() => {
-                  // Only allow going back or to completed steps
-                  if (index <= currentStep) {
-                    setCurrentStep(index);
-                  }
-                }}
-                whileTap={{ scale: 0.95 }}
-              />
+            <div key={index} className="flex flex-col items-center flex-1">
+              <div className="flex items-center w-full">
+                {/* Left connector line */}
+                <div
+                  className={cn(
+                    "flex-1 h-px transition-colors duration-300",
+                    index === 0 ? "invisible" : index <= currentStep ? "bg-primary" : "bg-gray-400",
+                  )}
+                />
+                {/* Step dot */}
+                <motion.div
+                  className={cn(
+                    "w-4 h-4 rounded-full cursor-pointer transition-all duration-300 shrink-0",
+                    index < currentStep
+                      ? "bg-primary"
+                      : index === currentStep
+                        ? "bg-primary ring-4 ring-primary/30"
+                        : "bg-transparent ring-2 ring-gray-400",
+                  )}
+                  onClick={() => {
+                    if (index <= currentStep) setCurrentStep(index);
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                />
+                {/* Right connector line */}
+                <div
+                  className={cn(
+                    "flex-1 h-px transition-colors duration-300",
+                    index === steps.length - 1 ? "invisible" : index < currentStep ? "bg-primary" : "bg-gray-400",
+                  )}
+                />
+              </div>
               <motion.span
                 className={cn(
                   "text-xs mt-1.5 hidden sm:block",
-                  index === currentStep
-                    ? "text-primary font-medium"
-                    : "text-muted-foreground",
+                  index === currentStep ? "text-primary font-medium" : "text-muted-foreground",
                 )}
               >
                 {step.title}
               </motion.span>
-            </motion.div>
+            </div>
           ))}
-        </div>
-        <div className="w-full bg-muted h-1.5 rounded-full overflow-hidden mt-2">
-          <motion.div
-            className="h-full bg-primary"
-            initial={{ width: 0 }}
-            animate={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
-            transition={{ duration: 0.3 }}
-          />
         </div>
       </motion.div>
 
