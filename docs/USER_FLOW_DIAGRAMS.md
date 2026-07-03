@@ -62,7 +62,7 @@ START: User visits website
 │   │           └─ components/ui/image-gallery.tsx
 │   │
 │   ├─► Service Pages
-│   │   ├─ E-commerce: app/(marketing)/e-commerce/page.tsx
+│   │   ├─ Marketing: app/(marketing)/marketing/page.tsx
 │   │   └─ Web Design: app/(marketing)/web-design/page.tsx
 │   │
 │   └─► Legal Pages
@@ -70,11 +70,11 @@ START: User visits website
 │       └─ Terms: app/(marketing)/terms/page.tsx
 │
 └─► Contact Form (CONVERSION POINT)
-    ├─ File: app/(marketing)/contact/page.tsx
+    ├─ File: app/(marketing)/contact-us/page.tsx
     ├─ User fills form (name, email, message)
     │
     ├─► Form Submission
-    │   ├─ API Endpoint: app/api/contact/route.ts
+    │   ├─ API Endpoint: app/api/contact-us/route.ts
     │   ├─ Database: Supabase 'contact_submissions' table
     │   └─ Response: Success/Error message
     │
@@ -384,7 +384,7 @@ User visits /admin
 ### Public User Files
 - **Entry Point**: `app/(marketing)/page.tsx`
 - **Layout**: `app/(marketing)/layout.tsx` → `app/layout.tsx`
-- **Contact**: `app/(marketing)/contact/page.tsx` → `app/api/contact/route.ts`
+- **Contact**: `app/(marketing)/contact-us/page.tsx` → `app/api/contact-us/route.ts`
 - **Content**: `app/(marketing)/blog/*` & `app/(marketing)/case-studies/*`
 
 ### Admin User Files

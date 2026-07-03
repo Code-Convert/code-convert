@@ -1,36 +1,23 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { cn } from '@/lib/utils'
+import { buttonVariants, buttonSizes, type ButtonVariant, type ButtonSize } from './button/shared'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
-  size?: 'sm' | 'md' | 'lg'
+  variant?: ButtonVariant
+  size?: ButtonSize
   loading?: boolean
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', loading, disabled, children, ...props }, ref) => {
     const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF1E1E] disabled:pointer-events-none disabled:opacity-50'
-    
-    const variants = {
-      primary: 'bg-[#FF1E1E] text-white hover:bg-[#FF5555]',
-      secondary: 'bg-white/10 text-white hover:bg-white/20',
-      outline: 'border border-white/20 text-white hover:bg-white/10',
-      ghost: 'text-white hover:bg-white/10',
-      danger: 'bg-red-600 text-white hover:bg-red-700'
-    }
-    
-    const sizes = {
-      sm: 'h-8 px-3 text-sm',
-      md: 'h-10 px-4',
-      lg: 'h-12 px-6 text-lg'
-    }
 
     return (
       <button
         className={cn(
           baseStyles,
-          variants[variant],
-          sizes[size],
+          buttonVariants[variant],
+          buttonSizes[size],
           className
         )}
         ref={ref}

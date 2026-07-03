@@ -55,17 +55,17 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-5 lg:gap-7">
           <a href="/" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Home</a>
           <a href="/web-design" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Web design</a>
-          <a href="/e-commerce" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">E-comm</a>
+          <a href="/marketing" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Marketing</a>
           <a href="/case-studies" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Case Studies</a>
           <a href="/blog" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Blog</a>
         </div>
 
           <div className="flex items-center gap-2">
             <a
-              href="/contact"
-              className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold px-2.5 sm:px-3 py-1.5 rounded-full bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 group whitespace-nowrap"
+              href="/contact-us"
+              className="inline-flex items-center gap-1 text-[12px] sm:text-[10px] font-bold px-2.5 sm:px-3 py-1.5 rounded-full bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 group whitespace-nowrap"
             >
-              Book 1:1
+              Book 1:1 Meeting
               <ArrowUpRight className="w-2.5 sm:w-3 h-2.5 sm:h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300 hidden sm:block" />
             </a>
             <button
@@ -132,11 +132,11 @@ export default function Navbar() {
                 <div className="h-px bg-[#FF1E1E]/20 my-1" />
                 
                 <a 
-                  href="/e-commerce" 
+                  href="/marketing" 
                   className="block text-sm font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-widest py-3" 
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  E-Commerce
+                  Marketing
                 </a>
                 <div className="h-px bg-[#FF1E1E]/20 my-1" />
                 
@@ -162,7 +162,7 @@ export default function Navbar() {
             {/* Bottom Button */}
             <div className="p-6 pb-8">
               <a
-                href="/contact"
+                href="/contact-us"
                 className="w-full inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3 rounded-lg bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] transition-all duration-300 uppercase tracking-widest"
                 onClick={() => setMobileMenuOpen(false)}
               >

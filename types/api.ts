@@ -1,4 +1,4 @@
-import { Database } from './database'
+import type { Database } from '@/lib/database.type'
 
 // Blog API types
 export type BlogInsertPayload = Database['public']['Tables']['blogs']['Insert']

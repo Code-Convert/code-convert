@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Toaster } from 'sonner';
+
+<meta name="apple-mobile-web-app-title" content="Code & Convert" />
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
   title: {
     default: 'Code & Convert - We Build, Market & Scale Digital Brands',
     template: '%s | Code & Convert'
@@ -32,7 +35,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="overflow-x-hidden">
-      <body className="overflow-x-hidden">{children}</body>
+      <body className="overflow-x-hidden">
+        {children}
+        <Toaster position="top-center" richColors />
+      </body>
     </html>
   );
 }

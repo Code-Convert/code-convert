@@ -166,7 +166,7 @@ export default function CaseStudiesPage() {
 
           <div className="mt-12 text-center">
             <a
-              href="/contact"
+              href="/contact-us"
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF1E1E] hover:bg-[#FF1E1E]/90 text-white font-bold rounded-lg transition-colors"
             >
               Start Your Project

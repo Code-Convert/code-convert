@@ -76,7 +76,7 @@ export default function AdminLogin() {
             type="email"
             value={formData.email}
             onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-            placeholder="admin@codeconvert.com"
+            placeholder="hello@codeandconvert.co.za"
             required
           />
 
