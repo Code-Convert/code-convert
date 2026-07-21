@@ -48,14 +48,13 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col justify-center">
               <span className="text-xs sm:text-sm font-bold tracking-tight truncate uppercase leading-tight">Code & Convert</span>
-              <span className="text-[7px] sm:text-[8px] text-neutral-400 font-medium uppercase tracking-[0.2em] leading-none mt-0.5 hidden sm:block">We code, you convert</span>
+              <span className="text-[7px] sm:text-[8px] text-neutral-400 font-medium uppercase tracking-[0.2em] leading-none mt-0.5 ">We code, you convert</span>
             </div>
           </a>
 
         <div className="hidden md:flex items-center gap-5 lg:gap-7">
           <a href="/" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Home</a>
-          <a href="/web-design" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Web design</a>
-          <a href="/marketing" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Marketing</a>
+          <a href="/services" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Services</a>
           <a href="/case-studies" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Case Studies</a>
           <a href="/blog" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest whitespace-nowrap">Blog</a>
         </div>
