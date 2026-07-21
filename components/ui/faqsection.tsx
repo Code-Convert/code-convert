@@ -38,7 +38,7 @@ export function FAQSection({
         </p>
         <h2 className="text-3xl md:text-4xl font-semibold mb-3">{title}</h2>
         <p className="text-muted-foreground max-w-xl mx-auto mb-6">{description}</p>
-        <Button variant="default" className="rounded-full" onClick={onButtonClick}>
+        <Button variant="primary" className="rounded-full" onClick={onButtonClick}>
           {buttonLabel}
         </Button>
       </div>

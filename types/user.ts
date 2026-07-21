@@ -1,9 +1,9 @@
 export interface User {
   id: string
   email: string
-  role: 'user' | 'admin'
-  created_at: string
-  updated_at: string
+  role: string | null
+  created_at: string | null
+  updated_at: string | null
 }
 
 export interface AdminUser extends User {

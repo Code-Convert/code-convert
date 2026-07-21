@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
 
     const { error } = await supabase
       .from('blogs')
-      .insert(insertData)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .insert(insertData as any)
 
     if (error) throw error
 
