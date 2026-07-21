@@ -122,20 +122,11 @@ export default function Navbar() {
                 <div className="h-px bg-[#FF1E1E]/20 my-1" />
                 
                 <a 
-                  href="/web-design" 
+                  href="/services" 
                   className="block text-sm font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-widest py-3" 
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Web Design
-                </a>
-                <div className="h-px bg-[#FF1E1E]/20 my-1" />
-                
-                <a 
-                  href="/marketing" 
-                  className="block text-sm font-bold text-neutral-400 hover:text-white transition-colors uppercase tracking-widest py-3" 
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Marketing
+                  Services
                 </a>
                 <div className="h-px bg-[#FF1E1E]/20 my-1" />
                 
