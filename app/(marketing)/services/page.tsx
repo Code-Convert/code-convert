@@ -1,15 +1,13 @@
 import { Metadata } from 'next';
-import ServicesHero from '@/components/sections/services-hero';
-import SelectedProjects from '@/components/sections/selected-projects';
-import Statistics from '@/components/sections/statistics';
-import GalleryGrid from '@/components/sections/gallery-grid';
-import ProcessTimeline from '@/components/sections/process-timeline';
-import ServicesFAQ from '@/components/sections/faq';
-import RecentLaunches from '@/components/sections/recent-launches';
-import FinalCTA from '@/components/sections/final-cta';
+import SelectedProjects from '@/components/layout/selected-projects';
+import Statistics from '@/components/layout/statistics';
+import GalleryGrid from '@/components/layout/gallery-grid';
+import Process from '@/components/layout/Process';
+import ServicesFAQ from '@/components/layout/faq';
+import RecentLaunches from '@/components/layout/recent-launches';
+import CTA from '@/components/layout/CTA';
 import HeroBackgroundPaths from '@/components/layout/HeroBackgroundPaths';
-import VoidBackground from '@/components/VoidBackground';
-import InteractiveCursor from '@/components/InteractiveCursor';
+import TechStack from '@/components/layout/tech-stack';
 
 export const metadata: Metadata = {
   title: 'Web Design & Marketing Services | Code & Convert',
@@ -21,7 +19,6 @@ export default function ServicesPage() {
   return (
     <main className="bg-black">
       {/* 1. Hero Section */}
-      {/* <ServicesHero /> */}
       <HeroBackgroundPaths
         title="We Build High-Converting Websites For Growing Brands"
         subtitle="We leverage data-backed Conversion Rate Optimisation and precision-driven digital strategy to help ambitious businesses break through revenue plateaus and unlock sustainable growth."
@@ -34,7 +31,9 @@ export default function ServicesPage() {
             text: "View Our Work",
             href: "#gallery-grid",
         }}
-        />
+        imageSrc="/hero-image.png"
+        imageAlt="Hero Image"
+      />
 
       {/* 2. Selected Projects */}
       <SelectedProjects />
@@ -42,21 +41,24 @@ export default function ServicesPage() {
       
       {/* 3. Statistics */}
       <Statistics />
+
+      {/* 4. Tech Stack */}
+      <TechStack />
       
-      {/* 4. Gallery Grid */}
+      {/* 5. Gallery Grid */}
       <GalleryGrid />
 
-      {/* 5. Process Timeline */}
-      <ProcessTimeline />
+      {/* 6. Process Timeline */}
+      <Process />
       
-      {/* 6. Recent Launches */}
+      {/* 7. Recent Launches */}
       <RecentLaunches />
 
-      {/* 7. FAQ */}
+      {/* 8. FAQ */}
       <ServicesFAQ />
 
-      {/* 8. Final CTA */}
-      <FinalCTA />
+      {/* 9. Final CTA */}
+      <CTA />
       
     </main>
   );
