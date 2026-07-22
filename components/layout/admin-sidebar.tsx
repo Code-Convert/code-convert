@@ -18,7 +18,7 @@ const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { name: 'Blog Posts', href: '/admin/blogs', icon: FileText },
   { name: 'Case Studies', href: '/admin/case-studies', icon: Briefcase },
-  { name: 'Homepage Content', href: '/admin/content-placement', icon: LayoutGrid },
+  { name: 'Content Management', href: '/admin/content-placement', icon: LayoutGrid },
   { name: 'Media Library', href: '/admin/media', icon: Image },
   { name: 'Settings', href: '/admin/settings', icon: Settings },
 ]

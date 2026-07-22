@@ -14,23 +14,23 @@ export default async function Statistics() {
 
   const statItems = [
     {
-      value: stats?.projects_delivered != null ? String(stats.projects_delivered) : '150',
-      suffix: '+',
+      value: stats?.projects_delivered != null ? String(stats.projects_delivered) : '—',
+      suffix: stats?.projects_delivered != null ? '+' : '',
       label: 'Projects Delivered',
     },
     {
-      value: stats?.avg_performance_score != null ? String(stats.avg_performance_score) : '95',
-      suffix: '+',
+      value: stats?.avg_performance_score != null ? String(stats.avg_performance_score) : '—',
+      suffix: stats?.avg_performance_score != null ? '+' : '',
       label: 'Performance Scores',
     },
     {
-      value: stats?.avg_roas != null ? String(stats.avg_roas) : '4.8',
-      suffix: 'x',
+      value: stats?.avg_roas != null ? String(stats.avg_roas) : '—',
+      suffix: stats?.avg_roas != null ? 'x' : '',
       label: 'Average ROAS',
     },
     {
-      value: stats?.percent_custom_built != null ? String(stats.percent_custom_built) : '100',
-      suffix: '%',
+      value: stats?.percent_custom_built != null ? String(stats.percent_custom_built) : '—',
+      suffix: stats?.percent_custom_built != null ? '%' : '',
       label: 'Custom Built',
     },
   ];
