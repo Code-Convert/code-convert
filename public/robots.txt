@@ -1,21 +1,21 @@
 User-agent: *
-Allow: /
+Disallow: /
 
-# Allow AI crawlers
+# Disallow all AI crawlers
 User-agent: GPTBot
-Allow: /
+Disallow: /
 
 User-agent: CCBot
-Allow: /
+Disallow: /
 
 User-agent: anthropic-ai
-Allow: /
+Disallow: /
 
 User-agent: Claude-Web
-Allow: /
+Disallow: /
 
 User-agent: bingbot
-Allow: /
+Disallow: /
 
 User-agent: Googlebot
-Allow: /
+Disallow: /
