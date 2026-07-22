@@ -5,116 +5,45 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight, ExternalLink, ZoomIn } from 'lucide-react';
+import { SERVICES } from '@/types/case-study';
 
-const CASE_STUDIES = [
-  {
-    id: '1',
-    title: 'StyleHub Fashion E-Commerce',
-    category: 'Web Design & Development',
-    description: 'Luxury fashion platform with mobile optimization and conversion-focused design.',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=800&fit=crop',
-    link: '/case-studies/stylehub',
-  },
-  {
-    id: '2',
-    title: 'Mbali Jewellery',
-    category: 'Web Design & Development',
-    description: 'A luxury-focused digital storefront crafted to elevate brand perception.',
-    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&h=800&fit=crop',
-    link: '/case-studies/mbali',
-  },
-  {
-    id: '6',
-    title: 'Fintech Solutions Platform',
-    category: 'Web Design & Development',
-    description: 'Conversion-focused corporate platform for lead generation.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop',
-    link: '/case-studies/fintech',
-  },
-  {
-    id: '8',
-    title: 'Prime Estates Property Platform',
-    category: 'Web Design & Development',
-    description: 'Modern property platform built to simplify discovery.',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=800&fit=crop',
-    link: '/case-studies/prime-estates',
-  },
-  {
-    id: '3',
-    title: 'Social Media Growth Campaign',
-    category: 'Social Media Strategy & Management',
-    description: 'Data-driven social strategy that increased engagement by 300%.',
-    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&h=800&fit=crop',
-    link: '/case-studies/social-growth',
-  },
-  {
-    id: '7',
-    title: 'Brand Awareness Campaign',
-    category: 'Social Media Strategy & Management',
-    description: 'Multi-channel campaign reaching 2M+ impressions.',
-    image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&h=800&fit=crop',
-    link: '/case-studies/brand-awareness',
-  },
-  {
-    id: '4',
-    title: 'Content Marketing Series',
-    category: 'Content Creation & Marketing',
-    description: 'Strategic content calendar that drove 500+ qualified leads.',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop',
-    link: '/case-studies/content-series',
-  },
-  {
-    id: '5',
-    title: 'Community Engagement Initiative',
-    category: 'Community Engagement & Management',
-    description: 'Built and managed a thriving community of 50k+ engaged members.',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop',
-    link: '/case-studies/community',
-  },
-];
-
-const CATEGORIES = [
-  'All Services',
-  'Web Design & Development',
-  'Social Media Strategy & Management',
-  'Content Creation & Marketing',
-  'Community Engagement & Management',
-];
-
-function getFiltered(activeCategory: string) {
-  if (activeCategory === 'All Services') {
-    // One representative per category, max 4 total
-    const seen = new Set<string>();
-    const result = [];
-    for (const cs of CASE_STUDIES) {
-      if (!seen.has(cs.category)) {
-        seen.add(cs.category);
-        result.push(cs);
-        if (result.length === 4) break;
-      }
-    }
-    return result;
-  }
-  return CASE_STUDIES.filter((cs) => cs.category === activeCategory).slice(0, 4);
+export interface GalleryItem {
+  id: string;
+  title: string;
+  slug: string;
+  services: string[];
+  description: string;
+  image: string;
 }
 
-export default function GalleryGrid() {
-  const [activeCategory, setActiveCategory] = useState('All Services');
+interface GalleryGridProps {
+  items: GalleryItem[];
+}
+
+const ALL = 'All Services';
+const CATEGORIES = [ALL, ...SERVICES];
+
+export default function GalleryGrid({ items }: GalleryGridProps) {
+  const [activeCategory, setActiveCategory] = useState(ALL);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const selectedStudy = CASE_STUDIES.find((cs) => cs.id === selectedId) ?? null;
-  const filteredCaseStudies = getFiltered(activeCategory);
+  const filtered =
+    activeCategory === ALL
+      ? items
+      : items.filter((cs) => cs.services.includes(activeCategory));
+
+  const selectedStudy = items.find((cs) => cs.id === selectedId) ?? null;
 
   const handleNext = () => {
     if (!selectedId) return;
-    const idx = filteredCaseStudies.findIndex((cs) => cs.id === selectedId);
-    setSelectedId(filteredCaseStudies[(idx + 1) % filteredCaseStudies.length].id);
+    const idx = filtered.findIndex((cs) => cs.id === selectedId);
+    setSelectedId(filtered[(idx + 1) % filtered.length].id);
   };
 
   const handlePrev = () => {
     if (!selectedId) return;
-    const idx = filteredCaseStudies.findIndex((cs) => cs.id === selectedId);
-    setSelectedId(filteredCaseStudies[(idx - 1 + filteredCaseStudies.length) % filteredCaseStudies.length].id);
+    const idx = filtered.findIndex((cs) => cs.id === selectedId);
+    setSelectedId(filtered[(idx - 1 + filtered.length) % filtered.length].id);
   };
 
   const handleCardKeyDown = (e: KeyboardEvent<HTMLDivElement>, id: string) => {
@@ -124,7 +53,6 @@ export default function GalleryGrid() {
   return (
     <section id="gallery-grid" className="py-12 bg-black px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +68,6 @@ export default function GalleryGrid() {
           </p>
         </motion.div>
 
-        {/* Filter Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -163,10 +90,9 @@ export default function GalleryGrid() {
           ))}
         </motion.div>
 
-        {/* Grid */}
         <motion.div layout className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           <AnimatePresence mode="popLayout">
-            {filteredCaseStudies.map((caseStudy, index) => (
+            {filtered.map((caseStudy, index) => (
               <motion.div
                 key={caseStudy.id}
                 layout
@@ -185,17 +111,12 @@ export default function GalleryGrid() {
                   aria-label={`View details for ${caseStudy.title}`}
                 >
                   <div className="relative aspect-square overflow-hidden rounded-2xl border border-white/10 hover:border-[#FF1E1E]/50 transition-all hover:shadow-xl hover:shadow-[#FF1E1E]/10 bg-gray-800">
-                    <motion.div
-                      className="h-full w-full"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Image
-                        src={caseStudy.image}
-                        alt={caseStudy.title}
-                        fill
-                        className="object-cover"
-                      />
+                    <motion.div className="h-full w-full" whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                      {caseStudy.image ? (
+                        <Image src={caseStudy.image} alt={caseStudy.title} fill className="object-cover" />
+                      ) : (
+                        <div className="w-full h-full bg-gray-700" />
+                      )}
                     </motion.div>
                     <motion.div
                       initial={{ opacity: 0 }}
@@ -208,11 +129,9 @@ export default function GalleryGrid() {
                     </motion.div>
                   </div>
                   <div className="mt-3">
-                    <h3 className="text-sm font-semibold text-white mb-2">
-                      {caseStudy.title}
-                    </h3>
+                    <h3 className="text-sm font-semibold text-white mb-2">{caseStudy.title}</h3>
                     <span className="text-xs font-semibold text-[#FF1E1E] bg-[#FF1E1E]/10 px-2 py-1 rounded-full">
-                      {caseStudy.category.split(' ')[0]}
+                      {caseStudy.services[0]?.split(' ')[0] ?? 'Project'}
                     </span>
                   </div>
                 </div>
@@ -271,13 +190,17 @@ export default function GalleryGrid() {
                   className="relative w-full overflow-hidden rounded-2xl bg-gray-800"
                   style={{ maxHeight: '70vh' }}
                 >
-                  <Image
-                    src={selectedStudy.image}
-                    alt={selectedStudy.title}
-                    width={900}
-                    height={600}
-                    className="w-full h-auto object-cover rounded-2xl"
-                  />
+                  {selectedStudy.image ? (
+                    <Image
+                      src={selectedStudy.image}
+                      alt={selectedStudy.title}
+                      width={900}
+                      height={600}
+                      className="w-full h-auto object-cover rounded-2xl"
+                    />
+                  ) : (
+                    <div className="w-full h-64 bg-gray-700 rounded-2xl" />
+                  )}
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -289,11 +212,11 @@ export default function GalleryGrid() {
                     {selectedStudy.title}
                   </h3>
                   <span className="text-xs font-semibold text-[#FF1E1E] bg-[#FF1E1E]/10 px-3 py-1 rounded-full">
-                    {selectedStudy.category}
+                    {selectedStudy.services[0] ?? 'Project'}
                   </span>
                   <p className="mt-3 text-gray-400 text-sm">{selectedStudy.description}</p>
                   <Link
-                    href={selectedStudy.link}
+                    href={`/case-studies/${selectedStudy.slug}`}
                     className="mt-4 inline-flex items-center gap-2 px-6 py-3 bg-[#FF1E1E] hover:bg-white hover:text-black text-white font-bold rounded-xl transition-all duration-300"
                   >
                     View Full Case Study <ExternalLink className="h-4 w-4" />
@@ -304,7 +227,6 @@ export default function GalleryGrid() {
           )}
         </AnimatePresence>
 
-        {/* View More Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

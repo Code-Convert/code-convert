@@ -1,13 +1,15 @@
 import { Metadata } from 'next';
 import SelectedProjects from '@/components/layout/selected-projects';
 import Statistics from '@/components/layout/statistics';
-import GalleryGrid from '@/components/layout/gallery-grid';
+import GalleryGrid, { GalleryItem } from '@/components/layout/gallery-grid';
 import Process from '@/components/layout/Process';
 import ServicesFAQ from '@/components/layout/faq';
 import RecentLaunches from '@/components/layout/recent-launches';
 import CTA from '@/components/layout/CTA';
 import HeroBackgroundPaths from '@/components/layout/HeroBackgroundPaths';
 import TechStack from '@/components/layout/tech-stack';
+import WebsiteCarousel from '@/components/layout/WebsiteCarousel';
+import { createClient } from '@/lib/supabase/server';
 
 export const metadata: Metadata = {
   title: 'Web Design & Marketing Services | Code & Convert',
@@ -15,7 +17,46 @@ export const metadata: Metadata = {
     'Expert web design, development, and social media marketing services. We build high-converting websites and scale your digital presence.',
 };
 
-export default function ServicesPage() {
+async function getGalleryItems(): Promise<GalleryItem[]> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from('case_studies')
+    .select('id, title, slug, services, results, featured_image, gallery_order')
+    .eq('published', true)
+    .order('gallery_order', { ascending: true });
+
+  return (data ?? []).map((cs) => ({
+    id: cs.id,
+    title: cs.title,
+    slug: cs.slug,
+    services: cs.services ?? [],
+    description: cs.results ?? '',
+    image: cs.featured_image ?? '',
+  }));
+}
+
+async function getCarouselItems() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from('case_studies')
+    .select('title, industry, carousel_image, featured_image, carousel_order')
+    .eq('published', true)
+    .eq('show_in_carousel', true)
+    .order('carousel_order', { ascending: true });
+
+  return (data ?? []).map((cs) => ({
+    name: cs.title,
+    industry: cs.industry ?? '',
+    image: cs.carousel_image ?? cs.featured_image ?? '',
+  }));
+}
+
+export default async function ServicesPage() {
+  const [galleryItems, carouselItems] = await Promise.all([
+    getGalleryItems(),
+    getCarouselItems(),
+  ]);
+
   return (
     <main className="bg-black">
       {/* 1. Hero Section */}
@@ -38,28 +79,29 @@ export default function ServicesPage() {
       {/* 2. Selected Projects */}
       <SelectedProjects />
 
-      
       {/* 3. Statistics */}
       <Statistics />
 
       {/* 4. Tech Stack */}
       <TechStack />
-      
-      {/* 5. Gallery Grid */}
-      <GalleryGrid />
 
-      {/* 6. Process Timeline */}
+      {/* 5. Gallery Grid */}
+      <GalleryGrid items={galleryItems} />
+
+      {/* 6. Website Carousel */}
+      {carouselItems.length > 0 && <WebsiteCarousel websites={carouselItems} />}
+
+      {/* 7. Process Timeline */}
       <Process />
-      
-      {/* 7. Recent Launches */}
+
+      {/* 8. Recent Launches */}
       <RecentLaunches />
 
-      {/* 8. FAQ */}
+      {/* 9. FAQ */}
       <ServicesFAQ />
 
-      {/* 9. Final CTA */}
+      {/* 10. Final CTA */}
       <CTA />
-      
     </main>
   );
 }

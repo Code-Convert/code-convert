@@ -20,6 +20,13 @@ export interface CaseStudy {
   published_at?: string
   created_at: string
   updated_at: string
+  show_in_carousel: boolean
+  carousel_image?: string
+  roas?: number | null
+  performance_score?: number | null
+  is_custom_built: boolean
+  gallery_order: number
+  carousel_order: number
 }
 
 export interface CreateCaseStudy {
@@ -41,6 +48,13 @@ export interface CreateCaseStudy {
   seo_description?: string
   published?: boolean
   published_at?: string
+  show_in_carousel?: boolean
+  carousel_image?: string
+  roas?: number | null
+  performance_score?: number | null
+  is_custom_built?: boolean
+  gallery_order?: number
+  carousel_order?: number
 }
 
 export interface UpdateCaseStudy {
@@ -62,6 +76,13 @@ export interface UpdateCaseStudy {
   seo_description?: string
   published?: boolean
   published_at?: string
+  show_in_carousel?: boolean
+  carousel_image?: string
+  roas?: number | null
+  performance_score?: number | null
+  is_custom_built?: boolean
+  gallery_order?: number
+  carousel_order?: number
 }
 
 export const INDUSTRIES = [
@@ -77,16 +98,16 @@ export const INDUSTRIES = [
   'Other'
 ] as const
 
+// These match the gallery filter categories exactly.
+// 'Web Design & Development' is also the carousel eligibility gate.
 export const SERVICES = [
-  'Web Design',
-  'E-commerce Development',
-  'Branding',
-  'Digital Marketing',
-  'SEO',
-  'Content Strategy',
-  'UI/UX Design',
-  'Development'
+  'Web Design & Development',
+  'Social Media Strategy & Management',
+  'Content Creation & Marketing',
+  'Community Engagement & Management',
 ] as const
+
+export const WEB_DEV_SERVICE = 'Web Design & Development' as const
 
 export type Industry = typeof INDUSTRIES[number]
 export type Service = typeof SERVICES[number]

@@ -200,19 +200,26 @@ export type Database = {
       case_studies: {
         Row: {
           challenge: string | null
+          carousel_image: string | null
+          carousel_order: number
           client: string
           content: string | null
           created_at: string | null
           featured_image: string | null
           gallery: string[] | null
+          gallery_order: number
           id: string
           industry: string | null
+          is_custom_built: boolean
+          performance_score: number | null
           published: boolean | null
           published_at: string | null
           results: string | null
+          roas: number | null
           seo_description: string | null
           seo_title: string | null
           services: string[] | null
+          show_in_carousel: boolean
           slug: string
           solution: string | null
           testimonial_author: string | null
@@ -223,19 +230,26 @@ export type Database = {
         }
         Insert: {
           challenge?: string | null
+          carousel_image?: string | null
+          carousel_order?: number
           client: string
           content?: string | null
           created_at?: string | null
           featured_image?: string | null
           gallery?: string[] | null
+          gallery_order?: number
           id?: string
           industry?: string | null
+          is_custom_built?: boolean
+          performance_score?: number | null
           published?: boolean | null
           published_at?: string | null
           results?: string | null
+          roas?: number | null
           seo_description?: string | null
           seo_title?: string | null
           services?: string[] | null
+          show_in_carousel?: boolean
           slug: string
           solution?: string | null
           testimonial_author?: string | null
@@ -246,19 +260,26 @@ export type Database = {
         }
         Update: {
           challenge?: string | null
+          carousel_image?: string | null
+          carousel_order?: number
           client?: string
           content?: string | null
           created_at?: string | null
           featured_image?: string | null
           gallery?: string[] | null
+          gallery_order?: number
           id?: string
           industry?: string | null
+          is_custom_built?: boolean
+          performance_score?: number | null
           published?: boolean | null
           published_at?: string | null
           results?: string | null
+          roas?: number | null
           seo_description?: string | null
           seo_title?: string | null
           services?: string[] | null
+          show_in_carousel?: boolean
           slug?: string
           solution?: string | null
           testimonial_author?: string | null
@@ -342,7 +363,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_site_statistics: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          projects_delivered: number
+          avg_performance_score: number | null
+          avg_roas: number | null
+          percent_custom_built: number | null
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
