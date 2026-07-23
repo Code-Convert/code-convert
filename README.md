@@ -1,15 +1,16 @@
 # Code & Convert
 
-Marketing agency website with a headless admin CMS. Built with Next.js 15, Supabase, and Tailwind CSS.
+Marketing agency website with a headless admin CMS. Built with Next.js, Supabase, and Tailwind CSS.
 
 ## Tech Stack
 
-- **Framework** — Next.js 15 App Router + TypeScript
+- **Framework** — Next.js 16 App Router + TypeScript
 - **Backend** — Supabase (Postgres, Auth, Storage, RLS)
-- **Styling** — Tailwind CSS
+- **Styling** — Tailwind CSS v4
 - **Animations** — Framer Motion + Lenis
 - **Editor** — Tiptap (rich text)
 - **Email** — Resend
+- **Validation** — Zod
 - **Deployment** — Vercel
 
 ## Project Structure
@@ -17,23 +18,45 @@ Marketing agency website with a headless admin CMS. Built with Next.js 15, Supab
 ```
 app/
   (marketing)/        # Public site
+    page.tsx          # Landing page
+    services/         # Services page
+    blog/             # Blog listing + [slug]
+    case-studies/     # Case study listing + [slug]
+    contact-us/       # Contact form
+    get-in-touch/     # Simple contact form
+    privacy/          # Privacy policy
+    terms/            # Terms of service
   (admin)/            # Admin panel (/admin/*)
+  admin-login/        # Login page (/admin-login)
   api/                # API routes
+    auth/callback/    # Supabase auth callback
+    blog/             # Blog API
+    blogs/[id]/       # Blog by ID
+    case-studies/[id]/# Case study by ID
+    contact/          # Contact form handler
+    leads/            # Lead submission handler
+    site-stats/       # Site statistics (cached 60s)
 components/
   ui/                 # Reusable UI components
-  layout/             # Navbar, Footer, AdminSidebar
-  sections/           # Landing page sections
-  effects/            # Cursor, background, loader
+  layout/             # Navbar, Footer, AdminSidebar, page sections
+  InteractiveCursor.tsx
+  LenisProvider.tsx
+  Loader.tsx
+  VoidBackground.tsx
 features/
   blog/               # Blog actions, queries, types
   case-studies/       # Case study actions, queries, types
   media/              # Media actions, queries, types
   auth/               # Auth actions, types
+hooks/
+  use-debounce.ts
+  use-focus-mode.ts
 lib/
   supabase/           # client.ts, server.ts, auth.ts
+  database.type.ts
   errors.ts
   utils.ts
-types/                # database.ts, api.ts
+types/                # database.ts, api.ts, blog.ts, case-study.ts, media.ts, contact.ts, user.ts
 supabase/             # SQL migrations
 middleware.ts         # Admin route protection
 ```
@@ -65,6 +88,8 @@ Run the SQL files in Supabase SQL Editor in this order:
 
 ```
 supabase/database-schema.sql
+supabase/lead-submissions.sql
+supabase/add-carousel-stats-columns.sql
 supabase/fix-storage-policies.sql
 ```
 
@@ -84,7 +109,7 @@ Open [http://localhost:3000/admin](http://localhost:3000/admin) for the admin pa
 
 ## Admin Panel
 
-Protected by middleware — requires a Supabase session with `role = 'admin'` set at login.
+Protected by middleware — requires a Supabase session with `role = 'admin'`. Login at `/admin-login`.
 
 | Route | Description |
 |---|---|
@@ -95,8 +120,32 @@ Protected by middleware — requires a Supabase session with `role = 'admin'` se
 | `/admin/case-studies` | Case study management |
 | `/admin/case-studies/new` | Create case study |
 | `/admin/case-studies/[id]` | Edit case study |
+| `/admin/content-placement` | Gallery order, carousel, site statistics |
 | `/admin/media` | Media library |
 | `/admin/settings` | Settings |
+
+## Database Schema
+
+Core tables: `profiles`, `blogs`, `case_studies`, `media`, `lead_submissions`
+
+The `case_studies` table includes extended columns for homepage content management:
+
+- `show_in_carousel` — whether the project appears in the website carousel
+- `carousel_image` — optional separate carousel thumbnail
+- `gallery_order` / `carousel_order` — display ordering
+- `roas`, `performance_score`, `is_custom_built` — feed the site statistics widget
+
+The `lead_submissions` table captures multi-step form data with UTM tracking, lead scoring, and HubSpot sync fields.
+
+A `get_site_statistics()` Postgres function aggregates published case study data for the homepage stats section.
+
+## Storage Buckets
+
+| Bucket | Access |
+|---|---|
+| `blog-images` | Public read, authenticated write |
+| `case-study-images` | Public read, authenticated write |
+| `media-library` | Public read, authenticated manage |
 
 ## Documentation
 

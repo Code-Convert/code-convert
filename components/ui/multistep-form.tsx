@@ -4,42 +4,34 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Check, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/shadcn-button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader,CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/shadcn-input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/shadcn-textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { OnboardingHeader } from "@/components/ui/onboarding-header";
-import { FocusModeOverlay } from "@/components/ui/focus-mode-overlay";
 
 const steps = [
-  { id: "introduction", title: "Introduction" },
-  { id: "primary-goal", title: "Primary Goal" },
-  { id: "growth-stage", title: "Growth Stage" },
-  { id: "challenge", title: "Challenge" },
-  { id: "company", title: "Company" },
-  { id: "decision", title: "Decision" },
-  { id: "revenue", title: "Revenue" },
-  { id: "readiness", title: "Readiness" },
-  { id: "context", title: "Context" },
-  { id: "contact", title: "Contact" },
-  { id: "meeting", title: "Meeting" },
+  { id: "introduction",       title: "Introduction" },
+  { id: "primary-goal",       title: "Primary Goal" },
+  { id: "sells-to",           title: "Who You Sell To" },
+  { id: "growth-stage",       title: "Growth Stage" },
+  { id: "challenge",          title: "Your Challenge" },
+  { id: "exploring-reason",   title: "Why Now" },
+  { id: "company",            title: "Company" },
+  { id: "role",               title: "Your Role" },
+  { id: "decision-authority", title: "Decision Authority" },
+  { id: "monthly-revenue",    title: "Monthly Revenue" },
+  { id: "ad-spend",           title: "Ad Spend" },
+  { id: "budget",             title: "Budget Allocated" },
+  { id: "timeline",           title: "Implementation Timeline" },
+  { id: "action-likelihood",  title: "Likelihood to Act" },
+  { id: "context",            title: "Additional Context" },
+  { id: "contact",            title: "Contact Details" },
+  { id: "meeting",            title: "Meeting Preference" },
 ];
 
 interface FormData {
@@ -87,37 +79,6 @@ interface FormErrors {
   meetingPreference?: string;
 }
 
-type LeadTemperature = 'hot' | 'warm' | 'cold';
-
-const scoreLead = (data: FormData): { score: number; temperature: LeadTemperature } => {
-  let score = 0;
-
-  if (['2m-10m', '10m+'].includes(data.monthlyRevenue)) score += 3;
-  else if (['500k-1m', '1m-2m'].includes(data.monthlyRevenue)) score += 2;
-  else if (data.monthlyRevenue) score += 1;
-
-  if (data.budgetAllocated === 'yes') score += 3;
-  else if (data.budgetAllocated === 'still-deciding') score += 1;
-
-  if (['final-decision', 'shared-decision'].includes(data.decisionAuthority)) score += 2;
-
-  if (data.implementationTimeline === 'immediately') score += 3;
-  else if (data.implementationTimeline === 'within-30-days') score += 2;
-  else if (data.implementationTimeline === 'within-90-days') score += 1;
-
-  if (data.actionLikelihood === 'very-likely') score += 3;
-  else if (data.actionLikelihood === 'likely') score += 2;
-  else if (data.actionLikelihood === 'unsure') score += 1;
-
-  // Normalise to 0-100
-  const normalised = Math.round((score / 14) * 100);
-
-  const temperature: LeadTemperature =
-    normalised >= 70 ? 'hot' : normalised >= 40 ? 'warm' : 'cold';
-
-  return { score: normalised, temperature };
-};
-
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
@@ -130,13 +91,12 @@ const contentVariants = {
 };
 
 interface OnboardingFormProps {
-  isFocusMode: boolean;
-  onActivateFocus: () => void;
-  onDeactivateFocus: () => void;
+  isOpen: boolean;
+  onClose: () => void;
   sourcePage: string;
 }
 
-const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourcePage }: OnboardingFormProps) => {
+const OnboardingForm = ({ isOpen, onClose, sourcePage }: OnboardingFormProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -189,39 +149,52 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
         break;
       case 1:
         if (!formData.primaryGoal) newErrors.primaryGoal = "Please select a primary goal";
-        if (!formData.sellsTo) newErrors.sellsTo = "Please select who you sell to";
         break;
       case 2:
-        if (!formData.growthStage) newErrors.growthStage = "Please select your growth stage";
+        if (!formData.sellsTo) newErrors.sellsTo = "Please select who you sell to";
         break;
       case 3:
-        if (!formData.biggestChallenge) newErrors.biggestChallenge = "Please select your biggest challenge";
-        if (!formData.exploringReason) newErrors.exploringReason = "Please select why you are exploring support";
+        if (!formData.growthStage) newErrors.growthStage = "Please select your growth stage";
         break;
       case 4:
+        if (!formData.biggestChallenge) newErrors.biggestChallenge = "Please select your biggest challenge";
+        break;
+      case 5:
+        if (!formData.exploringReason) newErrors.exploringReason = "Please select why you are exploring support";
+        break;
+      case 6:
         if (!formData.companyName.trim()) newErrors.companyName = "Company name is required";
         if (!formData.industry) newErrors.industry = "Please select an industry";
         break;
-      case 5:
+      case 7:
         if (!formData.role) newErrors.role = "Please select your role";
+        break;
+      case 8:
         if (!formData.decisionAuthority) newErrors.decisionAuthority = "Please select your decision-making authority";
         break;
-      case 6:
+      case 9:
         if (!formData.monthlyRevenue) newErrors.monthlyRevenue = "Please select your monthly revenue";
+        break;
+      case 10:
         if (!formData.monthlyAdSpend) newErrors.monthlyAdSpend = "Please select your monthly ad spend";
+        break;
+      case 11:
         if (!formData.budgetAllocated) newErrors.budgetAllocated = "Please select a budget option";
         break;
-      case 7:
+      case 12:
         if (!formData.implementationTimeline) newErrors.implementationTimeline = "Please select a timeline";
+        break;
+      case 13:
         if (!formData.actionLikelihood) newErrors.actionLikelihood = "Please select your likelihood to act";
         break;
-      case 9:
+      // case 14: additionalContext — optional, no validation
+      case 15:
         if (!formData.name.trim()) newErrors.name = "Full name is required";
         if (!formData.email.trim()) newErrors.email = "Email is required";
         else if (!isValidEmail(formData.email)) newErrors.email = "Please enter a valid email address";
         if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
         break;
-      case 10:
+      case 16:
         if (!formData.meetingPreference) newErrors.meetingPreference = "Please select a meeting preference";
         break;
     }
@@ -262,7 +235,6 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
 
     try {
       const params = new URLSearchParams(window.location.search);
-      const { score, temperature } = scoreLead(formData);
 
       const response = await fetch('/api/leads', {
         method: 'POST',
@@ -296,8 +268,6 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
           action_likelihood: formData.actionLikelihood,
           additional_context: formData.additionalContext,
           meeting_preference: formData.meetingPreference,
-          lead_score: score,
-          lead_temperature: temperature,
         }),
       });
 
@@ -308,7 +278,6 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
 
       setIsSubmitted(true);
       toast.success("Application received! We'll be in touch shortly.");
-      onDeactivateFocus();
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
       toast.error(message);
@@ -317,104 +286,53 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
     }
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="w-full max-w-lg mx-auto py-8">
-        <Card className="relative z-10 border border-white/10 shadow-2xl rounded-3xl overflow-hidden bg-white/5">
-          <CardContent className="flex flex-col items-center text-center space-y-6 py-16 px-8">
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
-              className="w-20 h-20 rounded-full bg-green-500/15 border border-green-500/40 flex items-center justify-center"
-            >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 18, delay: 0.25 }}
-              >
-                <Check className="w-9 h-9 text-green-400" strokeWidth={2.5} />
-              </motion.div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.35 }}
-              className="space-y-2"
-            >
-              <h2 className="text-2xl font-bold">You&apos;re all set!</h2>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Thanks for reaching out, <span className="text-white font-medium">{formData.name}</span>. We&apos;ve received your details and will be in touch shortly to confirm your session.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.5 }}
-              className="flex items-center gap-2 text-xs text-muted-foreground border border-white/10 rounded-full px-4 py-2"
-            >
-              <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              Submission confirmed
-            </motion.div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
   return (
-    <motion.div
-      layoutId="onboarding-card"
-      layout
-      transition={{ type: "spring", stiffness: 250, damping: 25 }}
-      className={cn(
-        isFocusMode
-          ? "fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 pointer-events-none"
-          : "w-full py-8"
-      )}
-    >
-      <AnimatePresence>
-        {isFocusMode && <FocusModeOverlay />}
-      </AnimatePresence>
-        <Card
-          className={cn(
-            "relative z-10 border border-white/10 shadow-2xl rounded-3xl overflow-hidden pointer-events-auto",
-            isFocusMode
-              ? "w-full max-w-[1100px] max-h-[90vh] overflow-y-auto bg-[#0e0e0e]"
-              : "w-full max-w-lg mx-auto bg-white/5"
-          )}
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          key="lightbox-backdrop"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
         >
-          <div>
-            <AnimatePresence>
-              {isFocusMode && (
-                <motion.div
-                  key="onboarding-header"
-                  className="px-6 pt-6"
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
+          <motion.div
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={onClose}
+            aria-hidden="true"
+          />
+          <motion.div
+            className="relative z-10 w-full max-w-lg"
+            initial={{ opacity: 0, scale: 0.96, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 16 }}
+            transition={{ type: "spring", stiffness: 260, damping: 24 }}
+          >
+            <Card className="border border-white/10 shadow-2xl rounded-3xl bg-[#0e0e0e]">
+              <div className="px-6 pt-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    {isSubmitted ? (
+                      <p className="text-sm font-semibold text-white tracking-wide">Complete</p>
+                    ) : (
                       <OnboardingHeader
                         currentStep={currentStep}
                         totalSteps={steps.length}
                         stepTitle={steps[currentStep].title}
                       />
-                    </div>
-                    <button
-                      type="button"
-                      onClick={onDeactivateFocus}
-                      className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-colors"
-                      aria-label="Close"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
+                    )}
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-colors"
+                    aria-label="Close"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStep}
@@ -423,15 +341,13 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                 exit="exit"
                 variants={contentVariants}
               >
-                {/* Step 1: Introduction */}
+                {/* Step 0: Introduction */}
                 {currentStep === 0 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Introduction</CardTitle>
-                        <CardDescription>Let&apos;s start with your name</CardDescription>
-                      </CardHeader>
-                    )}
+                    <CardHeader>
+                      <CardTitle>Introduction</CardTitle>
+                      <CardDescription>Let&apos;s start with your name</CardDescription>
+                    </CardHeader>
                     <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
                         <Label htmlFor="name">What&apos;s your name?</Label>
@@ -440,7 +356,6 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                           placeholder="Your name"
                           value={formData.name}
                           onChange={(e) => updateFormData("name", e.target.value)}
-                          onFocus={onActivateFocus}
                           className="transition-all duration-300 focus:ring-1 focus:ring-primary/20 focus:border-primary"
                         />
                         {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
@@ -449,18 +364,15 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   </>
                 )}
 
-                {/* Step 2: Primary Goal */}
+                {/* Step 1: Primary Goal */}
                 {currentStep === 1 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Primary Goal</CardTitle>
-                        <CardDescription>Help us understand what you&apos;re working towards</CardDescription>
-                      </CardHeader>
-                    )}
-                    <CardContent className="space-y-6">
+                    <CardHeader>
+                      <CardTitle>Primary Goal</CardTitle>
+                      <CardDescription>What are you hoping to achieve over the next 12 months?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label>What is the main outcome you&apos;re hoping to achieve over the next 12 months?</Label>
                         <RadioGroup
                           value={formData.primaryGoal}
                           onValueChange={(value) => updateFormData("primaryGoal", value)}
@@ -489,9 +401,19 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                         </RadioGroup>
                         {errors.primaryGoal && <p className="text-sm text-destructive">{errors.primaryGoal}</p>}
                       </motion.div>
+                    </CardContent>
+                  </>
+                )}
 
+                {/* Step 2: Sells To */}
+                {currentStep === 2 && (
+                  <>
+                    <CardHeader>
+                      <CardTitle>Who You Sell To</CardTitle>
+                      <CardDescription>Who do you primarily sell to?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label>Who do you primarily sell to?</Label>
                         <RadioGroup
                           value={formData.sellsTo}
                           onValueChange={(value) => updateFormData("sellsTo", value)}
@@ -521,15 +443,13 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   </>
                 )}
 
-                {/* Step 3: Business Growth Stage */}
-                {currentStep === 2 && (
+                {/* Step 3: Growth Stage */}
+                {currentStep === 3 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Business Growth Stage</CardTitle>
-                        <CardDescription>Which best describes your business today?</CardDescription>
-                      </CardHeader>
-                    )}
+                    <CardHeader>
+                      <CardTitle>Growth Stage</CardTitle>
+                      <CardDescription>Which best describes your business today?</CardDescription>
+                    </CardHeader>
                     <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
                         <RadioGroup
@@ -562,18 +482,16 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                     </CardContent>
                   </>
                 )}
-                {/* Step 4: Current Challenge */}
-                {currentStep === 3 && (
+
+                {/* Step 4: Your Challenge */}
+                {currentStep === 4 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Current Challenge</CardTitle>
-                        <CardDescription>Help us understand what&apos;s holding you back</CardDescription>
-                      </CardHeader>
-                    )}
-                    <CardContent className="space-y-6">
+                    <CardHeader>
+                      <CardTitle>Your Challenge</CardTitle>
+                      <CardDescription>What is the biggest growth challenge your business faces right now?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label>What is the biggest growth challenge your business is facing right now?</Label>
                         <RadioGroup
                           value={formData.biggestChallenge}
                           onValueChange={(value) => updateFormData("biggestChallenge", value)}
@@ -603,9 +521,19 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                         </RadioGroup>
                         {errors.biggestChallenge && <p className="text-sm text-destructive">{errors.biggestChallenge}</p>}
                       </motion.div>
+                    </CardContent>
+                  </>
+                )}
 
+                {/* Step 5: Why Now */}
+                {currentStep === 5 && (
+                  <>
+                    <CardHeader>
+                      <CardTitle>Why Now</CardTitle>
+                      <CardDescription>Why are you exploring marketing support at this point?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label>Why are you exploring marketing support right now?</Label>
                         <RadioGroup
                           value={formData.exploringReason}
                           onValueChange={(value) => updateFormData("exploringReason", value)}
@@ -639,15 +567,13 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   </>
                 )}
 
-                {/* Step 5: Company Information */}
-                {currentStep === 4 && (
+                {/* Step 6: Company */}
+                {currentStep === 6 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Company Information</CardTitle>
-                        <CardDescription>Tell us about your business</CardDescription>
-                      </CardHeader>
-                    )}
+                    <CardHeader>
+                      <CardTitle>Company</CardTitle>
+                      <CardDescription>Tell us about your business</CardDescription>
+                    </CardHeader>
                     <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
                         <Label htmlFor="companyName">What&apos;s your company name?</Label>
@@ -661,7 +587,7 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                         {errors.companyName && <p className="text-sm text-destructive">{errors.companyName}</p>}
                       </motion.div>
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label htmlFor="websiteUrl">What&apos;s your website URL?</Label>
+                        <Label htmlFor="websiteUrl">What&apos;s your website URL? (optional)</Label>
                         <Input
                           id="websiteUrl"
                           type="url"
@@ -710,18 +636,15 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   </>
                 )}
 
-                {/* Step 6: Decision-Making Authority */}
-                {currentStep === 5 && (
+                {/* Step 7: Your Role */}
+                {currentStep === 7 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Decision-Making Authority</CardTitle>
-                        <CardDescription>Help us understand your role in the process</CardDescription>
-                      </CardHeader>
-                    )}
-                    <CardContent className="space-y-6">
+                    <CardHeader>
+                      <CardTitle>Your Role</CardTitle>
+                      <CardDescription>What best describes your role?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label>What best describes your role?</Label>
                         <RadioGroup
                           value={formData.role}
                           onValueChange={(value) => updateFormData("role", value)}
@@ -751,9 +674,19 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                         </RadioGroup>
                         {errors.role && <p className="text-sm text-destructive">{errors.role}</p>}
                       </motion.div>
+                    </CardContent>
+                  </>
+                )}
 
+                {/* Step 8: Decision Authority */}
+                {currentStep === 8 && (
+                  <>
+                    <CardHeader>
+                      <CardTitle>Decision Authority</CardTitle>
+                      <CardDescription>Are you involved in approving marketing investments?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label>Are you involved in approving marketing investments?</Label>
                         <RadioGroup
                           value={formData.decisionAuthority}
                           onValueChange={(value) => updateFormData("decisionAuthority", value)}
@@ -784,18 +717,15 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   </>
                 )}
 
-                {/* Step 7: Revenue & Investment */}
-                {currentStep === 6 && (
+                {/* Step 9: Monthly Revenue */}
+                {currentStep === 9 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Revenue &amp; Investment</CardTitle>
-                        <CardDescription>Help us understand your current position</CardDescription>
-                      </CardHeader>
-                    )}
-                    <CardContent className="space-y-6">
+                    <CardHeader>
+                      <CardTitle>Monthly Revenue</CardTitle>
+                      <CardDescription>What is your current monthly revenue range?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label htmlFor="monthlyRevenue">What is your current monthly revenue range?</Label>
                         <Select
                           value={formData.monthlyRevenue}
                           onValueChange={(value) => updateFormData("monthlyRevenue", value)}
@@ -814,9 +744,19 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                         </Select>
                         {errors.monthlyRevenue && <p className="text-sm text-destructive">{errors.monthlyRevenue}</p>}
                       </motion.div>
+                    </CardContent>
+                  </>
+                )}
 
+                {/* Step 10: Ad Spend */}
+                {currentStep === 10 && (
+                  <>
+                    <CardHeader>
+                      <CardTitle>Ad Spend</CardTitle>
+                      <CardDescription>What is your current monthly advertising investment?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label htmlFor="monthlyAdSpend">What is your current monthly advertising investment?</Label>
                         <Select
                           value={formData.monthlyAdSpend}
                           onValueChange={(value) => updateFormData("monthlyAdSpend", value)}
@@ -836,9 +776,19 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                         </Select>
                         {errors.monthlyAdSpend && <p className="text-sm text-destructive">{errors.monthlyAdSpend}</p>}
                       </motion.div>
+                    </CardContent>
+                  </>
+                )}
 
+                {/* Step 11: Budget Allocated */}
+                {currentStep === 11 && (
+                  <>
+                    <CardHeader>
+                      <CardTitle>Budget Allocated</CardTitle>
+                      <CardDescription>Do you have a budget allocated for growth initiatives over the next 90 days?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label>Do you have a budget allocated for growth initiatives over the next 90 days?</Label>
                         <RadioGroup
                           value={formData.budgetAllocated}
                           onValueChange={(value) => updateFormData("budgetAllocated", value)}
@@ -868,18 +818,15 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   </>
                 )}
 
-                {/* Step 8: Readiness */}
-                {currentStep === 7 && (
+                {/* Step 12: Implementation Timeline */}
+                {currentStep === 12 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Readiness</CardTitle>
-                        <CardDescription>Help us understand your urgency</CardDescription>
-                      </CardHeader>
-                    )}
-                    <CardContent className="space-y-6">
+                    <CardHeader>
+                      <CardTitle>Implementation Timeline</CardTitle>
+                      <CardDescription>How soon are you looking to implement a growth strategy?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label>How soon are you looking to implement a growth strategy?</Label>
                         <RadioGroup
                           value={formData.implementationTimeline}
                           onValueChange={(value) => updateFormData("implementationTimeline", value)}
@@ -907,9 +854,19 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                         </RadioGroup>
                         {errors.implementationTimeline && <p className="text-sm text-destructive">{errors.implementationTimeline}</p>}
                       </motion.div>
+                    </CardContent>
+                  </>
+                )}
 
+                {/* Step 13: Likelihood to Act */}
+                {currentStep === 13 && (
+                  <>
+                    <CardHeader>
+                      <CardTitle>Likelihood to Act</CardTitle>
+                      <CardDescription>If we identify clear opportunities, how likely are you to take action?</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label>If we identify clear opportunities to improve your results, how likely are you to take action?</Label>
                         <RadioGroup
                           value={formData.actionLikelihood}
                           onValueChange={(value) => updateFormData("actionLikelihood", value)}
@@ -940,15 +897,13 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   </>
                 )}
 
-                {/* Step 9: Additional Context */}
-                {currentStep === 8 && (
+                {/* Step 14: Additional Context */}
+                {currentStep === 14 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Additional Context</CardTitle>
-                        <CardDescription>Is there anything else you&apos;d like us to know before the call?</CardDescription>
-                      </CardHeader>
-                    )}
+                    <CardHeader>
+                      <CardTitle>Additional Context</CardTitle>
+                      <CardDescription>Is there anything else you&apos;d like us to know before the call?</CardDescription>
+                    </CardHeader>
                     <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
                         <Textarea
@@ -963,20 +918,18 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   </>
                 )}
 
-                {/* Step 10: Contact Information */}
-                {currentStep === 9 && (
+                {/* Step 15: Contact Details */}
+                {currentStep === 15 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Contact Information</CardTitle>
-                        <CardDescription>Please provide your contact details</CardDescription>
-                      </CardHeader>
-                    )}
+                    <CardHeader>
+                      <CardTitle>Contact Details</CardTitle>
+                      <CardDescription>Please provide your contact information</CardDescription>
+                    </CardHeader>
                     <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
-                        <Label htmlFor="name">Full Name</Label>
+                        <Label htmlFor="contact-name">Full Name</Label>
                         <Input
-                          id="name"
+                          id="contact-name"
                           placeholder="Your full name"
                           value={formData.name}
                           onChange={(e) => updateFormData("name", e.target.value)}
@@ -1012,15 +965,13 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   </>
                 )}
 
-                {/* Step 11: Meeting Preference */}
-                {currentStep === 10 && (
+                {/* Step 16: Meeting Preference */}
+                {currentStep === 16 && (
                   <>
-                    {!isFocusMode && (
-                      <CardHeader>
-                        <CardTitle>Meeting Preference</CardTitle>
-                        <CardDescription>How would you prefer to meet?</CardDescription>
-                      </CardHeader>
-                    )}
+                    <CardHeader>
+                      <CardTitle>Meeting Preference</CardTitle>
+                      <CardDescription>How would you prefer to connect with us?</CardDescription>
+                    </CardHeader>
                     <CardContent className="space-y-4">
                       <motion.div variants={fadeInUp} className="space-y-2">
                         <RadioGroup
@@ -1055,10 +1006,7 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
             </AnimatePresence>
 
             <CardFooter className="flex justify-between pt-6 pb-4">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   type="button"
                   variant="outline"
@@ -1069,25 +1017,15 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                   <ChevronLeft className="h-4 w-4" /> Back
                 </Button>
               </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   type="button"
-                  onClick={
-                    currentStep === steps.length - 1 ? handleSubmit : nextStep
-                  }
+                  onClick={currentStep === steps.length - 1 ? handleSubmit : nextStep}
                   disabled={isSubmitting}
-                  className={cn(
-                    "flex items-center gap-1 transition-all duration-300 rounded-2xl",
-                    currentStep === steps.length - 1 ? "" : "",
-                  )}
+                  className="flex items-center gap-1 transition-all duration-300 rounded-2xl"
                 >
                   {isSubmitting ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" /> Submitting...
-                    </>
+                    <><Loader2 className="h-4 w-4 animate-spin" /> Submitting...</>
                   ) : (
                     <>
                       {currentStep === steps.length - 1 ? "Submit" : "Next"}
@@ -1101,9 +1039,50 @@ const OnboardingForm = ({ isFocusMode, onActivateFocus, onDeactivateFocus, sourc
                 </Button>
               </motion.div>
             </CardFooter>
-          </div>
-        </Card>
-    </motion.div>
+
+            {isSubmitted && (
+              <CardContent className="flex flex-col items-center text-center space-y-6 py-12 px-8">
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
+                  className="w-20 h-20 rounded-full bg-green-500/15 border border-green-500/40 flex items-center justify-center"
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 18, delay: 0.25 }}
+                  >
+                    <Check className="w-9 h-9 text-green-400" strokeWidth={2.5} />
+                  </motion.div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.35 }}
+                  className="space-y-2"
+                >
+                  <h2 className="text-2xl font-bold">You&apos;re all set!</h2>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    Thanks for reaching out, <span className="text-white font-medium">{formData.name}</span>. We&apos;ve received your details and will be in touch shortly to confirm your session.
+                  </p>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.5 }}
+                  className="flex items-center gap-2 text-xs text-muted-foreground border border-white/10 rounded-full px-4 py-2"
+                >
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Submission confirmed
+                </motion.div>
+              </CardContent>
+            )}
+          </Card>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
