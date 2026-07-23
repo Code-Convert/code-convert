@@ -10,6 +10,7 @@ import { EmptyState } from '@/components/ui/empty-state';
 import { CaseStudy, INDUSTRIES, SERVICES } from '@/types/case-study';
 import VoidBackground from '@/components/VoidBackground';
 import InteractiveCursor from '@/components/InteractiveCursor';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -89,27 +90,29 @@ export default function CaseStudiesPage() {
         />
         
         <div className="flex flex-wrap gap-4">
-          <select
-            value={industryFilter}
-            onChange={(e) => setIndustryFilter(e.target.value)}
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#FF1E1E]/50"
-          >
-            <option value="">All Industries</option>
-            {INDUSTRIES.map(industry => (
-              <option key={industry} value={industry}>{industry}</option>
-            ))}
-          </select>
-          
-          <select
-            value={serviceFilter}
-            onChange={(e) => setServiceFilter(e.target.value)}
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#FF1E1E]/50"
-          >
-            <option value="">All Services</option>
-            {SERVICES.map(service => (
-              <option key={service} value={service}>{service}</option>
-            ))}
-          </select>
+          <Select value={industryFilter || '__all__'} onValueChange={(v) => setIndustryFilter(v === '__all__' ? '' : v)}>
+            <SelectTrigger className="w-48">
+              <SelectValue placeholder="All Industries" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="__all__">All Industries</SelectItem>
+              {INDUSTRIES.map(industry => (
+                <SelectItem key={industry} value={industry}>{industry}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          <Select value={serviceFilter || '__all__'} onValueChange={(v) => setServiceFilter(v === '__all__' ? '' : v)}>
+            <SelectTrigger className="w-64">
+              <SelectValue placeholder="All Services" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="__all__">All Services</SelectItem>
+              {SERVICES.map(service => (
+                <SelectItem key={service} value={service}>{service}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 

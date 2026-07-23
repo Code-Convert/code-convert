@@ -9,6 +9,7 @@ import CTA from '@/components/layout/CTA';
 import HeroBackgroundPaths from '@/components/layout/HeroBackgroundPaths';
 import TechStack from '@/components/layout/tech-stack';
 import { createClient } from '@/lib/supabase/server';
+import InteractiveCursor from '@/components/InteractiveCursor';
 
 export const metadata: Metadata = {
   title: 'Web Design & Marketing Services | Code & Convert',
@@ -39,6 +40,8 @@ export default async function ServicesPage() {
 
   return (
     <main className="bg-black">
+      <InteractiveCursor />
+      
       {/* 1. Hero Section */}
       <HeroBackgroundPaths
         title="We Build High-Converting Websites For Growing Brands"

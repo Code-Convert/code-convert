@@ -10,6 +10,7 @@ import { ImageUpload } from '@/components/ui/image-upload'
 import { slugify } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 import { INDUSTRIES, SERVICES, WEB_DEV_SERVICE } from '@/types/case-study'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 export default function EditCaseStudy({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -157,16 +158,16 @@ export default function EditCaseStudy({ params }: { params: Promise<{ id: string
           <Input label="Client" value={formData.client} onChange={(e) => setFormData(prev => ({ ...prev, client: e.target.value }))} placeholder="Client name" required />
           <div>
             <label className="block text-sm font-medium text-white mb-2">Industry</label>
-            <select
-              value={formData.industry}
-              onChange={(e) => setFormData(prev => ({ ...prev, industry: e.target.value }))}
-              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md text-white"
-            >
-              <option value="">Select industry</option>
-              {INDUSTRIES.map(industry => (
-                <option key={industry} value={industry}>{industry}</option>
-              ))}
-            </select>
+            <Select value={formData.industry} onValueChange={(value) => setFormData(prev => ({ ...prev, industry: value }))}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select industry" />
+              </SelectTrigger>
+              <SelectContent>
+                {INDUSTRIES.map(industry => (
+                  <SelectItem key={industry} value={industry}>{industry}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

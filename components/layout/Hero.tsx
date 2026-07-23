@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import AnimatedStats from '@/components/ui/animated-stats';
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
 
@@ -20,14 +19,7 @@ const scaleIn = {
   transition: { duration: 0.8, ease },
 };
 
-export default function Hero() {
-  const stats = [
-    { value: '30', suffix: '+', label: 'Custom Full-Stack Builds' },
-    { value: '24', suffix: '/7', label: 'Automated Lead Capture' },
-    { value: '94', suffix: '%', label: 'Client Retention' },
-    { value: '100', suffix: '%', label: 'Built to Convert Leads' },
-  ];
-
+export default function Hero({ children }: { children?: React.ReactNode }) {
   return (
     <section className="relative z-10 min-h-screen flex items-center bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')]" id="hero">
       <div className="absolute top-20 left-1/3 w-96 h-96 rounded-full blur-3xl bg-[#FF1E1E]/2.5" />
@@ -70,9 +62,11 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <div className="mt-12 md:mt-16 lg:mt-24">
-          <AnimatedStats stats={stats} />
-        </div>
+        {children && (
+          <div className="mt-12 md:mt-16 lg:mt-24">
+            {children}
+          </div>
+        )}
       </div>
 
       <motion.div

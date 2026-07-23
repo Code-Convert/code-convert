@@ -1,3 +1,4 @@
+import InteractiveCursor from '@/components/InteractiveCursor';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-black text-white pt-32 pb-20">
+      <InteractiveCursor />
       <div className="max-w-4xl mx-auto px-6">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">Privacy Policy</h1>
         <p className="text-gray-400 mb-12">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>

@@ -68,6 +68,10 @@
 }
 
 @layer base {
+  select {
+    color-scheme: dark;
+  }
+
   html {
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 30, 30, 0.15) #050505;

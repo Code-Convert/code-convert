@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import { PageContainer } from '@/components/ui/page-container';
 import { ArticleHeader } from '@/components/ui/article-header';
 import { FeaturedImage } from '@/components/ui/featured-image';
+import InteractiveCursor from '@/components/InteractiveCursor';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -41,6 +42,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <PageContainer maxWidth="4xl">
+      <InteractiveCursor />
+      
       <article>
         <ArticleHeader
           title={blog.title}
