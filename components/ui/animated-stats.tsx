@@ -15,7 +15,7 @@ interface AnimatedStatsProps {
 
 export default function AnimatedStats({ stats }: AnimatedStatsProps) {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <div className="grid grid-cols-4 gap-8 lg:gap-12">
       {stats.map((stat, idx) => (
         <StatCard key={idx} stat={stat} index={idx} />
       ))}
@@ -42,7 +42,7 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
       <div className="relative inline-block">
         <div className="absolute inset-0 bg-[#FF1E1E]/20 blur-2xl group-hover:blur-3xl transition-all duration-500" />
         <motion.div
-          className="relative text-5xl md:text-6xl lg:text-7xl font-bold bg-linear-to-br from-white via-white to-gray-400 bg-clip-text text-transparent"
+          className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-linear-to-br from-white via-white to-gray-400 bg-clip-text text-transparent"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >

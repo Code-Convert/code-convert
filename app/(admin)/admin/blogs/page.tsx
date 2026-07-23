@@ -86,7 +86,7 @@ export default async function BlogsManagement() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-white/70">
-                      {new Date(blog.created_at).toLocaleDateString()}
+                      {blog.created_at ? new Date(blog.created_at).toLocaleDateString() : '—'}
                     </td>
                     <td className="px-6 py-4 text-right text-sm font-medium">
                       <Link

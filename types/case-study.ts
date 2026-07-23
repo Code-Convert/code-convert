@@ -3,23 +3,30 @@ export interface CaseStudy {
   title: string
   slug: string
   client: string
-  industry?: string
-  services?: string[]
-  challenge?: string
-  solution?: string
-  results?: string
-  content?: string
-  featured_image?: string
-  gallery?: string[]
-  testimonial_text?: string
-  testimonial_author?: string
-  testimonial_role?: string
-  seo_title?: string
-  seo_description?: string
-  published: boolean
-  published_at?: string
-  created_at: string
-  updated_at: string
+  industry?: string | null
+  services?: string[] | null
+  challenge?: string | null
+  solution?: string | null
+  results?: string | null
+  content?: string | null
+  featured_image?: string | null
+  gallery?: string[] | null
+  testimonial_text?: string | null
+  testimonial_author?: string | null
+  testimonial_role?: string | null
+  seo_title?: string | null
+  seo_description?: string | null
+  published?: boolean | null
+  published_at?: string | null
+  created_at: string | null
+  updated_at: string | null
+  show_in_carousel: boolean
+  carousel_image?: string | null
+  roas?: number | null
+  performance_score?: number | null
+  is_custom_built: boolean
+  gallery_order: number
+  carousel_order: number
 }
 
 export interface CreateCaseStudy {
@@ -41,6 +48,13 @@ export interface CreateCaseStudy {
   seo_description?: string
   published?: boolean
   published_at?: string
+  show_in_carousel?: boolean
+  carousel_image?: string
+  roas?: number | null
+  performance_score?: number | null
+  is_custom_built?: boolean
+  gallery_order?: number
+  carousel_order?: number
 }
 
 export interface UpdateCaseStudy {
@@ -62,6 +76,13 @@ export interface UpdateCaseStudy {
   seo_description?: string
   published?: boolean
   published_at?: string
+  show_in_carousel?: boolean
+  carousel_image?: string
+  roas?: number | null
+  performance_score?: number | null
+  is_custom_built?: boolean
+  gallery_order?: number
+  carousel_order?: number
 }
 
 export const INDUSTRIES = [
@@ -77,16 +98,16 @@ export const INDUSTRIES = [
   'Other'
 ] as const
 
+// These match the gallery filter categories exactly.
+// 'Web Design & Development' is also the carousel eligibility gate.
 export const SERVICES = [
-  'Web Design',
-  'E-commerce Development',
-  'Branding',
-  'Digital Marketing',
-  'SEO',
-  'Content Strategy',
-  'UI/UX Design',
-  'Development'
+  'Web Design & Development',
+  'Social Media Strategy & Management',
+  'Content Creation & Marketing',
+  'Community Engagement & Management',
 ] as const
+
+export const WEB_DEV_SERVICE = 'Web Design & Development' as const
 
 export type Industry = typeof INDUSTRIES[number]
 export type Service = typeof SERVICES[number]

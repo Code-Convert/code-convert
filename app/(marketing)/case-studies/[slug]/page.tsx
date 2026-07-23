@@ -7,6 +7,7 @@ import { FeaturedImage } from '@/components/ui/featured-image';
 import { ContentSection } from '@/components/ui/content-section';
 import { TestimonialCard } from '@/components/ui/testimonial-card';
 import { ImageGallery } from '@/components/ui/image-gallery';
+import InteractiveCursor from '@/components/InteractiveCursor';
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>;
@@ -44,6 +45,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   return (
     <PageContainer maxWidth="6xl">
+      <InteractiveCursor />
       <article>
         <ArticleHeader
           title={study.title}

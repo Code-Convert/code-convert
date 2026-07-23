@@ -39,12 +39,12 @@ export default function EditBlogPost({ params }: { params: Promise<{ id: string 
         setFormData({
           title: data.title,
           slug: data.slug,
-          excerpt: data.excerpt,
-          content: data.content,
-          featured_image: data.featured_image,
-          seo_title: data.seo_title,
-          seo_description: data.seo_description,
-          published: data.published || false
+          excerpt: data.excerpt ?? '',
+          content: data.content ?? '',
+          featured_image: data.featured_image ?? '',
+          seo_title: data.seo_title ?? '',
+          seo_description: data.seo_description ?? '',
+          published: data.published ?? false
         })
       }
       setFetching(false)

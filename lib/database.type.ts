@@ -40,12 +40,12 @@ export type Database = {
           action_likelihood: string | null
           additional_context: string | null
           meeting_preference: string | null
-          lead_score: number
+          lead_score: number | null
           lead_temperature: 'hot' | 'warm' | 'cold' | null
           lifecycle_stage: string
           lead_status: string
           hubspot_contact_id: string | null
-          hubspot_sync_status: 'pending' | 'synced' | 'failed'
+          hubspot_sync_status: 'pending' | 'synced' | 'failed' | null
           hubspot_synced_at: string | null
           ip_address: string | null
           user_agent: string | null
@@ -83,12 +83,12 @@ export type Database = {
           action_likelihood?: string | null
           additional_context?: string | null
           meeting_preference?: string | null
-          lead_score?: number
+          lead_score?: number | null
           lead_temperature?: 'hot' | 'warm' | 'cold' | null
           lifecycle_stage?: string
           lead_status?: string
           hubspot_contact_id?: string | null
-          hubspot_sync_status?: 'pending' | 'synced' | 'failed'
+          hubspot_sync_status?: 'pending' | 'synced' | 'failed' | null
           hubspot_synced_at?: string | null
           ip_address?: string | null
           user_agent?: string | null
@@ -126,12 +126,12 @@ export type Database = {
           action_likelihood?: string | null
           additional_context?: string | null
           meeting_preference?: string | null
-          lead_score?: number
+          lead_score?: number | null
           lead_temperature?: 'hot' | 'warm' | 'cold' | null
           lifecycle_stage?: string
           lead_status?: string
           hubspot_contact_id?: string | null
-          hubspot_sync_status?: 'pending' | 'synced' | 'failed'
+          hubspot_sync_status?: 'pending' | 'synced' | 'failed' | null
           hubspot_synced_at?: string | null
           ip_address?: string | null
           user_agent?: string | null
@@ -200,19 +200,26 @@ export type Database = {
       case_studies: {
         Row: {
           challenge: string | null
+          carousel_image: string | null
+          carousel_order: number
           client: string
           content: string | null
           created_at: string | null
           featured_image: string | null
           gallery: string[] | null
+          gallery_order: number
           id: string
           industry: string | null
+          is_custom_built: boolean
+          performance_score: number | null
           published: boolean | null
           published_at: string | null
           results: string | null
+          roas: number | null
           seo_description: string | null
           seo_title: string | null
           services: string[] | null
+          show_in_carousel: boolean
           slug: string
           solution: string | null
           testimonial_author: string | null
@@ -223,19 +230,26 @@ export type Database = {
         }
         Insert: {
           challenge?: string | null
+          carousel_image?: string | null
+          carousel_order?: number
           client: string
           content?: string | null
           created_at?: string | null
           featured_image?: string | null
           gallery?: string[] | null
+          gallery_order?: number
           id?: string
           industry?: string | null
+          is_custom_built?: boolean
+          performance_score?: number | null
           published?: boolean | null
           published_at?: string | null
           results?: string | null
+          roas?: number | null
           seo_description?: string | null
           seo_title?: string | null
           services?: string[] | null
+          show_in_carousel?: boolean
           slug: string
           solution?: string | null
           testimonial_author?: string | null
@@ -246,19 +260,26 @@ export type Database = {
         }
         Update: {
           challenge?: string | null
+          carousel_image?: string | null
+          carousel_order?: number
           client?: string
           content?: string | null
           created_at?: string | null
           featured_image?: string | null
           gallery?: string[] | null
+          gallery_order?: number
           id?: string
           industry?: string | null
+          is_custom_built?: boolean
+          performance_score?: number | null
           published?: boolean | null
           published_at?: string | null
           results?: string | null
+          roas?: number | null
           seo_description?: string | null
           seo_title?: string | null
           services?: string[] | null
+          show_in_carousel?: boolean
           slug?: string
           solution?: string | null
           testimonial_author?: string | null
@@ -342,7 +363,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_site_statistics: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          projects_delivered: number
+          avg_performance_score: number | null
+          avg_roas: number | null
+          percent_custom_built: number | null
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
@@ -353,122 +382,14 @@ export type Database = {
   }
 }
 
-type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+export type Tables<T extends keyof Database["public"]["Tables"]> =
+  Database["public"]["Tables"][T]["Row"]
 
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+export type TablesInsert<T extends keyof Database["public"]["Tables"]> =
+  Database["public"]["Tables"][T]["Insert"]
 
-export type Tables<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
-    }
-    ? R
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
-        Row: infer R
-      }
-      ? R
-      : never
-    : never
-
-export type TablesInsert<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
-    }
-    ? I
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Insert: infer I
-      }
-      ? I
-      : never
-    : never
-
-export type TablesUpdate<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
-> = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
-    }
-    ? U
-    : never
-  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Update: infer U
-      }
-      ? U
-      : never
-    : never
-
-export type Enums<
-  DefaultSchemaEnumNameOrOptions extends
-    | keyof DefaultSchema["Enums"]
-    | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
-> = DefaultSchemaEnumNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
-    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
-    : never
-
-export type CompositeTypes<
-  PublicCompositeTypeNameOrOptions extends
-    | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
-  }
-    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
-> = PublicCompositeTypeNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
-}
-  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
-  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
-    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
+export type TablesUpdate<T extends keyof Database["public"]["Tables"]> =
+  Database["public"]["Tables"][T]["Update"]
 
 export const Constants = {
   public: {
