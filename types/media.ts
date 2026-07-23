@@ -5,9 +5,9 @@ export interface MediaFile {
   mime_type: string
   size: number
   url: string
-  alt_text?: string
-  created_at: string
-  uploaded_by?: string
+  alt_text?: string | null
+  created_at: string | null
+  uploaded_by?: string | null
 }
 
 export interface UploadedFile {

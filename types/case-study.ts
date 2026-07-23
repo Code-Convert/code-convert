@@ -3,25 +3,25 @@ export interface CaseStudy {
   title: string
   slug: string
   client: string
-  industry?: string
-  services?: string[]
-  challenge?: string
-  solution?: string
-  results?: string
-  content?: string
-  featured_image?: string
-  gallery?: string[]
-  testimonial_text?: string
-  testimonial_author?: string
-  testimonial_role?: string
-  seo_title?: string
-  seo_description?: string
-  published: boolean
-  published_at?: string
-  created_at: string
-  updated_at: string
+  industry?: string | null
+  services?: string[] | null
+  challenge?: string | null
+  solution?: string | null
+  results?: string | null
+  content?: string | null
+  featured_image?: string | null
+  gallery?: string[] | null
+  testimonial_text?: string | null
+  testimonial_author?: string | null
+  testimonial_role?: string | null
+  seo_title?: string | null
+  seo_description?: string | null
+  published?: boolean | null
+  published_at?: string | null
+  created_at: string | null
+  updated_at: string | null
   show_in_carousel: boolean
-  carousel_image?: string
+  carousel_image?: string | null
   roas?: number | null
   performance_score?: number | null
   is_custom_built: boolean

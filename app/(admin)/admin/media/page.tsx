@@ -235,7 +235,7 @@ export default function MediaLibrary() {
               <div className="p-3">
                 <p className="text-sm text-white truncate">{item.original_name}</p>
                 <p className="text-xs text-white/50 mt-1">
-                  {new Date(item.created_at).toLocaleDateString()}
+                  {item.created_at ? new Date(item.created_at).toLocaleDateString() : '—'}
                 </p>
               </div>
             </div>
@@ -277,7 +277,7 @@ export default function MediaLibrary() {
                 </div>
                 <div>
                   <label className="text-sm text-white/50">Uploaded</label>
-                  <p className="text-white">{new Date(selectedMedia.created_at).toLocaleString()}</p>
+                  <p className="text-white">{selectedMedia.created_at ? new Date(selectedMedia.created_at).toLocaleString() : '—'}</p>
                 </div>
               </div>
 

@@ -2,11 +2,14 @@ import AnimatedStats from '@/components/ui/animated-stats';
 import Section, { SectionHeader } from '@/components/ui/section';
 import CTAButton from '@/components/ui/CTA_Button';
 import { createClient } from '@/lib/supabase/server';
+import type { Database } from '@/lib/database.type';
 
-async function getSiteStats() {
+type SiteStats = Database['public']['Functions']['get_site_statistics']['Returns'][number]
+
+async function getSiteStats(): Promise<SiteStats | null> {
   const supabase = await createClient();
   const { data } = await supabase.rpc('get_site_statistics');
-  return data?.[0] ?? null;
+  return (data as SiteStats[] | null)?.[0] ?? null;
 }
 
 export default async function Statistics() {

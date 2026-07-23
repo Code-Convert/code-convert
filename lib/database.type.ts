@@ -40,12 +40,12 @@ export type Database = {
           action_likelihood: string | null
           additional_context: string | null
           meeting_preference: string | null
-          lead_score: number
+          lead_score: number | null
           lead_temperature: 'hot' | 'warm' | 'cold' | null
           lifecycle_stage: string
           lead_status: string
           hubspot_contact_id: string | null
-          hubspot_sync_status: 'pending' | 'synced' | 'failed'
+          hubspot_sync_status: 'pending' | 'synced' | 'failed' | null
           hubspot_synced_at: string | null
           ip_address: string | null
           user_agent: string | null
@@ -83,12 +83,12 @@ export type Database = {
           action_likelihood?: string | null
           additional_context?: string | null
           meeting_preference?: string | null
-          lead_score?: number
+          lead_score?: number | null
           lead_temperature?: 'hot' | 'warm' | 'cold' | null
           lifecycle_stage?: string
           lead_status?: string
           hubspot_contact_id?: string | null
-          hubspot_sync_status?: 'pending' | 'synced' | 'failed'
+          hubspot_sync_status?: 'pending' | 'synced' | 'failed' | null
           hubspot_synced_at?: string | null
           ip_address?: string | null
           user_agent?: string | null
@@ -126,12 +126,12 @@ export type Database = {
           action_likelihood?: string | null
           additional_context?: string | null
           meeting_preference?: string | null
-          lead_score?: number
+          lead_score?: number | null
           lead_temperature?: 'hot' | 'warm' | 'cold' | null
           lifecycle_stage?: string
           lead_status?: string
           hubspot_contact_id?: string | null
-          hubspot_sync_status?: 'pending' | 'synced' | 'failed'
+          hubspot_sync_status?: 'pending' | 'synced' | 'failed' | null
           hubspot_synced_at?: string | null
           ip_address?: string | null
           user_agent?: string | null

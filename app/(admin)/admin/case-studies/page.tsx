@@ -92,7 +92,7 @@ export default async function CaseStudiesManagement() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-white/70">
-                      {new Date(study.created_at).toLocaleDateString()}
+                      {study.created_at ? new Date(study.created_at).toLocaleDateString() : '—'}
                     </td>
                     <td className="px-6 py-4 text-right text-sm font-medium">
                       <Link
