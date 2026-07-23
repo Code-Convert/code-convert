@@ -33,7 +33,6 @@ export default async function RecentLaunches() {
         />
       </div>
 
-      {/* <WebsiteCarousel websites={websites} /> */}
       {carouselItems.length > 0 && <WebsiteCarousel websites={carouselItems} />}
     </Section>
   );

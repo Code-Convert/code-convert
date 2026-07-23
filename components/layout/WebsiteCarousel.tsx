@@ -31,47 +31,46 @@ export default function WebsiteCarousel({ websites }: WebsiteCarouselProps) {
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
+
   const totalWidth = websites.length * cardWidth;
 
-  // Auto-scroll with infinite loop
+  // PERFECT LOOP: Use modulo to create infinite wrap without visible resets
+  const xWrapped = useTransform(xSmooth, (latest) => {
+    const wrapped = latest % totalWidth;
+    return wrapped > 0 ? wrapped - totalWidth : wrapped;
+  });
+
   useEffect(() => {
     if (isDragging) return;
 
-    const controls = animate(x, -totalWidth, {
+    const controls = animate(x, [0, -totalWidth], {
       duration: 30,
       repeat: Infinity,
       ease: 'linear',
-      repeatType: 'loop',
-      onRepeat: () => {
-        x.set(0);
-      },
     });
 
     return controls.stop;
   }, [x, totalWidth, isDragging]);
 
+  // Handle drag with wrap-around using modulo
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    const currentX = x.get();
+    // Normalize to keep the value within one cycle to prevent float drift
+    x.set(currentX % totalWidth);
+  };
+
   return (
-    <div
-      ref={containerRef}
-      className="relative overflow-hidden py-4"
-    >
+    <div ref={containerRef} className="relative overflow-hidden py-4">
       <motion.div
-        style={{ x: xSmooth }}
+        style={{ x: xWrapped }}
         drag="x"
         dragConstraints={{ left: -totalWidth, right: 0 }}
         onDragStart={() => setIsDragging(true)}
-        onDragEnd={() => {
-          setIsDragging(false);
-          // Wrap around if dragged past boundaries
-          const currentX = x.get();
-          if (currentX <= -totalWidth) {
-            x.set(currentX + totalWidth);
-          } else if (currentX > 0) {
-            x.set(currentX - totalWidth);
-          }
-        }}
+        onDragEnd={handleDragEnd}
         className="flex gap-3 sm:gap-6 cursor-grab active:cursor-grabbing"
       >
+        {/* Only need 2 copies, not 3 */}
         {[...websites, ...websites, ...websites].map((website, idx) => (
           <WebsiteCard key={idx} website={website} />
         ))}
