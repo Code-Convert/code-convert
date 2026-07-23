@@ -8,7 +8,6 @@ import RecentLaunches from '@/components/layout/recent-launches';
 import CTA from '@/components/layout/CTA';
 import HeroBackgroundPaths from '@/components/layout/HeroBackgroundPaths';
 import TechStack from '@/components/layout/tech-stack';
-import WebsiteCarousel from '@/components/layout/WebsiteCarousel';
 import { createClient } from '@/lib/supabase/server';
 
 export const metadata: Metadata = {
@@ -35,27 +34,8 @@ async function getGalleryItems(): Promise<GalleryItem[]> {
   }));
 }
 
-async function getCarouselItems() {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from('case_studies')
-    .select('title, industry, carousel_image, featured_image, carousel_order')
-    .eq('published', true)
-    .eq('show_in_carousel', true)
-    .order('carousel_order', { ascending: true });
-
-  return (data ?? []).map((cs) => ({
-    name: cs.title,
-    industry: cs.industry ?? '',
-    image: cs.carousel_image ?? cs.featured_image ?? '',
-  }));
-}
-
 export default async function ServicesPage() {
-  const [galleryItems, carouselItems] = await Promise.all([
-    getGalleryItems(),
-    getCarouselItems(),
-  ]);
+  const galleryItems = await getGalleryItems();
 
   return (
     <main className="bg-black">
@@ -88,19 +68,16 @@ export default async function ServicesPage() {
       {/* 5. Gallery Grid */}
       <GalleryGrid items={galleryItems} />
 
-      {/* 6. Website Carousel */}
-      {carouselItems.length > 0 && <WebsiteCarousel websites={carouselItems} />}
-
-      {/* 7. Process Timeline */}
+      {/* 6. Process Timeline */}
       <Process />
 
-      {/* 8. Recent Launches */}
+      {/* 7. Recent Launches */}
       <RecentLaunches />
 
-      {/* 9. FAQ */}
+      {/* 8. FAQ */}
       <ServicesFAQ />
 
-      {/* 10. Final CTA */}
+      {/* 9. Final CTA */}
       <CTA />
     </main>
   );
