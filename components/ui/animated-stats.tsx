@@ -15,7 +15,7 @@ interface AnimatedStatsProps {
 
 export default function AnimatedStats({ stats }: AnimatedStatsProps) {
   return (
-    <div className="grid grid-cols-4 gap-8 lg:gap-12">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 lg:gap-12">
       {stats.map((stat, idx) => (
         <StatCard key={idx} stat={stat} index={idx} />
       ))}

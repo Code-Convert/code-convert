@@ -346,13 +346,14 @@ CREATE POLICY "Admins can manage blogs" ON blogs
 
 ### Public Routes (No Auth Required)
 - `/` - Landing page
-- `/web-design` - Service pages
-- `/marketing` - Service pages  
+- `/services` - Services page
 - `/case-studies` - Public case studies
 - `/case-studies/[slug]` - Individual case study
 - `/blog` - Public blog
 - `/blog/[slug]` - Individual blog post
 - `/contact-us` - Contact page
+- `/privacy` - Privacy policy
+- `/terms` - Terms of service
 
 ### Protected Routes (Admin Only)
 - `/admin/*` - All admin routes
@@ -392,25 +393,77 @@ export async function middleware(request: NextRequest) {
 
 ## Performance & SEO
 
-### Static Generation Strategy
+### Rendering Strategy
+
+All public marketing pages are **Server Components** by default. Data is fetched server-side before the page renders — no client-side waterfalls, no empty HTML shipped to crawlers.
+
+| Page | Strategy | Notes |
+|---|---|---|
+| `/` (homepage) | Server Component | Fetches case studies + testimonials in `Promise.all` |
+| `/blog` | Server Component + client filter shell | Data fetched server-side; `BlogFilter.tsx` handles search/pagination client-side |
+| `/case-studies` | Server Component + client filter shell | Data fetched server-side; `CaseStudiesFilter.tsx` handles filters client-side |
+| `/blog/[slug]` | Server Component | Full SSR with `generateMetadata` |
+| `/case-studies/[slug]` | Server Component | Full SSR with `generateMetadata` |
+| `/services` | Server Component | Gallery items fetched server-side |
+
+### Critical Rendering Path
+
+`VoidBackground` (Three.js WebGL) and `InteractiveCursor` are loaded via `next/dynamic` with `{ ssr: false }` inside `LenisProvider`. This means:
+- The Three.js bundle (~600 KB) is never on the critical path
+- Page content renders immediately without waiting for WebGL initialisation
+- Lenis itself is dynamically imported inside `useEffect` — zero scroll library cost at parse time
+
 ```typescript
-// ISR for dynamic content
-export const revalidate = 3600; // 1 hour
+// LenisProvider.tsx — non-blocking pattern
+const VoidBackground = dynamic(() => import('@/components/VoidBackground'), { ssr: false });
+const InteractiveCursor = dynamic(() => import('@/components/InteractiveCursor'), { ssr: false });
+```
 
-// Static generation for case studies/blogs
-export async function generateStaticParams() {
-  // Generate paths at build time
-}
+### Font Loading
 
-// Dynamic metadata
-export async function generateMetadata({ params }) {
-  // Generate SEO metadata per page
-}
+Inter is loaded via `next/font/google` with `display: 'swap'` in the root layout. This eliminates FOIT (Flash of Invisible Text) and removes the external Google Fonts network request at runtime. The CSS variable `--font-inter` is wired into Tailwind's `--font-sans` token.
+
+```typescript
+// app/layout.tsx
+const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' });
 ```
 
 ### Image Optimization
-- Supabase Storage with organized bucket structure
-- Next.js Image component for optimization
+- `next.config.ts` serves AVIF and WebP formats automatically (`formats: ['image/avif', 'image/webp']`)
+- All `<Image>` components on listing pages include a `sizes` attribute
+- Supabase Storage with organised bucket structure
+- Next.js Image component for optimisation
+
+### Build Configuration (`next.config.ts`)
+
+```typescript
+const nextConfig: NextConfig = {
+  compress: true,           // gzip/brotli on all responses
+  poweredByHeader: false,   // removes X-Powered-By header
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [ /* Supabase + Unsplash */ ],
+  },
+};
+```
+
+### Structured Data / AI SEO
+
+JSON-LD schema is injected server-side — no client JS required.
+
+| Location | Schema Type |
+|---|---|
+| `app/layout.tsx` (every page) | `Organization` + `WebSite` with `SearchAction` |
+| `/blog/[slug]` | `Article` with `datePublished`, `dateModified`, `publisher` |
+| `/case-studies/[slug]` | `Article` with `about` (client entity) |
+
+### Sitemap
+
+`app/sitemap.ts` is an async Server Function that queries Supabase at request time to include all published blog and case study URLs with accurate `lastModified` dates. Dead routes (`/web-design`, `/marketing`) have been removed.
+
+### robots.txt
+
+`public/robots.txt` includes a `Sitemap:` directive and explicit `Allow` rules for: Googlebot, bingbot, GPTBot, CCBot, anthropic-ai, Claude-Web, PerplexityBot, YouBot.
 
 ## Implementation Notes
 
@@ -1783,9 +1836,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
 ---
 
-**Last Updated**: Phase 1 Complete - Landing page and component library ready
-**Current Focus**: Phase 2 - Backend setup and authentication
-**Next Milestone**: Admin panel with blog management
+**Last Updated**: Performance & SEO optimisation complete — server-side rendering, dynamic imports, font optimisation, structured data, and sitemap improvements applied across all public pages.
+**Current Focus**: Production-ready — all public marketing pages are Server Components with zero client-side data waterfalls.
+**Next Milestone**: ISR / on-demand revalidation for blog and case study pages.
 
 ## Error & Loading State Checklist
 

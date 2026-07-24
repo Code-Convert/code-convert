@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://www.codeandconvert.co.za/sitemap.xml
+
 # Allow all AI crawlers
 User-agent: GPTBot
 Allow: /
@@ -18,4 +20,10 @@ User-agent: bingbot
 Allow: /
 
 User-agent: Googlebot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
 Allow: /

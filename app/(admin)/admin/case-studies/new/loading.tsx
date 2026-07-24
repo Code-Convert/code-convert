@@ -1,5 +1,5 @@
 import Loader from '@/components/Loader'
 
-export default function MarketingLoading() {
+export default function Loading() {
   return <Loader inline />
 }
