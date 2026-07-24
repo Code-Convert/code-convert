@@ -23,7 +23,8 @@ async function getGalleryItems(): Promise<GalleryItem[]> {
     .from('case_studies')
     .select('id, title, slug, services, results, featured_image, gallery_order')
     .eq('published', true)
-    .order('gallery_order', { ascending: true });
+    .order('gallery_order', { ascending: true })
+    .limit(4);
 
   return (data ?? []).map((cs) => ({
     id: cs.id,

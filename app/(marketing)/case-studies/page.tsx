@@ -1,10 +1,10 @@
 import { createClient } from '@/lib/supabase/server';
 import { Metadata } from 'next';
 import { PageContainer } from '@/components/ui/page-container';
-import { PageHeader } from '@/components/ui/page-header';
 import VoidBackground from '@/components/VoidBackground';
 import InteractiveCursor from '@/components/InteractiveCursor';
-import CaseStudiesFilter from './CaseStudiesFilter';
+import CaseStudiesFilter from '../../../components/layout/CaseStudiesFilter';
+import CaseStudiesHero from '@/components/layout/CaseStudiesHero';
 
 export const metadata: Metadata = {
   title: 'Case Studies',
@@ -23,11 +23,8 @@ export default async function CaseStudiesPage() {
     <div className="relative selection:bg-[#FF1E1E]/20 selection:text-white">
       <VoidBackground />
       <InteractiveCursor />
-      <PageContainer>
-        <PageHeader
-          title="Case Studies"
-          description="Real results from real projects. See how we've helped businesses grow."
-        />
+      <CaseStudiesHero />
+      <PageContainer id="case-studies">
         <CaseStudiesFilter caseStudies={caseStudies ?? []} />
       </PageContainer>
     </div>

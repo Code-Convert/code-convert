@@ -20,14 +20,6 @@ function LoaderContent() {
           <span className="text-xs sm:text-sm text-neutral-600">We code, You convert</span>
         </div>
       </div>
-      <div className="mx-auto mb-4 flex justify-center">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-        >
-          <Sun className="w-8 sm:w-10 h-8 sm:h-10 text-[#FF1E1E]" />
-        </motion.div>
-      </div>
     </div>
   );
 }
