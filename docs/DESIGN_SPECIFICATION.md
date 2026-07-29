@@ -98,64 +98,46 @@ Marketing agency website with admin CMS panel.
 # 4. Typography System
 
 ## Primary Font
-**Inter** - Modern, highly legible sans-serif
+**Inter** — Modern, highly legible sans-serif (UI text)
 
-## Secondary Font
-**Inter** (Single font family approach)
+## Monospace Font
+**Commit Mono** — Code blocks, numbers, tabular data
 
 ## Heading Style
-* Bold weights (600-700)
-* Tight tracking (-0.5px to -1px)
+* Bold weights (600–700)
+* Letter spacing: -0.02em (tighter, feels cohesive)
 * High contrast colors
-* Proper line height (1.1-1.3)
+* Line height: 1.05–1.3 depending on level
 
 ## Paragraph Style
 * Regular weight (400)
-* Comfortable line height (1.5-1.7)
-* Improved contrast colors
-* Optimal reading width (600-750px max)
+* Line height: 1.6 minimum — prevents wall-of-text effect
+* Body text: never below 16px on mobile (prevents iOS zoom)
+* Optimal reading width: 65ch max
 
 ## Font Weights
-* **400** (Regular) - Body text
-* **500** (Medium) - Emphasis, buttons
-* **600** (Semi-bold) - Subheadings, cards
-* **700** (Bold) - Main headings, hero text
+* **400** (Regular) — Body text
+* **500** (Medium) — Emphasis, buttons
+* **600** (Semi-bold) — Subheadings, cards
+* **700** (Bold) — Main headings, hero text
 
-## Desktop Typography Scale
+## Fluid Type Scale (CSS custom properties via clamp())
 
-| Element | Size | Weight | Line Height |
-|---------|------|--------|-------------|
-| H1 (Hero) | 48-64px | 700 | 1.1 |
-| H2 (Section) | 36-48px | 700 | 1.2 |
-| H3 (Cards) | 28-32px | 600 | 1.3 |
-| H4 | 22-24px | 600 | 1.3 |
-| H5 | 18-20px | 600 | 1.4 |
-| H6 | 16-18px | 600 | 1.4 |
-| Paragraph | 16-18px | 400 | 1.6 |
-| Small Text | 14px | 400 | 1.5 |
-| Micro Text | 12px | 400-500 | 1.4 |
+| Token | Mobile | Desktop | Line Height |
+|-------|--------|---------|-------------|
+| `--text-display` | 32px | 72px | 1.05 |
+| `--text-h1` | 28px | 48px | 1.15 |
+| `--text-h2` | 22px | 32px | 1.15 |
+| `--text-h3` | 18px | 24px | 1.3 |
+| `--text-body` | 16px | 18px | 1.6 |
+| `--text-small` | 14px | 14px | 1.45 |
+| `--text-code` | 14px | 16px | 1.6 |
 
-## Mobile Typography Scale
-
-| Element | Size | Weight |
-|---------|------|--------|
-| H1 | 32-40px | 700 |
-| H2 | 26-32px | 700 |
-| H3 | 22-26px | 600 |
-| H4 | 18-20px | 600 |
-| Paragraph | 15-16px | 400 |
-| Small Text | 13-14px | 400 |
-
-## Tablet Typography Scale (768px-1024px)
-
-| Element | Size |
-|---------|------|
-| H1 | 40-52px |
-| H2 | 32-40px |
-| H3 | 24-28px |
-| H4 | 20-22px |
-| Paragraph | 16px |
-| Small Text | 14px |
+## Rules
+* Body text minimum: **16px** — non-negotiable on mobile
+* Headings: letter-spacing `-0.02em`, body: `normal`
+* Code/numbers: `font-variant-numeric: tabular-nums`
+* Max-width on text blocks: `65ch`
 
 ---
 
@@ -193,7 +175,7 @@ Marketing agency website with admin CMS panel.
 * Scale upward to tablet and desktop
 * Avoid desktop-first overrides
 * Prioritise touch usability (44px minimum touch targets)
-* Never go below 15px body text on mobile
+* Never go below 16px body text on mobile (prevents iOS input zoom)
 
 ## Breakpoints
 

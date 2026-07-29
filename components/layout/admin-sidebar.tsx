@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
+import { motion } from 'motion/react'
 import { 
   LayoutDashboard, 
   FileText, 
@@ -37,10 +38,15 @@ export default function AdminSidebar() {
     <div className="fixed inset-y-0 left-0 z-50 w-64 bg-[#0d0d0d] border-r border-white/10">
       <div className="flex flex-col h-full">
         {/* Logo */}
-        <div className="flex items-center h-16 px-6 border-b border-white/10">
-          <h1 className="text-xl font-bold text-white">
-            Code & Convert
-          </h1>
+        <div className="flex items-center gap-2 h-16 px-6 border-b border-white/10">
+          <motion.div
+            className="flex h-7 px-2 rounded-lg items-center justify-center bg-[#FF1E1E] shrink-0"
+            animate={{ rotate: [0, 360] }}
+            transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 2.4, ease: 'easeInOut' }}
+          >
+            <span className="font-bold text-[10px] tracking-tighter text-white">C&C</span>
+          </motion.div>
+          <h1 className="text-sm font-bold text-white uppercase tracking-tight">Code & Convert</h1>
         </div>
 
         {/* Navigation */}

@@ -2,8 +2,8 @@
 
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import React, { useState } from 'react';
+import Image from 'next/image';
 
 interface CaseStudy {
   id: string;
@@ -16,23 +16,11 @@ interface CaseStudy {
   featured_image: string;
 }
 
-export default function SelectedWork() {
-  const [projects, setProjects] = useState<CaseStudy[]>([]);
+interface SelectedWorkProps {
+  projects: CaseStudy[];
+}
 
-  useEffect(() => {
-    async function fetchCaseStudies() {
-      const supabase = createClient();
-      const { data } = await supabase
-        .from('case_studies')
-        .select('*')
-        .eq('published', true)
-        .order('published_at', { ascending: false })
-        .limit(3);
-      
-      if (data) setProjects(data);
-    }
-    fetchCaseStudies();
-  }, []);
+export default function SelectedWork({ projects }: SelectedWorkProps) {
   return (
     <section id="work" className="relative z-10 py-12 sm:py-16 md:py-24 lg:py-32">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(255,30,30,0.02),transparent_60%)] -z-10" />
@@ -69,7 +57,7 @@ export default function SelectedWork() {
           </motion.a>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+        <div className="grid md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           {projects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}
@@ -95,7 +83,7 @@ export default function SelectedWork() {
 
 function ProjectCard({ project, index }: { project: CaseStudy; index: number }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const isLarge = index === 0;
+  const colSpan = index === 0 || index === 3 ? 'md:col-span-2' : 'md:col-span-1';
   const color = index === 1 ? '#FF5555' : '#FF1E1E';
 
   const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -110,7 +98,7 @@ function ProjectCard({ project, index }: { project: CaseStudy; index: number }) 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       onMouseMove={handleMouseMove}
-      className={`relative overflow-hidden group bg-[#050505]/40 border border-white/5 backdrop-blur-lg rounded-2xl ${isLarge ? 'md:row-span-2' : ''} hover:bg-[#050505]/60 hover:border-[#FF1E1E]/10 hover:-translate-y-0.5 hover:shadow-[0_24px_60px_-16px_rgba(0,0,0,0.4)] transition-all duration-400 cursor-pointer`}
+      className={`relative overflow-hidden group bg-[#050505]/40 border border-white/5 backdrop-blur-lg rounded-2xl ${colSpan} hover:bg-[#050505]/60 hover:border-[#FF1E1E]/10 hover:-translate-y-0.5 hover:shadow-[0_24px_60px_-16px_rgba(0,0,0,0.4)] transition-all duration-400 cursor-pointer`}
     >
       <div
         className="absolute w-100 h-100 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-x-1/2 -translate-y-1/2 z-0"
@@ -121,37 +109,17 @@ function ProjectCard({ project, index }: { project: CaseStudy; index: number }) 
         }}
       />
 
-      <div className={`relative ${isLarge ? 'aspect-4/3' : 'aspect-square md:aspect-video'} overflow-hidden bg-[linear-gradient(145deg,#0d0d0d,#141414)] z-10 flex items-center justify-center`}>
-        <div className="w-full h-full absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: `radial-gradient(circle at center, ${color}33, transparent)` }} />
-        
-        {isLarge ? (
-          <div className="w-[70%] sm:w-[80%] max-w-xs rounded-xl border border-white/6 overflow-hidden bg-[rgba(20,20,20,0.9)] shadow-2xl scale-[0.65] sm:scale-75 md:scale-90 lg:scale-100">
-             <div className="flex items-center gap-1.5 px-3 py-2 border-b border-white/4">
-                <div className="text-[10px] uppercase tracking-widest text-neutral-500">ROAS Overview</div>
-             </div>
-             <div className="p-4 space-y-4">
-                <div className="flex gap-4">
-                  <div className="w-16 h-20 bg-white/5 rounded-lg overflow-hidden relative">
-                    <div className="absolute bottom-0 inset-x-0 bg-[#FF1E1E]/40" style={{ height: '70%' }} />
-                  </div>
-                  <div className="flex-1 space-y-2">
-                    <div className="h-2.5 bg-[#FF1E1E]/80 rounded w-full" />
-                    <div className="h-2 bg-white/5 rounded w-3/4" />
-                    <div className="mt-4 p-2 rounded-lg bg-[#FF1E1E]/10 border border-[#FF1E1E]/20 text-center">
-                      <span className="text-[10px] text-[#FF1E1E] font-bold">+342% YoY</span>
-                    </div>
-                  </div>
-                </div>
-             </div>
-          </div>
+      <div className="relative aspect-video overflow-hidden bg-[linear-gradient(145deg,#0d0d0d,#141414)] z-10">
+        {project.featured_image ? (
+          <Image
+            src={project.featured_image}
+            alt={project.client}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
+            className="object-cover"
+          />
         ) : (
-          <div className="flex gap-3 md:gap-4 items-end scale-75 sm:scale-90 md:scale-110">
-            <div className="w-12 h-24 rounded-lg bg-white/5 border border-white/5 -rotate-6 opacity-30" />
-            <div className="w-16 h-32 rounded-lg bg-[#FF1E1E]/10 border border-[#FF1E1E]/20 relative z-10 shadow-2xl shadow-[#FF1E1E]/10">
-               <div className="absolute top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#FF1E1E]/20" />
-            </div>
-            <div className="w-12 h-24 rounded-lg bg-white/5 border border-white/5 rotate-6 opacity-30" />
-          </div>
+          <div className="w-full h-full" style={{ background: `radial-gradient(circle at center, ${color}33, transparent)` }} />
         )}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,rgba(5,5,5,0.9)_100%)]" />
       </div>

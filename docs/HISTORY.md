@@ -23,3 +23,43 @@ Blog listing/detail, case study listing/detail, service pages (`/web-design`, `/
 - **TypeScript fixes** — removed `as any` casting across all API routes; added `BlogInsertPayload`, `BlogUpdatePayload`, `CaseStudyInsertPayload`, `CaseStudyUpdatePayload` types in `types/api.ts`; standardised error handling with `error instanceof Error`.
 - **Media upload fix** — corrected Supabase storage bucket policies (`supabase/fix-storage-policies.sql`); added error handling, file validation (images only, max 5 MB), and loading states to upload components.
 - **Reusable components** — extracted 10 shared UI components (`PageContainer`, `PageHeader`, `ArticleHeader`, `ContentGrid`, `ContentCard`, `FeaturedImage`, `ContentSection`, `TestimonialCard`, `ImageGallery`, `EmptyState`) reducing per-page code by ~30–48%.
+
+## Performance & SEO Optimisation
+
+### Critical Rendering Path
+
+Removed the `isLoaded` content gate from `LenisProvider` that was hiding all page content until `window.load` fired. This was the single largest LCP bottleneck on the site — the entire hero, navbar, and above-fold content was invisible to both users and crawlers until Three.js and all assets had loaded.
+
+`VoidBackground` (Three.js WebGL, ~600 KB) and `InteractiveCursor` are now loaded via `next/dynamic` with `{ ssr: false }`. Lenis is dynamically imported inside `useEffect`. The Three.js bundle is fully off the critical path.
+
+### Server-Side Data Fetching
+
+Converted all public marketing pages from client-side `useEffect` fetches to Server Components. Data is fetched before the page renders — no empty HTML, no loading spinners, no client waterfalls.
+
+- `app/(marketing)/page.tsx` — now a Server Component; fetches case studies and testimonials in a single `Promise.all`
+- `components/layout/SelectedWork.tsx` — removed internal `useEffect` fetch; now accepts `projects` as props
+- `components/layout/Testimonials.tsx` — removed internal `useEffect` fetch; now accepts `testimonials` as props
+- `app/(marketing)/blog/page.tsx` — converted to Server Component; extracted `BlogFilter.tsx` as a thin `'use client'` shell for search and pagination only
+- `app/(marketing)/case-studies/page.tsx` — same pattern; extracted `CaseStudiesFilter.tsx`
+
+### Font Optimisation
+
+Replaced the bare `"Inter"` CSS string with `next/font/google` (`display: 'swap'`, `variable: '--font-inter'`). Eliminates FOIT and removes the runtime Google Fonts network request. The CSS variable is wired into Tailwind's `--font-sans` token in `globals.css`.
+
+### Image & Build Optimisation
+
+- `next.config.ts` — added `compress: true`, `poweredByHeader: false`, and `formats: ['image/avif', 'image/webp']`
+- `SelectedWork.tsx` — added `sizes` attribute to project card images
+
+### Structured Data / AI SEO
+
+JSON-LD schema injected server-side on every relevant page:
+
+- `app/layout.tsx` — `Organization` + `WebSite` schema (sitewide)
+- `app/(marketing)/blog/[slug]/page.tsx` — `Article` schema + OpenGraph image
+- `app/(marketing)/case-studies/[slug]/page.tsx` — `Article` schema with `about` (client entity) + OpenGraph image
+
+### Sitemap & robots.txt
+
+- `app/sitemap.ts` — converted to async Server Function; queries Supabase at request time to include all published blog and case study URLs with accurate `lastModified` dates; removed dead `/web-design` and `/marketing` routes
+- `public/robots.txt` — added `Sitemap:` directive; added `PerplexityBot` and `YouBot` to AI crawler allow-list

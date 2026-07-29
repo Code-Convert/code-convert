@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const supabase = await createClient();
   const { data: blog } = await supabase
     .from('blogs')
-    .select('*')
+    .select('title, seo_title, seo_description, excerpt, featured_image')
     .eq('slug', slug)
     .eq('published', true)
     .single();
@@ -25,6 +25,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: blog.seo_title || blog.title,
     description: blog.seo_description || blog.excerpt,
+    openGraph: {
+      title: blog.seo_title || blog.title,
+      description: blog.seo_description || blog.excerpt,
+      images: blog.featured_image ? [blog.featured_image] : [],
+      type: 'article',
+    },
   };
 }
 
@@ -40,10 +46,37 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   if (!blog) notFound();
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: blog.title,
+    description: blog.seo_description || blog.excerpt,
+    image: blog.featured_image || undefined,
+    datePublished: blog.published_at,
+    dateModified: blog.updated_at || blog.published_at,
+    author: {
+      '@type': 'Organization',
+      name: 'Code & Convert',
+      url: siteUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Code & Convert',
+      url: siteUrl,
+      logo: { '@type': 'ImageObject', url: `${siteUrl}/icon1.png` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/blog/${slug}` },
+  };
+
   return (
     <PageContainer maxWidth="4xl">
       <InteractiveCursor />
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <article>
         <ArticleHeader
           title={blog.title}
@@ -60,7 +93,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div dangerouslySetInnerHTML={{ __html: blog.content }} />
           </div>
         )}
-        
+
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
           <h3 className="text-2xl font-bold mb-4">Ready to transform your business?</h3>
           <a

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
   const supabase = await createClient();
   const { data: study } = await supabase
     .from('case_studies')
-    .select('*')
+    .select('title, seo_title, seo_description, challenge, featured_image, client')
     .eq('slug', slug)
     .eq('published', true)
     .single();
@@ -28,6 +28,12 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
   return {
     title: study.seo_title || study.title,
     description: study.seo_description || study.challenge,
+    openGraph: {
+      title: study.seo_title || study.title,
+      description: study.seo_description || study.challenge,
+      images: study.featured_image ? [study.featured_image] : [],
+      type: 'article',
+    },
   };
 }
 
@@ -43,9 +49,40 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   if (!study) notFound();
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: study.title,
+    description: study.seo_description || study.challenge,
+    image: study.featured_image || undefined,
+    datePublished: study.published_at,
+    dateModified: study.updated_at || study.published_at,
+    author: {
+      '@type': 'Organization',
+      name: 'Code & Convert',
+      url: siteUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Code & Convert',
+      url: siteUrl,
+      logo: { '@type': 'ImageObject', url: `${siteUrl}/icon1.png` },
+    },
+    about: {
+      '@type': 'Thing',
+      name: study.client,
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/case-studies/${slug}` },
+  };
+
   return (
     <PageContainer maxWidth="6xl">
       <InteractiveCursor />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article>
         <ArticleHeader
           title={study.title}
@@ -59,15 +96,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         )}
 
         <div className="grid md:grid-cols-3 gap-12 mb-12">
-          {study.challenge && (
-            <ContentSection title="Challenge" content={study.challenge} />
-          )}
-          {study.solution && (
-            <ContentSection title="Solution" content={study.solution} />
-          )}
-          {study.results && (
-            <ContentSection title="Results" content={study.results} />
-          )}
+          {study.challenge && <ContentSection title="Challenge" content={study.challenge} />}
+          {study.solution && <ContentSection title="Solution" content={study.solution} />}
+          {study.results && <ContentSection title="Results" content={study.results} />}
         </div>
 
         {study.content && (
@@ -85,7 +116,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         )}
 
         <ImageGallery images={study.gallery} alt={study.title} />
-        
+
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
           <h3 className="text-2xl font-bold mb-4">Want similar results for your business?</h3>
           <a
