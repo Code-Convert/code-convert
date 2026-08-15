@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Upload, X, AlertCircle } from 'lucide-react'
-import { Button } from './button'
 
 interface ImageUploadProps {
   value: string

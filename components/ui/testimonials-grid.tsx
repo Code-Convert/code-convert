@@ -94,8 +94,8 @@ function TestimonialCard({ testimonial, index }: { testimonial: NormalizedTestim
         </div>
 
         {/* Quote */}
-        <p className="text-gray-300 leading-relaxed mb-6 flex-grow text-sm md:text-base">
-          "{testimonial.quote}"
+        <p className="text-body text-gray-300 leading-relaxed mb-6 flex-grow">
+          &ldquo;{testimonial.quote}&rdquo;
         </p>
 
         {/* Author */}

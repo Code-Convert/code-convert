@@ -15,7 +15,7 @@ interface RichTextEditorProps {
   placeholder?: string
 }
 
-export function RichTextEditor({ value, onChange, label, placeholder }: RichTextEditorProps) {
+export function RichTextEditor({ value, onChange, label }: RichTextEditorProps) {
   const [showMediaPicker, setShowMediaPicker] = useState(false)
 
   const editor = useEditor({

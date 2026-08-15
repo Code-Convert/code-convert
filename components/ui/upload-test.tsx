@@ -73,8 +73,9 @@ export function UploadTest() {
 
       setStatus(`✅ Complete! Media ID: ${mediaData.id}`)
       
-    } catch (err: any) {
-      setError(`Unexpected error: ${err.message}`)
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Unexpected error'
+      setError(`Unexpected error: ${message}`)
       console.error('Full error:', err)
     }
   }

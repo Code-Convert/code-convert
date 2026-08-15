@@ -17,10 +17,6 @@ export function MediaPicker({ onSelect, onClose }: MediaPickerProps) {
   const [uploading, setUploading] = useState(false)
   const [search, setSearch] = useState('')
 
-  useEffect(() => {
-    fetchMedia()
-  }, [])
-
   const fetchMedia = async () => {
     const supabase = createClient()
     const { data } = await supabase
@@ -31,6 +27,10 @@ export function MediaPicker({ onSelect, onClose }: MediaPickerProps) {
     if (data) setMedia(data)
     setLoading(false)
   }
+
+  useEffect(() => {
+    fetchMedia()
+  }, [])
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]

@@ -25,7 +25,7 @@ export default function CTA() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4 px-2">
               Ready to multiply<br />your <span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent">revenue</span>?
             </h2>
-            <p className="text-xs sm:text-sm md:text-base text-neutral-400 max-w-sm mx-auto mb-6 md:mb-9 font-bold px-2">
+            <p className="text-body text-neutral-400 max-w-sm mx-auto mb-6 md:mb-9 font-bold px-2">
               Book a complimentary audit call. We'll dissect your current setup and outline actionable growth strategies.
             </p>
 

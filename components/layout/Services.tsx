@@ -71,7 +71,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-xs sm:text-sm md:text-base text-neutral-400 max-w-md mx-auto font-bold px-4"
+            className="text-body text-neutral-400 max-w-md mx-auto font-bold px-4"
           >
             We cover every touchpoint of your customer's journey with data-backed strategies.
           </motion.p>

@@ -56,7 +56,7 @@ export default async function ServicesPage() {
             text: "View Our Work",
             href: "#gallery-grid",
         }}
-        imageSrc="/hero-image.png"
+        imageSrc="/images/services-page/social-icon.png"
         imageAlt="Hero Image"
       />
 

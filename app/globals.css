@@ -19,6 +19,16 @@
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Commit Mono", "Fira Code", ui-monospace, monospace;
+  --text-body: 15px;
+}
+
+@layer base {
+  @media (min-width: 768px) {
+    :root { --text-body: 16px; }
+  }
+  @media (min-width: 1024px) {
+    :root { --text-body: 17px; }
+  }
 }
 
 @layer base {
@@ -28,7 +38,7 @@
     --text-h1:      clamp(1.75rem, 3vw + 1rem, 3rem);    /* 28px → 48px */
     --text-h2:      clamp(1.375rem, 2vw + 0.75rem, 2rem); /* 22px → 32px */
     --text-h3:      clamp(1.125rem, 1vw + 0.875rem, 1.5rem); /* 18px → 24px */
-    --text-body:    clamp(1rem, 0.5vw + 0.875rem, 1.125rem); /* 16px → 18px */
+    --text-body:    15px; /* mobile — set in @theme, overridden by breakpoints above */
     --text-small:   0.875rem; /* 14px — fixed, never smaller */
     --text-code:    clamp(0.875rem, 0.25vw + 0.8125rem, 1rem); /* 14px → 16px */
 

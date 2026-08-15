@@ -76,7 +76,7 @@ export default function ContactUs() {
           </div>
 
           {/* Right Column — Contact CTAs */}
-          <div className="hidden lg:flex flex-col gap-4 lg:sticky lg:top-32">
+          <div className="flex flex-col gap-4 lg:sticky lg:top-32">
             <a
               href="tel:+27000000000"
               className="group flex items-center gap-5 p-6 rounded-2xl bg-white/3 border border-white/10 backdrop-blur-sm hover:border-[#FF1E1E] hover:bg-[#FF1E1E]/5 transition-all duration-300"

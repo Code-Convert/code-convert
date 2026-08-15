@@ -191,7 +191,7 @@ export default function HeroBackgroundPaths({
                         transition={{ duration: 1, delay: 0.4 }}
                         className="relative order-1 lg:order-2"
                     >
-                        <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl border border-white/10 overflow-hidden bg-black/20 backdrop-blur-sm hidden lg:block">
+                        <div className="relative  object-fill rounded-2xl border border-white/10 overflow-hidden backdrop-blur-sm hidden lg:block">
                             <img
                                 src={imageSrc}
                                 alt={imageAlt}
