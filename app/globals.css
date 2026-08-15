@@ -3,6 +3,20 @@
 @theme inline {
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Commit Mono", "Fira Code", ui-monospace, monospace;
+
+  /* Map CSS vars to Tailwind text utilities */
+  --text-h1: var(--text-h1);
+  --text-h2: var(--text-h2);
+  --text-h3: var(--text-h3);
+  --text-h4: var(--text-h4);
+  --text-h5: var(--text-h5);
+  --text-h6: var(--text-h6);
+  --text-body: var(--text-body);
+  --text-small: var(--text-small);
+  --text-code: var(--text-code);
 }
 
 @keyframes accordion-down {
@@ -15,32 +29,18 @@
   to { height: 0; }
 }
 
-
-@theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Commit Mono", "Fira Code", ui-monospace, monospace;
-  --text-body: 15px;
-}
-
-@layer base {
-  @media (min-width: 768px) {
-    :root { --text-body: 16px; }
-  }
-  @media (min-width: 1024px) {
-    :root { --text-body: 17px; }
-  }
-}
-
 @layer base {
   :root {
-    /* Fluid type scale */
-    --text-display: clamp(2rem, 5vw + 1rem, 4.5rem);     /* 32px → 72px */
-    --text-h1:      clamp(1.75rem, 3vw + 1rem, 3rem);    /* 28px → 48px */
-    --text-h2:      clamp(1.375rem, 2vw + 0.75rem, 2rem); /* 22px → 32px */
-    --text-h3:      clamp(1.125rem, 1vw + 0.875rem, 1.5rem); /* 18px → 24px */
-    --text-body:    15px; /* mobile — set in @theme, overridden by breakpoints above */
-    --text-small:   0.875rem; /* 14px — fixed, never smaller */
-    --text-code:    clamp(0.875rem, 0.25vw + 0.8125rem, 1rem); /* 14px → 16px */
+    /* Fluid type scale — mobile → large desktop */
+    --text-h1:     clamp(2.5rem, 3.5vw + 1.25rem, 4.5rem);   /* 40px → 72px */
+    --text-h2:     clamp(2rem, 2.5vw + 1rem, 3.5rem);         /* 32px → 56px */
+    --text-h3:     clamp(1.625rem, 1.5vw + 1rem, 2.5rem);     /* 26px → 40px */
+    --text-h4:     clamp(1.375rem, 1vw + 0.875rem, 2rem);     /* 22px → 32px */
+    --text-h5:     clamp(1.125rem, 0.5vw + 0.875rem, 1.5rem); /* 18px → 24px */
+    --text-h6:     clamp(1rem, 0.4vw + 0.8rem, 1.375rem);     /* 16px → 22px */
+    --text-body:   clamp(0.9375rem, 0.25vw + 0.875rem, 1.0625rem); /* 15px → 17px */
+    --text-small:  clamp(0.75rem, 0.15vw + 0.7rem, 0.875rem); /* 12px → 14px */
+    --text-code:   clamp(0.875rem, 0.25vw + 0.8125rem, 1rem); /* 14px → 16px */
 
     /* Line heights */
     --leading-display: 1.05;

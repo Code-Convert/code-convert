@@ -38,7 +38,7 @@ export default function AdminLogin() {
           .from('profiles')
           .select('role')
           .eq('id', data.user.id)
-          .single()
+          .single<{ role: string }>()
 
         if (!profile || profile.role !== 'admin') {
           setError('Access denied. Admin privileges required.')
@@ -49,7 +49,7 @@ export default function AdminLogin() {
         router.push('/admin')
         router.refresh()
       }
-    } catch (error) {
+    } catch {
       setError('An unexpected error occurred')
     } finally {
       setLoading(false)

@@ -42,14 +42,14 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
       <div className="relative inline-block">
         <div className="absolute inset-0 bg-[#FF1E1E]/20 blur-2xl group-hover:blur-3xl transition-all duration-500" />
         <motion.div
-          className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-linear-to-br from-white via-white to-gray-400 bg-clip-text text-transparent"
+          className="relative text-h1 font-bold bg-linear-to-br from-white via-white to-gray-400 bg-clip-text text-transparent"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >
           <AnimatedNumber value={stat.value} suffix={stat.suffix} isInView={isInView} />
         </motion.div>
       </div>
-      <p className="text-gray-400 mt-3 text-sm md:text-base font-medium">{stat.label}</p>
+      <p className="text-gray-400 mt-3 text-body font-medium">{stat.label}</p>
     </motion.div>
   );
 }

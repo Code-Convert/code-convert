@@ -3,6 +3,14 @@ import { createClient } from '@/lib/supabase/server'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 
+interface Blog {
+  id: string
+  title: string
+  slug: string
+  published: boolean
+  created_at: string | null
+}
+
 async function getBlogs() {
   const supabase = await createClient()
   
@@ -10,6 +18,7 @@ async function getBlogs() {
     .from('blogs')
     .select('*')
     .order('created_at', { ascending: false })
+    .returns<Blog[]>()
 
   if (error) {
     console.error('Error fetching blogs:', error)

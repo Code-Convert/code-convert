@@ -42,9 +42,8 @@ export default function ContentManagementPage() {
   const [statsLoading, setStatsLoading] = useState(false)
   const [saving, setSaving] = useState<string | null>(null)
 
-  const supabase = createClient()
-
   const fetchRows = useCallback(async () => {
+    const supabase = createClient()
     const { data } = await supabase
       .from('case_studies')
       .select('id, title, client, services, featured_image, carousel_image, industry, published, show_in_carousel, gallery_order, carousel_order, roas, performance_score, is_custom_built')
@@ -54,6 +53,7 @@ export default function ContentManagementPage() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchStats = useCallback(async () => {
+    const supabase = createClient()
     setStatsLoading(true)
     const { data } = await supabase.rpc('get_site_statistics')
     setStats(data?.[0] ?? null)
@@ -65,15 +65,16 @@ export default function ContentManagementPage() {
     fetchStats()
   }, [fetchRows, fetchStats])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const updateCaseStudy = (id: string, patch: Record<string, unknown>) =>
+    (createClient() as any).from('case_studies').update(patch).eq('id', id)
+
   // ── Toggle published ──
   const togglePublished = async (row: CaseStudyRow) => {
     const next = !row.published
     setSaving(row.id + '-pub')
     setRows(prev => prev.map(r => r.id === row.id ? { ...r, published: next } : r))
-    const { error } = await supabase
-      .from('case_studies')
-      .update({ published: next })
-      .eq('id', row.id)
+    const { error } = await updateCaseStudy(row.id, { published: next })
     if (error) fetchRows()
     setSaving(null)
   }
@@ -83,10 +84,7 @@ export default function ContentManagementPage() {
     const next = !row.show_in_carousel
     setSaving(row.id + '-car')
     setRows(prev => prev.map(r => r.id === row.id ? { ...r, show_in_carousel: next } : r))
-    const { error } = await supabase
-      .from('case_studies')
-      .update({ show_in_carousel: next })
-      .eq('id', row.id)
+    const { error } = await updateCaseStudy(row.id, { show_in_carousel: next })
     if (error) fetchRows()
     setSaving(null)
   }
@@ -102,8 +100,8 @@ export default function ContentManagementPage() {
     next[bRealIdx] = { ...b, gallery_order: a.gallery_order }
     setRows(next)
     const [r1, r2] = await Promise.all([
-      supabase.from('case_studies').update({ gallery_order: b.gallery_order }).eq('id', a.id),
-      supabase.from('case_studies').update({ gallery_order: a.gallery_order }).eq('id', b.id),
+      updateCaseStudy(a.id, { gallery_order: b.gallery_order }),
+      updateCaseStudy(b.id, { gallery_order: a.gallery_order }),
     ])
     if (r1.error || r2.error) fetchRows()
   }
@@ -119,8 +117,8 @@ export default function ContentManagementPage() {
     next[bRealIdx] = { ...b, carousel_order: a.carousel_order }
     setRows(next)
     const [r1, r2] = await Promise.all([
-      supabase.from('case_studies').update({ carousel_order: b.carousel_order }).eq('id', a.id),
-      supabase.from('case_studies').update({ carousel_order: a.carousel_order }).eq('id', b.id),
+      updateCaseStudy(a.id, { carousel_order: b.carousel_order }),
+      updateCaseStudy(b.id, { carousel_order: a.carousel_order }),
     ])
     if (r1.error || r2.error) fetchRows()
   }

@@ -29,14 +29,14 @@ export default function Hero({ children }: { children?: React.ReactNode }) {
         <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
           <motion.div
             {...scaleIn}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] md:text-xs font-bold tracking-wide uppercase border border-[#FF1E1E]/15 bg-[#FF1E1E]/5 text-[#FF1E1E] mb-6 md:mb-8"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-small font-bold tracking-wide uppercase border border-[#FF1E1E]/15 bg-[#FF1E1E]/5 text-[#FF1E1E] mb-6 md:mb-8"
           >
             We Build, Market & Scale Digital Brands.
           </motion.div>
 
           <motion.h1
             {...fadeInUp}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[0.95] mb-5 md:mb-7 drop-shadow-[0_4px_32px_rgba(0,0,0,1)] text-[#FFFFFF] px-2"
+            className="text-h1 font-bold tracking-tight leading-[0.95] mb-5 md:mb-7 drop-shadow-[0_4px_32px_rgba(0,0,0,1)] text-[#FFFFFF] px-2"
           >
             Transforming First Impressions<br />
             into <span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(255,30,30,0.8)]">Profitable Actions</span>
@@ -45,7 +45,7 @@ export default function Hero({ children }: { children?: React.ReactNode }) {
           <motion.p
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
-            className="text-body md:text-lg text-neutral-300 leading-relaxed max-w-lg mx-auto mb-6 md:mb-8 lg:mb-10 font-bold drop-shadow-[0_4px_24px_rgba(0,0,0,1)] text-shadow-sm px-4"
+            className="text-body text-neutral-300 leading-relaxed max-w-lg mx-auto mb-6 md:mb-8 lg:mb-10 font-bold drop-shadow-[0_4px_24px_rgba(0,0,0,1)] text-shadow-sm px-4"
           >
             Elite web architecture designed with one objective: maximizing your conversion rate through data-backed design and psychological triggers.
           </motion.p>
@@ -55,7 +55,7 @@ export default function Hero({ children }: { children?: React.ReactNode }) {
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
             className="flex flex-wrap items-center justify-center gap-3.5"
           >
-            <a href="#work" className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 text-xs md:text-sm font-bold rounded-full bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 shadow-[0_0_20px_rgba(255,30,30,0.15)] group">
+            <a href="#work" className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 text-small font-bold rounded-full bg-[#FF1E1E] text-white hover:bg-white hover:text-[#050505] hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 shadow-[0_0_20px_rgba(255,30,30,0.15)] group">
               View Case Studies
               <ArrowRight className="w-3.5 md:w-4 h-3.5 md:h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
             </a>

@@ -10,24 +10,37 @@ interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
+interface BlogData {
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: string | null;
+  featured_image: string | null;
+  seo_title: string | null;
+  seo_description: string | null;
+  published_at: string | null;
+  updated_at: string | null;
+}
+
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data: blog } = await supabase
+  const { data: blog }: { data: BlogData | null } = await supabase
     .from('blogs')
     .select('title, seo_title, seo_description, excerpt, featured_image')
     .eq('slug', slug)
     .eq('published', true)
-    .single();
+    .single()
+    //.returns<BlogData>();
 
   if (!blog) return { title: 'Blog Not Found' };
 
   return {
     title: blog.seo_title || blog.title,
-    description: blog.seo_description || blog.excerpt,
+    description: blog.seo_description ?? blog.excerpt ?? undefined,
     openGraph: {
       title: blog.seo_title || blog.title,
-      description: blog.seo_description || blog.excerpt,
+      description: blog.seo_description ?? blog.excerpt ?? undefined,
       images: blog.featured_image ? [blog.featured_image] : [],
       type: 'article',
     },
@@ -37,12 +50,13 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data: blog } = await supabase
+  const { data: blog }: { data: BlogData | null } = await supabase
     .from('blogs')
     .select('*')
     .eq('slug', slug)
     .eq('published', true)
-    .single();
+    .single()
+    //.returns<BlogData>();
 
   if (!blog) notFound();
 

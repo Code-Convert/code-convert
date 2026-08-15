@@ -4,17 +4,7 @@ import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import React, { useState } from 'react';
 import Image from 'next/image';
-
-interface CaseStudy {
-  id: string;
-  title: string;
-  slug: string;
-  client: string;
-  industry: string;
-  services: string[];
-  results: string;
-  featured_image: string;
-}
+import type { CaseStudy } from '@/types/case-study';
 
 interface SelectedWorkProps {
   projects: CaseStudy[];
@@ -31,7 +21,7 @@ export default function SelectedWork({ projects }: SelectedWorkProps) {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] md:text-xs font-bold tracking-wide uppercase border border-white/5 bg-white/2 text-white/40 mb-4 md:mb-5 mx-auto"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-small font-bold tracking-wide uppercase border border-white/5 bg-white/2 text-white/40 mb-4 md:mb-5 mx-auto"
             >
               Selected Case Studies
             </motion.div>
@@ -40,7 +30,7 @@ export default function SelectedWork({ projects }: SelectedWorkProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight px-4"
+              className="text-h2 font-bold tracking-tight px-4"
             >
               Growth we've<br /><span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent">engineered</span>
             </motion.h2>
@@ -86,20 +76,20 @@ function ProjectCard({ project, index }: { project: CaseStudy; index: number }) 
   const colSpan = index === 0 || index === 3 ? 'md:col-span-2' : 'md:col-span-1';
   const color = index === 1 ? '#FF5555' : '#FF1E1E';
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
   return (
-    <motion.a
-      href={`/case-studies/${project.slug}`}
+    <motion.div
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       onMouseMove={handleMouseMove}
       className={`relative overflow-hidden group bg-[#050505]/40 border border-white/5 backdrop-blur-lg rounded-2xl ${colSpan} hover:bg-[#050505]/60 hover:border-[#FF1E1E]/10 hover:-translate-y-0.5 hover:shadow-[0_24px_60px_-16px_rgba(0,0,0,0.4)] transition-all duration-400 cursor-pointer`}
     >
+      <a href={`/case-studies/${project.slug}`} className="absolute inset-0 z-20" aria-label={project.client} />
       <div
         className="absolute w-100 h-100 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-x-1/2 -translate-y-1/2 z-0"
         style={{
@@ -129,8 +119,8 @@ function ProjectCard({ project, index }: { project: CaseStudy; index: number }) 
           <span style={{ color }}>{project.industry}</span>
           <ArrowUpRight className="w-3.5 md:w-4 h-3.5 md:h-4 text-neutral-600 group-hover:text-white transition-colors duration-300" />
         </div>
-        <h3 className="text-base md:text-lg font-bold tracking-tight mb-2">{project.client}</h3>
-        <p className="text-[11px] md:text-xs text-neutral-500 leading-relaxed mb-4 md:mb-5" dangerouslySetInnerHTML={{ __html: project.results.substring(0, 150) + '...' }} />
+        <h3 className="text-h3 font-bold tracking-tight mb-2">{project.client}</h3>
+        <div className="text-small text-neutral-500 leading-relaxed mb-4 md:mb-5" dangerouslySetInnerHTML={{ __html: (project.results ?? '').substring(0, 150) + '...' }} />
         <div className="flex flex-wrap gap-1.5">
           {project.services?.slice(0, 3).map((tag) => (
             <span key={tag} className="text-[10px] font-bold text-neutral-600 px-2.5 py-1 rounded-md bg-white/3 uppercase tracking-wider">
@@ -139,6 +129,6 @@ function ProjectCard({ project, index }: { project: CaseStudy; index: number }) 
           ))}
         </div>
       </div>
-    </motion.a>
+    </motion.div>
   );
 }

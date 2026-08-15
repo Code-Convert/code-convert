@@ -25,7 +25,6 @@ export async function POST(request: NextRequest) {
 
     const { error } = await supabase
       .from('case_studies')
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .insert({
         title: body.title,
         slug: body.slug,
@@ -50,7 +49,7 @@ export async function POST(request: NextRequest) {
         is_custom_built: body.is_custom_built ?? true,
         gallery_order: body.gallery_order ?? 0,
         carousel_order: body.carousel_order ?? 0,
-      } as any)
+      })
 
     if (error) throw error
 

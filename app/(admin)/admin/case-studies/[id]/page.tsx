@@ -10,6 +10,7 @@ import { ImageUpload } from '@/components/ui/image-upload'
 import { slugify } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 import { INDUSTRIES, SERVICES, WEB_DEV_SERVICE } from '@/types/case-study'
+import type { CaseStudy } from '@/types/case-study'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 export default function EditCaseStudy({ params }: { params: Promise<{ id: string }> }) {
@@ -48,11 +49,13 @@ export default function EditCaseStudy({ params }: { params: Promise<{ id: string
   useEffect(() => {
     async function fetchCaseStudy() {
       const supabase = createClient()
-      const { data } = await supabase
+      // 1. Force TypeScript to type the extracted "data" variable directly
+      const { data }: { data: CaseStudy | null } = await supabase
         .from('case_studies')
         .select('*')
         .eq('id', id)
         .single()
+        //.returns<CaseStudy>()
 
       if (data) {
         setFormData({

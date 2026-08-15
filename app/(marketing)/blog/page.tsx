@@ -5,6 +5,7 @@ import { PageHeader } from '@/components/ui/page-header';
 import VoidBackground from '@/components/VoidBackground';
 import InteractiveCursor from '@/components/InteractiveCursor';
 import BlogFilter from './BlogFilter';
+import { BlogPost } from '@/types/blog';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -17,7 +18,8 @@ export default async function BlogPage() {
     .from('blogs')
     .select('*')
     .eq('published', true)
-    .order('published_at', { ascending: false });
+    .order('published_at', { ascending: false })
+    .returns<BlogPost[]>();
 
   return (
     <div className="relative selection:bg-[#FF1E1E]/20 selection:text-white">

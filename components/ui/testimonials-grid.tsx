@@ -2,9 +2,10 @@
 
 import { motion } from 'motion/react';
 import { Star } from 'lucide-react';
+import type { CaseStudy } from '@/types/case-study';
 
 // Support multiple data formats
-type TestimonialInput = 
+type TestimonialInput =
   | {
       rating: number;
       quote: string;
@@ -12,13 +13,7 @@ type TestimonialInput =
       company: string;
       role: string;
     }
-  | {
-      id?: string;
-      testimonial_text: string;
-      testimonial_author: string;
-      testimonial_role: string;
-      client: string;
-    };
+  | CaseStudy;
 
 // Normalized format for internal use
 interface NormalizedTestimonial {
@@ -43,10 +38,10 @@ function normalizeTestimonial(input: TestimonialInput): NormalizedTestimonial {
   // Convert from Supabase format
   return {
     rating: 5, // Default to 5 stars for Supabase testimonials
-    quote: input.testimonial_text,
-    name: input.testimonial_author,
+    quote: input.testimonial_text ?? '',
+    name: input.testimonial_author ?? '',
     company: input.client,
-    role: input.testimonial_role,
+    role: input.testimonial_role ?? '',
   };
 }
 
@@ -101,8 +96,8 @@ function TestimonialCard({ testimonial, index }: { testimonial: NormalizedTestim
         {/* Author */}
         <div className="pt-4 border-t border-white/10">
           <p className="font-bold text-white mb-1">{testimonial.name}</p>
-          <p className="text-sm text-gray-400">{testimonial.role}</p>
-          <p className="text-sm text-[#FF1E1E]">{testimonial.company}</p>
+          <p className="text-small text-gray-400">{testimonial.role}</p>
+          <p className="text-small text-[#FF1E1E]">{testimonial.company}</p>
         </div>
       </div>
     </motion.div>

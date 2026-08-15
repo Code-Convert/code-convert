@@ -17,6 +17,16 @@ export const metadata: Metadata = {
     'Expert web design, development, and social media marketing services. We build high-converting websites and scale your digital presence.',
 };
 
+interface caseStudy {
+  id: string;
+  title: string;
+  slug: string;
+  services: string[];
+  results: string;
+  featured_image: string;
+  gallery_order: number;
+}
+
 async function getGalleryItems(): Promise<GalleryItem[]> {
   const supabase = await createClient();
   const { data } = await supabase
@@ -24,7 +34,8 @@ async function getGalleryItems(): Promise<GalleryItem[]> {
     .select('id, title, slug, services, results, featured_image, gallery_order')
     .eq('published', true)
     .order('gallery_order', { ascending: true })
-    .limit(4);
+    .limit(4)
+    .returns<caseStudy[]>();
 
   return (data ?? []).map((cs) => ({
     id: cs.id,

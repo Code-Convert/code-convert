@@ -34,6 +34,7 @@ export default function DiagnosticPage() {
       const { data: blogs, error: blogsError } = await supabase
         .from('blogs')
         .select('id, title, published')
+        .returns<{ id: string; title: string; published: boolean }[]>()
 
       if (blogsError) {
         addResult(`❌ Database error: ${blogsError.message}`)
