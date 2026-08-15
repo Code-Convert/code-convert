@@ -14,12 +14,12 @@ const services = [
   {
     icon: Search,
     title: 'Technical SEO',
-    description: 'Dominate search results with structural optimization, authoritative link building, and intent-driven content.',
+    description: 'Dominate search results with structural optimisation, authoritative link building, and intent-driven content.',
     tags: ['Audits', 'On-Page', 'Off-Page']
   },
   {
     icon: MousePointer2,
-    title: 'Conversion Optimization',
+    title: 'Conversion Optimisation',
     description: 'Continuous A/B testing and user journey refinements to extract maximum value from existing traffic.',
     tags: ['A/B Testing', 'UX', 'Heatmaps']
   },

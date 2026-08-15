@@ -23,7 +23,7 @@ const steps = [
   },
   {
     number: '04',
-    title: 'Scale & Optimize',
+    title: 'Scale & Optimise',
     description: 'Cutting losers and scaling winners. Continuous CRO and budget allocation towards the highest ROAS channels.',
     timeline: 'Ongoing ✓',
     highlight: true

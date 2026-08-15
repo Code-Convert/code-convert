@@ -42,7 +42,7 @@ export default function ContactUs() {
               <div className="flex items-start gap-3">
                 <div className="w-2 h-2 rounded-full bg-[#FF1E1E] mt-2" />
                 <div>
-                  <h3 className="font-semibold text-lg">Personalized Service</h3>
+                  <h3 className="font-semibold text-lg">Personalised Service</h3>
                   <p className="text-gray-400 text-sm">We tailor our approach to your specific needs</p>
                 </div>
               </div>

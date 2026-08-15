@@ -39,7 +39,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
           className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-8 lg:gap-14 mb-10 sm:mb-12 md:mb-16"
         >
           {testimonials.slice(0, 3).map((t) => (
-            <span key={t.id} className="text-body font-bold tracking-tighter text-neutral-500 hover:text-white transition-colors cursor-pointer capitalize">
+            <span key={t.id} className="text-body font-bold tracking-tighter text-neutral-500 hover:text-white transition-colors cursor-pointer capitalise">
               {t.client}
             </span>
           ))}

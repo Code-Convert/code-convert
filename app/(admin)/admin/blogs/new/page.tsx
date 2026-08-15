@@ -115,7 +115,7 @@ export default function CreateBlogPost() {
               label="SEO Title"
               value={formData.seo_title}
               onChange={(e) => setFormData(prev => ({ ...prev, seo_title: e.target.value }))}
-              placeholder="SEO optimized title"
+              placeholder="SEO optimised title"
             />
             
             <Textarea

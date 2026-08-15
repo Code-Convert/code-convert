@@ -70,12 +70,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     datePublished: blog.published_at,
     dateModified: blog.updated_at || blog.published_at,
     author: {
-      '@type': 'Organization',
+      '@type': 'Organisation',
       name: 'Code & Convert',
       url: siteUrl,
     },
     publisher: {
-      '@type': 'Organization',
+      '@type': 'Organisation',
       name: 'Code & Convert',
       url: siteUrl,
       logo: { '@type': 'ImageObject', url: `${siteUrl}/icon1.png` },

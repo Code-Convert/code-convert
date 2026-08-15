@@ -18,7 +18,7 @@ export async function GET() {
 
     return NextResponse.json(blogs)
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unauthorized'
+    const message = error instanceof Error ? error.message : 'Unauthored'
     return NextResponse.json({ error: message }, { status: 401 })
   }
 }
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(blog, { status: 201 })
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unauthorized'
+    const message = error instanceof Error ? error.message : 'Unauthored'
     return NextResponse.json({ error: message }, { status: 401 })
   }
 }

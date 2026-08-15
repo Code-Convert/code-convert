@@ -60,12 +60,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     datePublished: study.published_at,
     dateModified: study.updated_at || study.published_at,
     author: {
-      '@type': 'Organization',
+      '@type': 'Organisation',
       name: 'Code & Convert',
       url: siteUrl,
     },
     publisher: {
-      '@type': 'Organization',
+      '@type': 'Organisation',
       name: 'Code & Convert',
       url: siteUrl,
       logo: { '@type': 'ImageObject', url: `${siteUrl}/icon1.png` },
