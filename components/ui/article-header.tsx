@@ -3,7 +3,7 @@ import Link from 'next/link';
 interface ArticleHeaderProps {
   title: string;
   subtitle?: string;
-  date?: string;
+  date?: string | null;
   tags?: string[] | null;
   backLink?: { href: string; label: string };
 }

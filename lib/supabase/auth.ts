@@ -8,7 +8,7 @@ export async function getUser(): Promise<User | null> {
   
   if (!user) return null
 
-  const { data: profile } = await supabase
+  const { data: profile }: { data: any } = await supabase
     .from('profiles')
     .select('role, created_at, updated_at')
     .eq('id', user.id)

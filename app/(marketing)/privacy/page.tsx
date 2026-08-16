@@ -38,7 +38,7 @@ export default function PrivacyPage() {
               <li>Communicate with you about projects and updates</li>
               <li>Respond to your inquiries and support requests</li>
               <li>Send you marketing communications (with your consent)</li>
-              <li>Analyze usage patterns and optimize our website</li>
+              <li>Analyze usage patterns and optimise our website</li>
             </ul>
           </section>
 
@@ -59,8 +59,8 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">4. Data Security</h2>
             <p>
-              We implement appropriate technical and organizational measures to protect your personal 
-              information against unauthorized access, alteration, disclosure, or destruction. However, 
+              We implement appropriate technical and organational measures to protect your personal 
+              information against unauthored access, alteration, disclosure, or destruction. However, 
               no method of transmission over the internet is 100% secure.
             </p>
           </section>

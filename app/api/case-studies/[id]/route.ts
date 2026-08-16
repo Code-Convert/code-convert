@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/supabase/auth'
 import { WEB_DEV_SERVICE } from '@/types/case-study'
+import type { TablesUpdate } from '@/lib/database.type'
 
 export async function PUT(
   request: NextRequest,
@@ -27,9 +28,7 @@ export async function PUT(
       )
     }
 
-    const { error } = await supabase
-      .from('case_studies')
-      .update({
+    const updateData: TablesUpdate<'case_studies'> = {
         title: body.title,
         slug: body.slug,
         client: body.client,
@@ -53,7 +52,11 @@ export async function PUT(
         is_custom_built: body.is_custom_built ?? true,
         gallery_order: body.gallery_order ?? 0,
         carousel_order: body.carousel_order ?? 0,
-      })
+      }
+
+    const { error } = await supabase
+      .from('case_studies')
+      .update(updateData)
       .eq('id', id)
 
     if (error) throw error

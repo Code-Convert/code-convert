@@ -23,7 +23,7 @@ const steps = [
   },
   {
     number: '04',
-    title: 'Scale & Optimize',
+    title: 'Scale & Optimise',
     description: 'Cutting losers and scaling winners. Continuous CRO and budget allocation towards the highest ROAS channels.',
     timeline: 'Ongoing ✓',
     highlight: true
@@ -39,7 +39,7 @@ export default function Process() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] md:text-xs font-bold tracking-wide uppercase border border-white/5 bg-white/[0.02] text-white/40 mb-4 md:mb-5 mx-auto"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-small font-bold tracking-wide uppercase border border-white/5 bg-white/[0.02] text-white/40 mb-4 md:mb-5 mx-auto"
           >
             Our Method
           </motion.div>
@@ -48,7 +48,7 @@ export default function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4 px-4"
+            className="text-h2 font-bold tracking-tight mb-3 md:mb-4 px-4"
           >
             The blueprint to<br /><span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent">profitable scale</span>
           </motion.h2>
@@ -65,15 +65,15 @@ export default function Process() {
               className="group bg-[#050505]/40 border border-white/5 backdrop-blur-[16px] rounded-2xl p-4 md:p-5 lg:p-6 relative hover:bg-[#050505]/60 hover:border-[#FF1E1E]/10 hover:-translate-y-[2px] transition-all duration-400"
             >
               <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-5">
-                <div className={`w-9 md:w-10 h-9 md:h-10 rounded-full flex items-center justify-center text-[11px] md:text-xs font-bold ${step.highlight ? 'bg-[#FF1E1E] text-white shadow-[0_0_15px_rgba(255,30,30,0.4)]' : 'bg-[#FF1E1E]/10 border border-[#FF1E1E]/20 text-[#FF1E1E]'}`}>
+                <div className={`w-9 md:w-10 h-9 md:h-10 rounded-full flex items-center justify-center text-small font-bold ${step.highlight ? 'bg-[#FF1E1E] text-white shadow-[0_0_15px_rgba(255,30,30,0.4)]' : 'bg-[#FF1E1E]/10 border border-[#FF1E1E]/20 text-[#FF1E1E]'}`}>
                   {step.number}
                 </div>
                 {i < steps.length - 1 && (
                   <div className="hidden lg:block flex-1 h-px bg-[linear-gradient(90deg,rgba(255,30,30,0.15),transparent)]" />
                 )}
               </div>
-              <h3 className="text-xs md:text-sm font-bold tracking-tight mb-2">{step.title}</h3>
-              <p className="text-[11px] md:text-xs text-neutral-500 leading-relaxed">{step.description}</p>
+              <h3 className="text-h3 font-bold tracking-tight mb-2">{step.title}</h3>
+              <p className="text-small text-neutral-500 leading-relaxed">{step.description}</p>
               <div className={`mt-4 text-[10px] uppercase tracking-widest font-bold ${step.highlight ? 'text-[#FF1E1E]' : 'text-neutral-600'}`}>
                 {step.timeline}
               </div>

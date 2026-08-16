@@ -3,13 +3,23 @@ import { createClient } from '@/lib/supabase/server'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 
+interface CaseStudyRow {
+  id: string
+  title: string
+  slug: string
+  client: string
+  published: boolean | null
+  created_at: string | null
+}
+
 async function getCaseStudies() {
   const supabase = await createClient()
-  
+
   const { data: caseStudies, error } = await supabase
     .from('case_studies')
-    .select('*')
+    .select('id, title, slug, client, published, created_at')
     .order('created_at', { ascending: false })
+    .returns<CaseStudyRow[]>()
 
   if (error) {
     console.error('Error fetching case studies:', error)

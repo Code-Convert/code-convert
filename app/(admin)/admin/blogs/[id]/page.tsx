@@ -9,6 +9,7 @@ import { RichTextEditor } from '@/components/ui/rich-text-editor'
 import { ImageUpload } from '@/components/ui/image-upload'
 import { slugify } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
+import type { BlogPost } from '@/types/blog'
 
 export default function EditBlogPost({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -29,11 +30,13 @@ export default function EditBlogPost({ params }: { params: Promise<{ id: string 
   useEffect(() => {
     async function fetchBlog() {
       const supabase = createClient()
-      const { data } = await supabase
+      // 1. Force TypeScript to type the extracted "data" variable directly
+      const { data }: { data: BlogPost | null } = await supabase
         .from('blogs')
         .select('*')
         .eq('id', id)
         .single()
+        //.returns<BlogPost>()
 
       if (data) {
         setFormData({
@@ -160,7 +163,7 @@ export default function EditBlogPost({ params }: { params: Promise<{ id: string 
               label="SEO Title"
               value={formData.seo_title}
               onChange={(e) => setFormData(prev => ({ ...prev, seo_title: e.target.value }))}
-              placeholder="SEO optimized title"
+              placeholder="SEO optimised title"
             />
             
             <Textarea

@@ -8,6 +8,7 @@ import Process from '@/components/layout/Process';
 import Testimonials from '@/components/layout/Testimonials';
 import CTA from '@/components/layout/CTA';
 import Statistics from '@/components/layout/statistics';
+import type { CaseStudy } from '@/types/case-study';
 
 async function getHomepageData() {
   const supabase = await createClient();
@@ -18,14 +19,16 @@ async function getHomepageData() {
       .select('id, title, slug, client, industry, services, results, featured_image')
       .eq('published', true)
       .order('published_at', { ascending: false })
-      .limit(4),
+      .limit(4)
+      .returns<CaseStudy[]>(),
     supabase
       .from('case_studies')
       .select('id, testimonial_text, testimonial_author, testimonial_role, client')
       .eq('published', true)
       .not('testimonial_text', 'is', null)
       .order('published_at', { ascending: false })
-      .limit(6),
+      .limit(6)
+      .returns<CaseStudy[]>(),
   ]);
 
   return { projects: projects ?? [], testimonials: testimonials ?? [] };

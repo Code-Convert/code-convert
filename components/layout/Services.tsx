@@ -14,12 +14,12 @@ const services = [
   {
     icon: Search,
     title: 'Technical SEO',
-    description: 'Dominate search results with structural optimization, authoritative link building, and intent-driven content.',
+    description: 'Dominate search results with structural optimisation, authoritative link building, and intent-driven content.',
     tags: ['Audits', 'On-Page', 'Off-Page']
   },
   {
     icon: MousePointer2,
-    title: 'Conversion Optimization',
+    title: 'Conversion Optimisation',
     description: 'Continuous A/B testing and user journey refinements to extract maximum value from existing traffic.',
     tags: ['A/B Testing', 'UX', 'Heatmaps']
   },
@@ -53,7 +53,7 @@ export default function Services() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] md:text-xs font-bold tracking-wide uppercase border border-white/5 bg-white/[0.02] text-white/40 mb-4 md:mb-5 mx-auto"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-small font-bold tracking-wide uppercase border border-white/5 bg-white/[0.02] text-white/40 mb-4 md:mb-5 mx-auto"
           >
             What We Do
           </motion.div>
@@ -62,7 +62,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4 px-4"
+            className="text-h2 font-bold tracking-tight mb-3 md:mb-4 px-4"
           >
             Full-funnel marketing<br /><span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent">capabilities</span>
           </motion.h2>
@@ -71,7 +71,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-xs sm:text-sm md:text-base text-neutral-400 max-w-md mx-auto font-bold px-4"
+            className="text-body text-neutral-400 max-w-md mx-auto font-bold px-4"
           >
             We cover every touchpoint of your customer's journey with data-backed strategies.
           </motion.p>
@@ -117,8 +117,8 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         <div className="w-10 md:w-11 h-10 md:h-11 rounded-xl flex items-center justify-center mb-4 md:mb-5 bg-[#FF1E1E]/10 border border-[#FF1E1E]/20">
           <service.icon className="w-4.5 md:w-5 h-4.5 md:h-5 text-[#FF1E1E]" />
         </div>
-        <h3 className="text-sm md:text-base font-bold tracking-tight mb-2">{service.title}</h3>
-        <p className="text-[11px] md:text-xs text-neutral-500 leading-relaxed mb-4 md:mb-5">{service.description}</p>
+        <h3 className="text-h3 font-bold tracking-tight mb-2">{service.title}</h3>
+        <p className="text-small text-neutral-500 leading-relaxed mb-4 md:mb-5">{service.description}</p>
         <div className="flex flex-wrap gap-1.5">
           {service.tags.map((tag) => (
             <span key={tag} className="text-[10px] text-neutral-600 px-2 py-0.5 rounded bg-white/[0.03] uppercase tracking-wider font-bold">

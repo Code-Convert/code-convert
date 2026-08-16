@@ -26,7 +26,7 @@ export async function PUT(
 
     const { error } = await supabase
       .from('blogs')
-      .update(updateData as any)
+      .update(updateData)
       .eq('id', id)
 
     if (error) throw error

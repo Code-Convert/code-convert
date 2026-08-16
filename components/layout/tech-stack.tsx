@@ -20,7 +20,7 @@ const services = [
     ],
     color: "#8B5CF6",
     gradient: "from-violet-500/20 to-purple-500/10",
-    imagePlaceholder: "Marketing Strategy",
+    imagePlaceholder: "/images/services-page/marketing-strategy.png",
   },
   {
     id: "paid-ads",
@@ -37,7 +37,7 @@ const services = [
     ],
     color: "#F59E0B",
     gradient: "from-amber-500/20 to-orange-500/10",
-    imagePlaceholder: "Paid Advertising",
+    imagePlaceholder: "/images/services-page/paid-ads.png",
   },
   {
     id: "web-design",
@@ -54,7 +54,7 @@ const services = [
     ],
     color: "#10B981",
     gradient: "from-emerald-500/20 to-teal-500/10",
-    imagePlaceholder: "Web Design",
+    imagePlaceholder: "/images/services-page/web-design.png",
   },
   {
     id: "editing",
@@ -71,11 +71,21 @@ const services = [
     ],
     color: "#EF4444",
     gradient: "from-red-500/20 to-rose-500/10",
-    imagePlaceholder: "Content Creation",
+    imagePlaceholder: "/images/services-page/content-creation.png",
   },
 ];
 
-const CardSkeleton = ({ color, icon: Icon, title }: { color: string; icon: any; title: string }) => {
+const CardSkeleton = ({ color, icon: Icon, title, imagePlaceholder }: { color: string; icon: any; title: string; imagePlaceholder: string }) => {
+  const isImage = imagePlaceholder.startsWith("/");
+
+  if (isImage) {
+    return (
+      <div className="relative w-full h-full rounded-2xl overflow-hidden bg-neutral-900/80 border border-neutral-800/50">
+        <img src={imagePlaceholder} alt={title} className="w-full h-full object-cover" />
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden bg-neutral-900/80 border border-neutral-800/50">
       {/* Top section - mock UI */}
@@ -140,7 +150,7 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
     >
       {/* Image/Skeleton Area */}
       <div className="relative h-64 w-full overflow-hidden">
-        <CardSkeleton color={service.color} icon={Icon} title={service.title} />
+        <CardSkeleton color={service.color} icon={Icon} title={service.title} imagePlaceholder={service.imagePlaceholder} />
 
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/20 to-transparent opacity-60" />

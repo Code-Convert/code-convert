@@ -220,7 +220,7 @@ export default function CreateCaseStudy() {
         <div className="border-t border-white/10 pt-6">
           <h3 className="text-lg font-medium text-white mb-4">SEO Settings</h3>
           <div className="space-y-4">
-            <Input label="SEO Title" value={formData.seo_title} onChange={(e) => setFormData(prev => ({ ...prev, seo_title: e.target.value }))} placeholder="SEO optimized title" />
+            <Input label="SEO Title" value={formData.seo_title} onChange={(e) => setFormData(prev => ({ ...prev, seo_title: e.target.value }))} placeholder="SEO optimised title" />
             <Textarea label="SEO Description" value={formData.seo_description} onChange={(e) => setFormData(prev => ({ ...prev, seo_description: e.target.value }))} placeholder="Meta description" rows={2} />
           </div>
         </div>

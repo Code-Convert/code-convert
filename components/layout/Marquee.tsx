@@ -4,7 +4,7 @@ const items = [
   'Paid Search',
   'Social Advertising',
   'Technical SEO',
-  'Conversion Rate Optimization',
+  'Conversion Rate Optimisation',
   'Email Automation',
   'Data Analytics'
 ];

@@ -15,7 +15,7 @@ interface RichTextEditorProps {
   placeholder?: string
 }
 
-export function RichTextEditor({ value, onChange, label, placeholder }: RichTextEditorProps) {
+export function RichTextEditor({ value, onChange, label }: RichTextEditorProps) {
   const [showMediaPicker, setShowMediaPicker] = useState(false)
 
   const editor = useEditor({
@@ -52,7 +52,7 @@ export function RichTextEditor({ value, onChange, label, placeholder }: RichText
 
   return (
     <div className="space-y-2">
-      {label && <label className="block text-sm font-medium text-white">{label}</label>}
+      {label && <label className="block [font-size:var(--text-small)] font-medium text-white">{label}</label>}
       
       <div className="border border-white/10 rounded-md bg-white/5 overflow-hidden">
         <div className="flex flex-wrap gap-1 p-2 border-b border-white/10 bg-white/5">

@@ -41,8 +41,8 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Organization',
-      '@id': `${process.env.NEXT_PUBLIC_SITE_URL}/#organization`,
+      '@type': 'Organisation',
+      '@id': `${process.env.NEXT_PUBLIC_SITE_URL}/#organisation`,
       name: 'Code & Convert',
       url: process.env.NEXT_PUBLIC_SITE_URL,
       logo: `${process.env.NEXT_PUBLIC_SITE_URL}/icon1.png`,
@@ -57,7 +57,7 @@ const jsonLd = {
       '@id': `${process.env.NEXT_PUBLIC_SITE_URL}/#website`,
       url: process.env.NEXT_PUBLIC_SITE_URL,
       name: 'Code & Convert',
-      publisher: { '@id': `${process.env.NEXT_PUBLIC_SITE_URL}/#organization` },
+      publisher: { '@id': `${process.env.NEXT_PUBLIC_SITE_URL}/#organisation` },
       potentialAction: {
         '@type': 'SearchAction',
         target: `${process.env.NEXT_PUBLIC_SITE_URL}/blog?q={search_term_string}`,

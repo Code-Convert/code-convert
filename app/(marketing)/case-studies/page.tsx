@@ -5,6 +5,7 @@ import VoidBackground from '@/components/VoidBackground';
 import InteractiveCursor from '@/components/InteractiveCursor';
 import CaseStudiesFilter from '../../../components/layout/CaseStudiesFilter';
 import CaseStudiesHero from '@/components/layout/CaseStudiesHero';
+import { CaseStudy } from '@/types/case-study';
 
 export const metadata: Metadata = {
   title: 'Case Studies',
@@ -17,7 +18,8 @@ export default async function CaseStudiesPage() {
     .from('case_studies')
     .select('*')
     .eq('published', true)
-    .order('published_at', { ascending: false });
+    .order('published_at', { ascending: false })
+    .returns<CaseStudy[]>();
 
   return (
     <div className="relative selection:bg-[#FF1E1E]/20 selection:text-white">

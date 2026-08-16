@@ -8,9 +8,11 @@ Marketing agency website with a headless admin CMS. Built with Next.js, Supabase
 - **Backend** — Supabase (Postgres, Auth, Storage, RLS)
 - **Styling** — Tailwind CSS v4
 - **Animations** — Framer Motion + Lenis
+- **3D/WebGL** — Three.js + @paper-design/shaders-react
 - **Editor** — Tiptap (rich text)
-- **Email** — Resend
+- **UI Primitives** — Radix UI
 - **Validation** — Zod
+- **Notifications** — Sonner
 - **Deployment** — Vercel
 
 ## Project Structure
@@ -23,19 +25,20 @@ app/
     blog/             # Blog listing + [slug]
     case-studies/     # Case study listing + [slug]
     contact-us/       # Contact form
-    get-in-touch/     # Simple contact form
     privacy/          # Privacy policy
     terms/            # Terms of service
   (admin)/            # Admin panel (/admin/*)
   admin-login/        # Login page (/admin-login)
-  api/                # API routes
+  api/
     auth/callback/    # Supabase auth callback
     blog/             # Blog API
     blogs/[id]/       # Blog by ID
+    case-studies/     # Case studies API
     case-studies/[id]/# Case study by ID
     contact/          # Contact form handler
     leads/            # Lead submission handler
     site-stats/       # Site statistics (cached 60s)
+  sitemap.ts          # Dynamic sitemap
 components/
   ui/                 # Reusable UI components
   layout/             # Navbar, Footer, AdminSidebar, page sections
@@ -56,7 +59,7 @@ lib/
   database.type.ts
   errors.ts
   utils.ts
-types/                # database.ts, api.ts, blog.ts, case-study.ts, media.ts, contact.ts, user.ts
+types/                # api.ts, blog.ts, case-study.ts, media.ts, contact.ts, user.ts, web-design.ts
 supabase/             # SQL migrations
 middleware.ts         # Admin route protection
 ```
@@ -71,15 +74,15 @@ npm install
 
 ### 2. Configure environment variables
 
-Create `.env.local`:
+Copy `.env.example` to `.env.local` and fill in your values:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
-RESEND_API_KEY=your_resend_api_key
-CONTACT_EMAIL=your_email@domain.com
+HUBSPOT_ACCESS_TOKEN=your_hubspot_private_app_token
+HUBSPOT_API_BASE_URL=https://api.hubapi.com
 ```
 
 ### 3. Set up the database
@@ -104,7 +107,7 @@ supabase/fix-storage-policies.sql
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) for the public site.
+Open [http://localhost:3000](http://localhost:3000) for the public site.  
 Open [http://localhost:3000/admin](http://localhost:3000/admin) for the admin panel.
 
 ## Admin Panel
@@ -147,6 +150,16 @@ A `get_site_statistics()` Postgres function aggregates published case study data
 | `case-study-images` | Public read, authenticated write |
 | `media-library` | Public read, authenticated manage |
 
+## Performance & SEO
+
+- All public pages are Server Components — no client-side data waterfalls
+- `VoidBackground` (Three.js) and `InteractiveCursor` are loaded via `next/dynamic` with `{ ssr: false }` to keep them off the critical path
+- Inter font loaded via `next/font/google` with `display: 'swap'`
+- AVIF/WebP image formats via `next.config.ts`
+- JSON-LD structured data injected server-side on every page, blog posts, and case studies
+- Dynamic sitemap at `app/sitemap.ts` queries Supabase for all published URLs
+- `public/robots.txt` includes `Sitemap:` directive and explicit `Allow` rules for major crawlers and AI bots
+
 ## Documentation
 
 All architecture and design documentation is in `/docs`:
@@ -155,4 +168,4 @@ All architecture and design documentation is in `/docs`:
 - `DESIGN_SPECIFICATION.md` — Design system, colours, typography
 - `USER_FLOW_DIAGRAMS.md` — Public and admin user flows
 - `WEB_DESIGN_OVERVIEW.md` — Section-by-section visual overview
-- `HISTORY.md` — Summary of all completed work
+- `AUDIT.md` — Audit log of completed work

@@ -22,19 +22,19 @@ export default function CTA() {
               <TrendingUp className="w-5 md:w-6 h-5 md:h-6 text-[#FF1E1E]" />
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4 px-2">
+            <h2 className="text-h2 font-bold tracking-tight mb-3 md:mb-4 px-2">
               Ready to multiply<br />your <span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent">revenue</span>?
             </h2>
-            <p className="text-xs sm:text-sm md:text-base text-neutral-400 max-w-sm mx-auto mb-6 md:mb-9 font-bold px-2">
+            <p className="text-body text-neutral-400 max-w-sm mx-auto mb-6 md:mb-9 font-bold px-2">
               Book a complimentary audit call. We'll dissect your current setup and outline actionable growth strategies.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a href="/contact-us" className="inline-flex items-center justify-center gap-2 px-5 md:px-7 py-3 md:py-3.5 text-[15px] font-bold rounded-full bg-[#FF1E1E] text-white hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,30,30,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 w-full sm:w-auto">
+              <a href="/contact-us" className="inline-flex items-center justify-center gap-2 px-5 md:px-7 py-3 md:py-3.5 text-body font-bold rounded-full bg-[#FF1E1E] text-white hover:-translate-y-px hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(255,30,30,0.25),0_8px_24px_rgba(0,0,0,0.3)] active:scale-[0.98] transition-all duration-300 w-full sm:w-auto">
                 <Calendar className="w-3.5 md:w-4 h-3.5 md:h-4" />
                 Book 1:1 Let's chat.
               </a>
-              <a href="mailto:hello@codeandconvert.co.za" className="inline-flex items-center justify-center gap-2 px-5 md:px-7 py-3 md:py-3.5 text-[15px] font-bold rounded-full border border-white/10 text-white bg-transparent hover:border-white/20 hover:bg-white/5 transition-all duration-300 w-full sm:w-auto">
+              <a href="mailto:hello@codeandconvert.co.za" className="inline-flex items-center justify-center gap-2 px-5 md:px-7 py-3 md:py-3.5 text-body font-bold rounded-full border border-white/10 text-white bg-transparent hover:border-white/20 hover:bg-white/5 transition-all duration-300 w-full sm:w-auto">
                 <Mail className="w-3.5 md:w-4 h-3.5 md:h-4" />
                 hello@codeandconvert.co.za
               </a>

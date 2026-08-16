@@ -1,6 +1,7 @@
 import WebsiteCarousel from '@/components/layout/WebsiteCarousel';
 import Section, { SectionHeader } from '@/components/ui/section';
 import { createClient } from '@/lib/supabase/server';
+import type { Tables } from '@/lib/database.type';
 
 
 async function getCarouselItems() {
@@ -10,7 +11,8 @@ async function getCarouselItems() {
     .select('title, industry, carousel_image, featured_image, carousel_order')
     .eq('published', true)
     .eq('show_in_carousel', true)
-    .order('carousel_order', { ascending: true });
+    .order('carousel_order', { ascending: true })
+    .returns<Pick<Tables<'case_studies'>, 'title' | 'industry' | 'carousel_image' | 'featured_image' | 'carousel_order'>[]>();
 
   return (data ?? []).map((cs) => ({
     name: cs.title,

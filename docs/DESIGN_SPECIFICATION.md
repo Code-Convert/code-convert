@@ -36,7 +36,7 @@ Marketing agency website with admin CMS panel.
 * **Dark Premium**: Sophisticated dark theme with high contrast
 * **Modern Minimal**: Clean, uncluttered interface
 * **Cinematic**: Smooth animations and premium feel
-* **High Performance**: Fast-loading with optimized interactions
+* **High Performance**: Fast-loading with optimised interactions
 
 ## Design Principles
 
@@ -270,7 +270,7 @@ Convert visitors into leads through strategic content flow and strong value prop
 ### Mobile
 - Single column stacked layout
 - Collapsible navigation menu
-- Touch-optimized buttons (44px minimum)
+- Touch-optimised buttons (44px minimum)
 - Simplified hero with essential content
 
 ### Tablet
@@ -282,7 +282,7 @@ Convert visitors into leads through strategic content flow and strong value prop
 - Full multi-column layouts
 - Hover effects and interactive cursor
 - Expanded content sections
-- Optimized for conversion flow
+- Optimised for conversion flow
 
 ## Required Components
 - Animated counters in hero
@@ -292,8 +292,8 @@ Convert visitors into leads through strategic content flow and strong value prop
 - Newsletter signup form
 
 ## SEO Requirements
-- Structured data for organization
-- Optimized meta descriptions
+- Structured data for organisation
+- Optimised meta descriptions
 - Internal linking to service pages
 - Image alt texts and captions
 
@@ -340,7 +340,7 @@ Convert e-commerce leads with ROI-focused messaging and technical expertise
 1. **Hero** - E-commerce specific value proposition
 2. **ROI Focus** - Conversion and sales emphasis
 3. **Platform Expertise** - Shopify, WooCommerce, custom builds
-4. **E-commerce Features** - Payments, checkout optimization, integrations
+4. **E-commerce Features** - Payments, checkout optimisation, integrations
 5. **Portfolio** - E-commerce case studies with results
 6. **Process** - Technical implementation steps
 7. **Testimonials** - E-commerce client feedback
@@ -412,7 +412,7 @@ Detailed project showcase to demonstrate expertise and results
 - Interactive elements
 
 ## Content Structure (CMS Fields)
-- **Title** (SEO optimized)
+- **Title** (SEO optimised)
 - **Client Name**
 - **Project Type** (dropdown: Website, Campaign, Branding, etc.)
 - **Industry** (dropdown selection)
@@ -460,7 +460,7 @@ Establish thought leadership and improve SEO through valuable content
 - Interactive cursor enabled
 
 ## Content Structure (CMS Fields)
-- **Title** (SEO optimized)
+- **Title** (SEO optimised)
 - **Slug** (auto-generated from title)
 - **Hero Image** (separate from content)
 - **Content** (rich text editor with inline images)
@@ -519,12 +519,12 @@ Convert inquiries into qualified leads through strategic form design
 
 ## Sections
 1. **Hero** - Clear contact CTA and value proposition
-2. **Contact Form** - Optimized for conversions
+2. **Contact Form** - Optimised for conversions
 3. **Business Information** - Address, phone, email, hours
 4. **FAQ Section** - Common questions and answers
 5. **CTA** - Alternative contact methods
 
-## Form Fields (Conversion Optimized)
+## Form Fields (Conversion Optimised)
 - **Name** (required)
 - **Email** (required)
 - **Company** (optional but valuable)
@@ -644,7 +644,7 @@ Convert inquiries into qualified leads through strategic form design
 - **Text Formatting**: Bold, italic, headings, lists, links
 - **No Image Editing**: Simple upload and insert (no crop/resize)
 - **Alt Text**: Required for accessibility
-- **Image Optimization**: Automatic WebP conversion and compression
+- **Image Optimisation**: Automatic WebP conversion and compression
 
 ---
 
@@ -654,7 +654,7 @@ Convert inquiries into qualified leads through strategic form design
 - **Gallery Management** (multiple image upload)
 - **Client Information** fields
 - **Results Metrics** input
-- **SEO Fields** optimization
+- **SEO Fields** optimisation
 - **Featured Toggle** (for homepage display)
 
 ### Content Fields
@@ -676,11 +676,11 @@ Convert inquiries into qualified leads through strategic form design
 - **Image Details** (size, dimensions, alt text)
 - **Usage Tracking** (where images are used)
 
-### Organization
+### Organisation
 - **Automatic Folders** by upload date (YYYY/MM)
-- **File Naming**: Automatic optimization for web
+- **File Naming**: Automatic optimisation for web
 - **Multiple Formats**: Auto-generate WebP versions
-- **Compression**: Automatic optimization for performance
+- **Compression**: Automatic optimisation for performance
 
 ---
 
@@ -716,8 +716,8 @@ Convert inquiries into qualified leads through strategic form design
 
 ## Technical SEO
 - **Meta Tags**: Dynamic title and description per page
-- **Open Graph**: Social media sharing optimization
-- **Structured Data**: JSON-LD for articles, organization, breadcrumbs
+- **Open Graph**: Social media sharing optimisation
+- **Structured Data**: JSON-LD for articles, organisation, breadcrumbs
 - **Sitemap**: Auto-generated XML sitemap
 - **Robots.txt**: Proper crawling directives
 - **Canonical URLs**: Prevent duplicate content
@@ -725,9 +725,9 @@ Convert inquiries into qualified leads through strategic form design
 ## Content SEO
 - **Heading Hierarchy**: Proper H1-H6 structure
 - **Internal Linking**: Automatic related content suggestions
-- **Image Optimization**: Alt text, proper file names, compression
+- **Image Optimisation**: Alt text, proper file names, compression
 - **URL Structure**: Clean, descriptive slugs
-- **Loading Speed**: Optimized images, minimal JavaScript
+- **Loading Speed**: Optimised images, minimal JavaScript
 
 ---
 
@@ -736,7 +736,7 @@ Convert inquiries into qualified leads through strategic form design
 ## Goals
 - **Fast Load Times**: <3 seconds on 3G
 - **Minimal Layout Shift**: CLS <0.1
-- **Optimized Images**: WebP format, lazy loading
+- **Optimised Images**: WebP format, lazy loading
 - **Efficient JavaScript**: Code splitting, minimal bundles
 
 ## Core Web Vitals Targets
@@ -747,8 +747,8 @@ Convert inquiries into qualified leads through strategic form design
 | CLS (Cumulative Layout Shift) | <0.1 |
 | INP (Interaction to Next Paint) | <200ms |
 
-## Optimization Strategies
-- **Image Optimization**: Automatic WebP conversion, multiple sizes
+## Optimisation Strategies
+- **Image Optimisation**: Automatic WebP conversion, multiple sizes
 - **Lazy Loading**: Images and components below fold
 - **Code Splitting**: Route-based and component-based
 - **Caching**: Static assets, API responses
@@ -769,7 +769,7 @@ Convert inquiries into qualified leads through strategic form design
 - **JPEG**: Fallback for older browsers
 - **PNG**: For graphics with transparency
 
-## Optimization Rules
+## Optimisation Rules
 - **Automatic Compression**: 85% quality for photos
 - **Responsive Sizing**: Multiple sizes generated automatically
 - **Lazy Loading**: All images below the fold
@@ -793,7 +793,7 @@ Convert inquiries into qualified leads through strategic form design
 - Case study management system
 
 ### Week 5-6: Advanced Features
-- SEO fields and optimization
+- SEO fields and optimisation
 - Bulk operations and search
 - User management and settings
 - Data validation and error handling
@@ -806,15 +806,15 @@ Convert inquiries into qualified leads through strategic form design
 - Case study listing and individual pages
 
 ### Week 9-10: Enhanced Features
-- Contact page with optimized form
+- Contact page with optimised form
 - Search and filtering functionality
 - SEO implementation and structured data
-- Performance optimization
+- Performance optimisation
 
 ### Week 11-12: Polish & Launch
 - Accessibility improvements
 - Cross-browser testing
-- Performance optimization
+- Performance optimisation
 - Final QA and deployment
 
 ---
@@ -900,7 +900,7 @@ Convert inquiries into qualified leads through strategic form design
 |----------|--------|
 | Single font family (Inter) | Consistency, performance, modern aesthetic |
 | Dark theme with improved contrast | Brand consistency while improving readability |
-| Multi-page architecture | Better SEO, user experience, content organization |
+| Multi-page architecture | Better SEO, user experience, content organisation |
 | Admin CMS priority | Core business need for content management |
 | Supabase for backend | Rapid development, built-in auth, real-time features |
 | Rich text editor with drag-drop | Modern content creation experience |
@@ -909,5 +909,5 @@ Convert inquiries into qualified leads through strategic form design
 | Featured post rotation (2 days) | Automatic content freshness without manual management |
 | 9-12 posts per page | Optimal balance of content discovery and performance |
 | Theme toggle in admin | Flexibility for different working preferences |
-| Automatic image optimization | Performance without manual intervention |
+| Automatic image optimisation | Performance without manual intervention |
 | Mobile-first responsive design | Modern web standards, mobile traffic priority |

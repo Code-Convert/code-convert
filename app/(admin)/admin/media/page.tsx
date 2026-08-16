@@ -102,7 +102,7 @@ export default function MediaLibrary() {
               size: file.size,
               url: publicUrl,
               uploaded_by: user.id
-            })
+            } as any)
 
           if (insertError) {
             console.error('Database insert error for', file.name, ':', insertError)

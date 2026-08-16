@@ -38,7 +38,7 @@ export default function CreateBlogPost() {
     setLoading(true)
 
     try {
-      const response = await fetch('/api/blogs', {
+      const response = await fetch('/api/blog', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ export default function CreateBlogPost() {
               label="SEO Title"
               value={formData.seo_title}
               onChange={(e) => setFormData(prev => ({ ...prev, seo_title: e.target.value }))}
-              placeholder="SEO optimized title"
+              placeholder="SEO optimised title"
             />
             
             <Textarea

@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import type { Database } from '@/lib/database.type'
-
-type LeadInsert = Database['public']['Tables']['lead_submissions']['Insert']
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createClient()
-    const body = await request.json()
+    const token = process.env.HUBSPOT_ACCESS_TOKEN
+    const apiBase = process.env.HUBSPOT_API_BASE_URL
 
+    if (!token || !apiBase) {
+      console.error('HubSpot: HUBSPOT_ACCESS_TOKEN or HUBSPOT_API_BASE_URL is not set')
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+    }
+
+    const body = await request.json()
     const { name, email, phone, source_page } = body
 
     if (!name || !email || !phone || !source_page) {
@@ -18,52 +20,42 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const ip =
-      request.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
-      request.headers.get('x-real-ip') ??
-      null
+    // TODO: gate on POPIA consent once property exists in HubSpot
 
-    const payload: LeadInsert = {
-      name,
+    const [firstName, ...rest] = (name as string).trim().split(' ')
+    const lastName = rest.join(' ') || ''
+
+    const properties: Record<string, string> = {
       email,
+      firstname: firstName,
+      lastname: lastName,
       phone,
-      source_page,
-      source_url: body.source_url || null,
-      utm_source: body.utm_source || null,
-      utm_medium: body.utm_medium || null,
-      utm_campaign: body.utm_campaign || null,
-      utm_content: body.utm_content || null,
-      utm_term: body.utm_term || null,
-      primary_goal: body.primary_goal || null,
-      sells_to: body.sells_to || null,
-      growth_stage: body.growth_stage || null,
-      biggest_challenge: body.biggest_challenge || null,
-      exploring_reason: body.exploring_reason || null,
-      company_name: body.company_name || null,
-      website_url: body.website_url || null,
-      industry: body.industry || null,
-      industry_other: body.industry_other || null,
-      role: body.role || null,
-      decision_authority: body.decision_authority || null,
-      monthly_revenue: body.monthly_revenue || null,
-      monthly_ad_spend: body.monthly_ad_spend || null,
-      budget_allocated: body.budget_allocated || null,
-      implementation_timeline: body.implementation_timeline || null,
-      action_likelihood: body.action_likelihood || null,
-      additional_context: body.additional_context || null,
-      meeting_preference: body.meeting_preference || null,
-      lead_score: null,
-      lead_temperature: null,
-      lifecycle_stage: 'lead',
-      lead_status: 'new',
-      ip_address: ip,
-      user_agent: request.headers.get('user-agent') || null,
-      referrer: request.headers.get('referer') || null,
+      company: body.company_name ?? '',
+      website: body.website_url ?? '',
+      jobtitle: body.role ?? '',
+      industry: body.industry ?? '',
+      hs_lead_status: 'NEW',
+      lifecyclestage: 'lead',
     }
 
-    const { error } = await supabase.from('lead_submissions').insert(payload)
+    if (body.utm_source) properties.hs_analytics_source = body.utm_source
+    if (body.utm_medium) properties.hs_analytics_source_data_1 = body.utm_medium
+    if (body.utm_campaign) properties.hs_analytics_source_data_2 = body.utm_campaign
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    const res = await fetch(`${apiBase}/crm/v3/objects/contacts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authoration: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ properties }),
+    })
+
+    if (!res.ok) {
+      const text = await res.text()
+      console.error(`HubSpot API ${res.status}:`, text)
+      return NextResponse.json({ error: 'Failed to submit lead' }, { status: 500 })
+    }
 
     return NextResponse.json({ success: true }, { status: 201 })
   } catch (err) {

@@ -46,7 +46,7 @@ export function SectionHeader({ subtitle, title, description, className = '' }: 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-[#FF1E1E] text-sm md:text-base font-semibold uppercase tracking-wider mb-4"
+          className="text-[#FF1E1E] text-small font-semibold uppercase tracking-wider mb-4"
         >
           {subtitle}
         </motion.p>
@@ -57,7 +57,7 @@ export function SectionHeader({ subtitle, title, description, className = '' }: 
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+        className="text-h1 font-bold mb-6"
       >
         {title}
       </motion.h2>
@@ -68,7 +68,7 @@ export function SectionHeader({ subtitle, title, description, className = '' }: 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-gray-400 text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto"
+          className="text-gray-400 text-body leading-relaxed max-w-3xl mx-auto"
         >
           {description}
         </motion.p>
