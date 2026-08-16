@@ -71,6 +71,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`overflow-x-hidden ${inter.variable}`}>
       <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H8B061SJJK"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H8B061SJJK');`,
+          }}
+        />
         <meta name="apple-mobile-web-app-title" content="Code & Convert" />
         <script
           type="application/ld+json"
