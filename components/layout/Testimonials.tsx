@@ -49,6 +49,18 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
             className="h-11 sm:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
             style={{ filter: 'grayscale(1) invert(1)' }}
           />
+          <img
+            src="/brand-logos/nelson-chauke-properties.png"
+            alt="Nelson Chauke Properties"
+            className="h-8 sm:h-9 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+            style={{ filter: 'grayscale(1) invert(1)' }}
+          />
+          <img
+            src="/brand-logos/jasonb.png"
+            alt="Jason B Jewellery"
+            className="h-7 sm:h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+            style={{ filter: 'grayscale(1) invert(1)' }}
+          />
         </motion.div>
 
         <TestimonialsGrid testimonials={testimonials} />
