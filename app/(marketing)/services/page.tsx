@@ -10,6 +10,8 @@ import HeroBackgroundPaths from '@/components/layout/HeroBackgroundPaths';
 import TechStack from '@/components/layout/tech-stack';
 import { createClient } from '@/lib/supabase/server';
 import InteractiveCursor from '@/components/InteractiveCursor';
+import VoidBackground from '@/components/VoidBackground';
+import ScrollBridge from '@/components/ScrollBridge';
 
 export const metadata: Metadata = {
   title: 'Web Design & Marketing Services | Code & Convert',
@@ -51,24 +53,24 @@ export default async function ServicesPage() {
   const galleryItems = await getGalleryItems();
 
   return (
-    <main className="bg-black">
+    <>
+      <VoidBackground />
+      <ScrollBridge />
+      <main className="bg-transparent relative z-10">
       <InteractiveCursor />
       
       {/* 1. Hero Section */}
       <HeroBackgroundPaths
-        title="We Build High-Converting Websites For Growing Brands"
-        subtitle="We leverage data-backed Conversion Rate Optimisation and precision-driven digital strategy to help ambitious businesses break through revenue plateaus and unlock sustainable growth."
+        title="Full-service marketing, built around your business"
+        subtitle="From websites and e-commerce to social media, paid ads and traditional marketing, we give your business one team to plan, execute and grow."
         primaryCTA={{
             text: "Book Your Free Strategy Session",
             href: "/contact-us",
-            badge: "30-Minute Call • Free",
         }}
         secondaryCTA={{
             text: "View Our Work",
             href: "#gallery-grid",
         }}
-        imageSrc="/images/services-page/social-icon.png"
-        imageAlt="Hero Image"
       />
 
       {/* 2. Selected Projects */}
@@ -89,11 +91,16 @@ export default async function ServicesPage() {
       {/* 7. Recent Launches */}
       <RecentLaunches />
 
-      {/* 8. FAQ */}
-      <ServicesFAQ />
-
-      {/* 9. Final CTA */}
-      <CTA />
+      {/* 8. FAQ + 9. Final CTA — shared red background */}
+      <div className="relative bg-[#050505]">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 140% 90% at 50% 60%, rgba(200,10,10,0.22) 0%, rgba(100,0,0,0.12) 45%, transparent 70%)' }}
+        />
+        <ServicesFAQ />
+        <CTA />
+      </div>
     </main>
+    </>
   );
 }
