@@ -9,9 +9,9 @@ export default function Footer() {
         <div className="hidden lg:flex items-center justify-between w-full gap-8 lg:gap-12 mb-16">
           
           <div className="flex items-center gap-x-4 sm:gap-x-6">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Instagram</a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Facebook</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">LinkedIn</a>
+            <a href="https://www.instagram.com/codeconvert" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Instagram</a>
+            <a href="https://www.facebook.com/share/1Ey1B5yiNQ/" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Facebook</a>
+            <a href="https://www.linkedin.com/company/code-and-convert-digital/" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">LinkedIn</a>
           </div>
 
           <div className="flex items-center justify-center gap-x-6 sm:gap-x-10 flex-1">
@@ -38,9 +38,9 @@ export default function Footer() {
           </div>
           
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Instagram</a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Facebook</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">LinkedIn</a>
+            <a href="https://www.instagram.com/codeconvert" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Instagram</a>
+            <a href="https://www.facebook.com/share/1Ey1B5yiNQ/" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Facebook</a>
+            <a href="https://www.linkedin.com/company/code-and-convert-digital/" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">LinkedIn</a>
           </div>
           
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
@@ -65,7 +65,7 @@ export default function Footer() {
             </a>
             
             <p className="text-[10px] sm:text-xs text-neutral-500 font-medium tracking-tight">
-              © {new Date().getFullYear()} Code & Convert (Pty) Ltd. All rights reserved.
+              © {new Date().getFullYear()} Code and Convert Digital (Pty) Ltd. All rights reserved.
             </p>
           </div>
 

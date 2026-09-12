@@ -29,7 +29,7 @@ export default function Hero({ children }: { children?: React.ReactNode }) {
         <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
           <motion.div
             {...scaleIn}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-small font-bold tracking-wide uppercase border border-[#FF1E1E]/15 bg-[#FF1E1E]/5 text-[#FF1E1E] mb-6 md:mb-8"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-small font-bold tracking-wide uppercase border border-white/20 bg-white/[0.06] text-white/70 mb-6 md:mb-8"
           >
             YOUR MARKETING TEAM. WITHOUT THE HEADCOUNT.
           </motion.div>
