@@ -38,29 +38,21 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
           viewport={{ once: true }}
           className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16"
         >
-          <img
-            src="/brand-logos/peak-activewear.png"
-            alt="Peak Activewear"
-            className="h-8 sm:h-9 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
-          />
-          <img
-            src="/brand-logos/thriveearth-transparent.png"
-            alt="ThriveEarth Hydroseeding"
-            className="h-11 sm:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
-            style={{ filter: 'grayscale(1) invert(1)' }}
-          />
-          <img
-            src="/brand-logos/nelson-chauke-properties.png"
-            alt="Nelson Chauke Properties"
-            className="h-8 sm:h-9 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
-            style={{ filter: 'grayscale(1) invert(1)' }}
-          />
-          <img
-            src="/brand-logos/jasonb.png"
-            alt="Jason B Jewellery"
-            className="h-7 sm:h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
-            style={{ filter: 'grayscale(1) invert(1)' }}
-          />
+          {[
+            { src: '/brand-logos/peak-activewear.png', alt: 'Peak Activewear', filter: '' },
+            { src: '/brand-logos/thriveearth-transparent.png', alt: 'ThriveEarth Hydroseeding', filter: 'grayscale(1) invert(1)' },
+            { src: '/brand-logos/nelson-chauke-properties.png', alt: 'Nelson Chauke Properties', filter: 'grayscale(1) invert(1)' },
+            { src: '/brand-logos/jasonb.png', alt: 'Jason B Jewellery', filter: 'grayscale(1) invert(1)' },
+          ].map(({ src, alt, filter }) => (
+            <div key={alt} className="w-28 sm:w-32 h-10 sm:h-11 flex items-center justify-center">
+              <img
+                src={src}
+                alt={alt}
+                className="max-w-full max-h-full object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+                style={filter ? { filter } : undefined}
+              />
+            </div>
+          ))}
         </motion.div>
 
         <TestimonialsGrid testimonials={testimonials} />
