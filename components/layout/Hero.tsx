@@ -39,7 +39,7 @@ export default function Hero({ children }: { children?: React.ReactNode }) {
             className="text-h1 font-bold tracking-tight leading-[0.95] mb-5 md:mb-7 drop-shadow-[0_4px_32px_rgba(0,0,0,1)] text-[#FFFFFF] px-2"
           >
             You Have a Business to Run<br />
-            <span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(255,30,30,0.8)]">Let Us Handle the Marketing</span>
+            Let Us Handle the <span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(255,30,30,0.8)]">Marketing</span>
           </motion.h1>
 
           <motion.p

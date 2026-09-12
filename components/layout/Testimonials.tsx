@@ -28,7 +28,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
             transition={{ delay: 0.1 }}
             className="text-h2 font-bold tracking-tight mb-3 md:mb-4 px-4"
           >
-            The Brands We&apos;re Proud<br className="hidden sm:block" /><span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent"> to Work With</span>
+            The Brands We&apos;re Proud<br className="hidden sm:block" /> to Work With
           </motion.h2>
         </div>
 

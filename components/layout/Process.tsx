@@ -50,7 +50,7 @@ export default function Process() {
             transition={{ delay: 0.1 }}
             className="text-h2 font-bold tracking-tight mb-3 md:mb-4 px-4"
           >
-            A Smarter Way<br /><span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent">To Do Marketing</span>
+            A Smarter Way To Do Marketing
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
