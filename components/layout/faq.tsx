@@ -29,7 +29,7 @@ const faqsRight = [
   {
     question: "How do you measure success?",
     answer:
-      "We establish clear KPIs at the start of every project — whether conversion rates, engagement metrics, or revenue growth — and track performance continuously.",
+      "We establish clear KPIs at the start of every project, whether conversion rates, engagement metrics, or revenue growth, and track performance continuously.",
   },
   {
     question: "What is your pricing model?",

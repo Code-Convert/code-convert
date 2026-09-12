@@ -12,7 +12,7 @@ const steps = [
   {
     number: '02',
     title: 'Strategise',
-    description: 'We identify the priorities, opportunities and channels that will have the greatest impact — then turn them into an actionable plan.',
+    description: 'We identify the priorities, opportunities and channels that will have the greatest impact, then turn them into an actionable plan.',
     timeline: 'SET THE DIRECTION'
   },
   {
@@ -59,7 +59,7 @@ export default function Process() {
             transition={{ delay: 0.2 }}
             className="text-body text-neutral-400 font-bold max-w-xl mx-auto px-4"
           >
-            We keep the process focused, collaborative and practical — bringing strategy, creative and execution together so every piece of marketing has a clear purpose.
+            We keep the process focused, collaborative and practical, bringing strategy, creative and execution together so every piece of marketing has a clear purpose.
           </motion.p>
         </div>
 

@@ -11,7 +11,7 @@ export function TestimonialCard({ quote, author, role }: TestimonialCardProps) {
     <div className="bg-white/5 rounded-lg p-8 mb-12">
       <p className="text-xl italic mb-4">&ldquo;{quote}&rdquo;</p>
       <p className="text-gray-400">
-        — {author}
+        {author}
         {role && `, ${role}`}
       </p>
     </div>

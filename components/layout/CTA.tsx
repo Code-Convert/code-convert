@@ -25,7 +25,7 @@ export default function CTA() {
 
             {/* Headline */}
             <h2 className="text-h2 font-bold tracking-tight mb-3 md:mb-4 px-2">
-              Your Next Move Starts <span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent">HERE.</span>
+              Your Next Move Starts <span className="bg-[linear-gradient(135deg,#FF1E1E_0%,#FF5555_50%,#FF1E1E_100%)] bg-clip-text text-transparent">HERE!</span>
             </h2>
 
             {/* Body */}

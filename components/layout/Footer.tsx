@@ -18,7 +18,7 @@ export default function Footer() {
             <a href="/services" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Services</a>
             <a href="/case-studies" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Case Studies</a>
             <a href="/blog" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Blog</a>
-            <a href="/contact" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Contact</a>
+            <a href="/contact-us" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors whitespace-nowrap">Contact</a>
           </div>
 
           <div className="flex items-center justify-end gap-x-4 sm:gap-x-6">
@@ -34,7 +34,7 @@ export default function Footer() {
             <a href="/services" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Services</a>
             <a href="/case-studies" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Case Studies</a>
             <a href="/blog" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Blog</a>
-            <a href="/contact" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Contact</a>
+            <a href="/contact-us" className="text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">Contact</a>
           </div>
           
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
