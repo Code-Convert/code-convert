@@ -91,12 +91,8 @@ export default async function ServicesPage() {
       {/* 7. Recent Launches */}
       <RecentLaunches />
 
-      {/* 8. FAQ + 9. Final CTA — shared red background */}
-      <div className="relative bg-[#050505]">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 140% 90% at 50% 60%, rgba(200,10,10,0.22) 0%, rgba(100,0,0,0.12) 45%, transparent 70%)' }}
-        />
+      {/* 8. FAQ + 9. Final CTA — VoidBackground fades red overlay in here */}
+      <div id="partners" className="relative">
         <ServicesFAQ />
         <CTA />
       </div>
