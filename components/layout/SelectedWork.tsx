@@ -11,8 +11,10 @@ interface SelectedWorkProps {
 }
 
 export default function SelectedWork({ projects }: SelectedWorkProps) {
+  if (projects.length === 0) return null;
+
   return (
-    <section id="work" className="relative z-10 py-12 sm:py-16 md:py-24 lg:py-32">
+    <section id="work" className="relative z-10 py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(255,30,30,0.02),transparent_60%)] -z-10" />
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-8 sm:mb-10 md:mb-14 gap-4">

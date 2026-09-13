@@ -92,7 +92,7 @@ const services: ServiceItem[] = [
 
 export default function Services() {
   return (
-    <section id="capabilities" className="relative z-10 py-12 sm:py-16 md:py-24 lg:py-32 border-t border-white/[0.03]">
+    <section id="capabilities" className="relative z-10 py-12 sm:py-16 md:py-20 lg:py-24 border-t border-white/[0.03]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_100%,rgba(255,30,30,0.02),transparent_60%)] -z-10" />
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-12 md:mb-16">

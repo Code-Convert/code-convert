@@ -39,10 +39,9 @@ export default async function HomePage() {
 
   return (
     <LenisProvider>
-      <Hero>
-        <Statistics />
-      </Hero>
+      <Hero />
       <Marquee />
+      <Statistics />
       <SelectedWork projects={projects} />
       <Services />
       <Process />
