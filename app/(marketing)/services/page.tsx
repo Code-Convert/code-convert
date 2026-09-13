@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import SelectedProjects from '@/components/layout/selected-projects';
-import Statistics from '@/components/layout/statistics';
 import GalleryGrid, { GalleryItem } from '@/components/layout/gallery-grid';
 import Process from '@/components/layout/Process';
 import ServicesFAQ from '@/components/layout/faq';
@@ -75,9 +74,6 @@ export default async function ServicesPage() {
 
       {/* 2. Selected Projects */}
       <SelectedProjects />
-
-      {/* 3. Statistics */}
-      <Statistics />
 
       {/* 4. Tech Stack */}
       <TechStack />

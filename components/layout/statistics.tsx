@@ -44,12 +44,12 @@ export default async function Statistics() {
         <div className="text-center mb-16 md:mb-20">
           <SectionHeader
             title="Proven in the Real World"
-            description="Good work looks good. Great work moves the business forward. Here's what we've built and the impact it's made."
+            description="Good work looks good. Great work moves the business forward. Here's our method designed to keep them there."
           />
 
           <div className="mt-8">
-            <CTAButton href="/case-studies" variant="secondary">
-              See More Projects
+            <CTAButton href="#method" variant="secondary">
+              See How It Works
             </CTAButton>
           </div>
         </div>
