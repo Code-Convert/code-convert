@@ -111,7 +111,7 @@ export default function Services() {
             transition={{ delay: 0.1 }}
             className="text-h2 font-bold tracking-tight mb-3 md:mb-4 px-4"
           >
-            Built For Every Side Of Your Marketing
+            Full Service Marketing Built Around Your Business
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
