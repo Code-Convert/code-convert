@@ -84,10 +84,12 @@ export default async function ServicesPage() {
       {/* 6. Process Timeline */}
       <Process />
 
-      {/* 7. Recent Launches */}
-      <RecentLaunches />
+      {/* 7. Recent Launches — red fade begins here */}
+      <div id="red-fade-start">
+        <RecentLaunches />
+      </div>
 
-      {/* 8. FAQ + 9. Final CTA — VoidBackground fades red overlay in here */}
+      {/* 8. FAQ + 9. Final CTA */}
       <div id="partners" className="relative">
         <ServicesFAQ />
         <CTA />

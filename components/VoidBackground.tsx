@@ -142,12 +142,12 @@ export default function VoidBackground() {
       scrollRef.current = e.detail.scroll;
       scrollVelRef.current = e.detail.scrollVel;
 
-      const partnersEl = document.getElementById('partners');
-      if (partnersEl) {
+      const fadeTriggerEl = document.getElementById('red-fade-start') ?? document.getElementById('partners');
+      if (fadeTriggerEl) {
         const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
         if (totalScroll > 0) {
-          const fadeStart = (partnersEl.offsetTop - window.innerHeight * 0.5) / totalScroll;
-          const fadeEnd = fadeStart + 0.1;
+          const fadeStart = (fadeTriggerEl.offsetTop - window.innerHeight * 0.6) / totalScroll;
+          const fadeEnd = fadeStart + 0.18;
           const prog = e.detail.scroll as number;
           let t = 0;
           if (prog >= fadeEnd) t = 1;
