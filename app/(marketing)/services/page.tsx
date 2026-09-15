@@ -60,8 +60,8 @@ export default async function ServicesPage() {
       
       {/* 1. Hero Section */}
       <HeroBackgroundPaths
-        title="Full-service marketing, built around your business"
-        subtitle="From websites and e-commerce to social media, paid ads and traditional marketing, we give your business one team to plan, execute and grow."
+        title="Your Marketing Handled Under One Roof"
+        subtitle="From your website and e-commerce to social media, paid advertising and traditional marketing, we bring the expertise and execution your business needs into one team."
         primaryCTA={{
             text: "Book Your Free Strategy Session",
             href: "/contact-us",

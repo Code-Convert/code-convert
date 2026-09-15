@@ -137,11 +137,19 @@ export default function Services() {
           ))}
         </div>
 
-        {/* Desktop: grid */}
-        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {services.map((service, i) => (
-            <ServiceCard key={i} service={service} index={i} />
-          ))}
+        {/* Desktop: bento — alternating [wide+narrow] [narrow+wide] [wide+narrow], flagship services in wide slots */}
+        <div className="hidden sm:grid grid-cols-3 gap-4">
+          {/* Row 1: Web Design (wide) + Paid Ads (narrow) */}
+          <ServiceCard service={services[0]} index={0} span={2} />
+          <ServiceCard service={services[3]} index={3} />
+          {/* Row 2: Email (narrow) + E-Commerce (wide) */}
+          <ServiceCard service={services[4]} index={4} />
+          <ServiceCard service={services[1]} index={1} span={2} />
+          {/* Row 3: Social Media (wide) + Traditional (narrow) */}
+          <ServiceCard service={services[2]} index={2} span={2} />
+          <ServiceCard service={services[5]} index={5} />
+          {/* Row 4: OOH/DOOH (full width) */}
+          <ServiceCard service={services[6]} index={6} span={3} />
         </div>
       </div>
     </section>
@@ -155,7 +163,7 @@ function hexToRgb(hex: string) {
   return `${r}, ${g}, ${b}`;
 }
 
-function ServiceCard({ service, index }: { service: ServiceItem; index: number }) {
+function ServiceCard({ service, index, span = 1 }: { service: ServiceItem; index: number; span?: number }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const rgb = hexToRgb(service.accent);
 
@@ -175,6 +183,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
       style={{
         background: `linear-gradient(135deg, rgba(${rgb}, 0.06) 0%, rgba(5,5,5,0.5) 60%)`,
         border: `1px solid rgba(${rgb}, 0.14)`,
+        gridColumn: span > 1 ? `span ${span}` : undefined,
       }}
     >
       <div

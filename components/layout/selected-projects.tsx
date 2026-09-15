@@ -46,7 +46,7 @@ export default function SelectedProjects() {
     <Section id="projects" className="py-12 md:py-24">
       <div className="max-w-7xl px-4 sm:px-6 z-100 mx-auto">
         <SectionHeader
-          title="See How Strategy, Design & Performance Combine"
+          title="See Strategy, Design & Execution Combined"
           description="Explore how we combine strategic thinking, compelling design and technical excellence to create measurable business growth for our clients."
         />
       </div>
