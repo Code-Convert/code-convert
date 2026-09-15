@@ -77,7 +77,7 @@ export default function HeroBackgroundPaths({
                     transition={{ duration: 0.6 }}
                     className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase border border-white/20 bg-white/[0.06] text-white/70 mb-6 md:mb-8"
                 >
-                    What We Do
+                    Our Services
                 </motion.div>
 
                 {/* Heading */}
