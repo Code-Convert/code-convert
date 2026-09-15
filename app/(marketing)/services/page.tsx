@@ -61,7 +61,7 @@ export default async function ServicesPage() {
       {/* 1. Hero Section */}
       <HeroBackgroundPaths
         title="Your Marketing Handled Under One Roof"
-        subtitle="From your website and e-commerce to social media, paid advertising and traditional marketing, we bring the expertise and execution your business needs into one team."
+        subtitle="Everything you need to build a stronger, more credible presence in your market, from the first impression to the ongoing work that keeps your business moving."
         primaryCTA={{
             text: "Book Your Free Strategy Session",
             href: "/contact-us",
