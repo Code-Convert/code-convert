@@ -72,11 +72,11 @@ export default async function ServicesPage() {
         }}
       />
 
-      {/* 2. Selected Projects */}
-      <SelectedProjects />
-
-      {/* 4. Tech Stack */}
+      {/* 2. Tech Stack */}
       <TechStack />
+
+      {/* 3. Selected Projects */}
+      <SelectedProjects />
 
       {/* 5. Gallery Grid */}
       <GalleryGrid items={galleryItems} />
