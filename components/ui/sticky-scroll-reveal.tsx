@@ -235,7 +235,7 @@ export const StickyScroll = ({
               
               {/* Mobile Image - shown on top, hidden on lg+ */}
               <div className="block lg:hidden mb-6">
-                <div className="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl">
+                <div className="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden border border-white/10 bg-white shadow-2xl">
                   <motion.div
                     key={`mobile-${activeCard}-${index}`}
                     initial={{ opacity: 0 }}
@@ -247,7 +247,7 @@ export const StickyScroll = ({
                       src={item.image}
                       alt={item.name}
                       fill
-                      className="object-cover"
+                      className="object-contain object-top"
                       priority
                     />
                   </motion.div>
