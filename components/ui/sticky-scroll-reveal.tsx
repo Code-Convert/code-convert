@@ -324,7 +324,7 @@ export const StickyScroll = ({
                 className="relative flex items-end gap-4 w-full h-full px-2"
               >
                 {/* Desktop browser frame */}
-                <div className="flex-1 flex flex-col rounded-xl overflow-hidden border border-white/15 bg-[#1a1a1a] shadow-2xl" style={{ maxHeight: '72%' }}>
+                <div className="flex-1 flex flex-col rounded-xl overflow-hidden border border-white/15 bg-[#1a1a1a] shadow-2xl" style={{ height: '72%' }}>
                   {/* Browser chrome */}
                   <div className="flex items-center gap-1.5 px-3 py-2 bg-[#2a2a2a] border-b border-white/10 shrink-0">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
@@ -350,7 +350,7 @@ export const StickyScroll = ({
                 {/* Phone frame */}
                 <div
                   className="shrink-0 flex flex-col rounded-[28px] overflow-hidden border-[3px] border-white/20 bg-[#111] shadow-2xl"
-                  style={{ width: '28%', maxHeight: '82%' }}
+                  style={{ width: '28%', height: '82%' }}
                 >
                   {/* Phone notch area */}
                   <div className="flex justify-center pt-2 pb-1 bg-[#111] shrink-0">
