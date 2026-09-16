@@ -14,7 +14,7 @@ const content = [
       'A performance-driven Shopify store built to showcase a premium activewear brand, improve mobile shopping and drive conversions across all devices.',
     services: ['E-Commerce Development', 'Mobile Optimisation', 'Conversion Optimisation'],
     image: '/images/case-studies/peak-product-grid.png',
-    mobileImage: '/images/case-studies/peak-activewear-mobile.png',
+    mobileImage: '/images/case-studies/peak-mobile.jpg',
   },
   {
     industry: 'Luxury Retail',
