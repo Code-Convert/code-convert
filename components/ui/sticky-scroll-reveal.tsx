@@ -326,7 +326,7 @@ export const StickyScroll = ({
                 {/* Desktop browser frame — fills most of the panel */}
                 <div
                   className="absolute flex flex-col rounded-xl overflow-hidden border border-white/15 bg-[#1a1a1a] shadow-2xl"
-                  style={{ top: '8%', left: '2%', width: '82%', aspectRatio: '19/10' }}
+                  style={{ top: '4%', left: '0%', width: '82%', aspectRatio: '19/10' }}
                 >
                   <div className="flex items-center gap-1.5 px-3 py-2 bg-[#2a2a2a] border-b border-white/10 shrink-0">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
@@ -351,7 +351,7 @@ export const StickyScroll = ({
                 {/* Phone frame — overlaps bottom-right of browser */}
                 <div
                   className="absolute flex flex-col rounded-[2rem] overflow-hidden border-[3px] border-white/25 bg-black shadow-2xl"
-                  style={{ bottom: '2%', right: '-4%', width: '42%', aspectRatio: '9/19' }}
+                  style={{ top: '30%', right: '0%', width: '42%', aspectRatio: '9/19' }}
                 >
                   <div className="flex justify-center pt-2 pb-1 bg-[#111] shrink-0">
                     <div className="w-10 h-1 rounded-full bg-white/20" />
