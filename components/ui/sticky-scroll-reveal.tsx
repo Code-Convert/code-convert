@@ -335,12 +335,12 @@ export const StickyScroll = ({
                     </div>
                   </div>
                   {/* Screenshot */}
-                  <div className="relative w-full flex-1 min-h-0">
+                  <div className="relative w-full flex-1 min-h-0 bg-white">
                     <Image
                       src={content[activeCard].image}
                       alt={content[activeCard].name}
                       fill
-                      className="object-cover object-top"
+                      className="object-contain object-top"
                       sizes="50vw"
                       priority
                     />
