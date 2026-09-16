@@ -311,7 +311,7 @@ export const StickyScroll = ({
 
         {/* Right Column - Sticky Image (desktop only) */}
         <div className="hidden lg:block lg:w-1/2 max-w-2xl">
-          <div className="sticky top-10 h-[80vh] flex items-center justify-center">
+          <div className="sticky top-10 h-[80vh] overflow-hidden flex items-center justify-center">
             <div className="absolute inset-0 bg-linear-to-br from-[#FF1E1E]/20 to-transparent rounded-2xl blur-3xl" />
 
             {content[activeCard].mobileImage ? (
@@ -351,7 +351,7 @@ export const StickyScroll = ({
                 {/* Phone frame — overlaps bottom-right of browser */}
                 <div
                   className="absolute flex flex-col rounded-[2rem] overflow-hidden border-[3px] border-white/25 bg-black shadow-2xl"
-                  style={{ top: '36%', left: '20%', width: '38%', aspectRatio: '9/19' }}
+                  style={{ top: '34%', left: '27%', width: '28%', aspectRatio: '9/19' }}
                 >
                   <div className="flex justify-center pt-2 pb-1 bg-[#111] shrink-0">
                     <div className="w-10 h-1 rounded-full bg-white/20" />
