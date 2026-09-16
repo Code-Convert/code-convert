@@ -177,6 +177,7 @@ export const StickyScroll = ({
     services: string[];
     image: string;
     mobileImage?: string;
+    mobileVideo?: string;
   }[];
   contentClassName?: string;
 }) => {
@@ -314,7 +315,7 @@ export const StickyScroll = ({
           <div className="sticky top-10 h-[80vh] overflow-hidden flex items-center justify-center">
             <div className="absolute inset-0 bg-linear-to-br from-[#FF1E1E]/20 to-transparent rounded-2xl blur-3xl" />
 
-            {content[activeCard].mobileImage ? (
+            {(content[activeCard].mobileImage || content[activeCard].mobileVideo) ? (
               /* Overlapping mockup: browser fills panel, phone floats over bottom-right */
               <motion.div
                 key={activeCard}
@@ -357,14 +358,25 @@ export const StickyScroll = ({
                     <div className="w-10 h-1 rounded-full bg-white/20" />
                   </div>
                   <div className="relative flex-1 min-h-0 overflow-hidden">
-                    <Image
-                      src={content[activeCard].mobileImage!}
-                      alt={`${content[activeCard].name} mobile`}
-                      fill
-                      className="object-cover"
-                      sizes="15vw"
-                      priority
-                    />
+                    {content[activeCard].mobileVideo ? (
+                      <video
+                        src={content[activeCard].mobileVideo}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    ) : (
+                      <Image
+                        src={content[activeCard].mobileImage!}
+                        alt={`${content[activeCard].name} mobile`}
+                        fill
+                        className="object-cover"
+                        sizes="15vw"
+                        priority
+                      />
+                    )}
                   </div>
                   <div className="flex justify-center py-2 bg-[#111] shrink-0">
                     <div className="w-8 h-1 rounded-full bg-white/30" />
