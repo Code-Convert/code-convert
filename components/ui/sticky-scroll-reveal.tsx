@@ -351,7 +351,7 @@ export const StickyScroll = ({
                 {/* Phone frame — overlaps bottom-right of browser */}
                 <div
                   className="absolute flex flex-col rounded-[2rem] overflow-hidden border-[3px] border-white/25 bg-black shadow-2xl"
-                  style={{ top: '46%', left: '34%', width: '32%', aspectRatio: '9/19' }}
+                  style={{ top: '42%', left: '31%', width: '38%', aspectRatio: '9/19' }}
                 >
                   <div className="flex justify-center pt-2 pb-1 bg-[#111] shrink-0">
                     <div className="w-10 h-1 rounded-full bg-white/20" />
