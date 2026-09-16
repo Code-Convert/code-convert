@@ -161,7 +161,7 @@
 
 
 "use client";
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useEffect } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -183,6 +183,15 @@ export const StickyScroll = ({
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+  }, [activeCard]);
   const { scrollYProgress } = useScroll({
     container: ref,
     offset: ["start start", "end start"],
@@ -374,6 +383,7 @@ export const StickyScroll = ({
                   <div className="relative flex-1 min-h-0 overflow-hidden">
                     {content[activeCard].mobileVideo ? (
                       <video
+                        ref={videoRef}
                         src={content[activeCard].mobileVideo}
                         autoPlay
                         muted
