@@ -24,7 +24,7 @@ const content = [
       'Launch QA & Testing',
     ],
     image: '/images/case-studies/peak-homepage.png',
-    mobileVideo: '/videos/peak-mobile.mov',
+    mobileVideo: '/videos/peak-mobile.mp4',
   },
   {
     industry: 'Luxury Retail',
