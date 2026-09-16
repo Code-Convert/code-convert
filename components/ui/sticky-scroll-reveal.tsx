@@ -321,7 +321,7 @@ export const StickyScroll = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="relative flex items-end gap-4 w-full h-full px-2"
+                className="relative flex items-center gap-4 w-full h-full px-2"
               >
                 {/* Desktop browser frame */}
                 <div className="flex-1 flex flex-col rounded-xl overflow-hidden border border-white/15 bg-[#1a1a1a] shadow-2xl" style={{ height: '72%' }}>
@@ -357,9 +357,9 @@ export const StickyScroll = ({
                     <div className="w-10 h-1 rounded-full bg-white/20" />
                   </div>
                   {/* Screenshot */}
-                  <div className="relative flex-1 min-h-0 overflow-hidden">
+                  <div className="relative flex-1 min-h-0 overflow-hidden bg-white">
                     <Image
-                      src={content[activeCard].mobileImage}
+                      src={content[activeCard].image}
                       alt={`${content[activeCard].name} mobile`}
                       fill
                       className="object-cover object-top"
