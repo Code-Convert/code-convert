@@ -228,15 +228,18 @@ export const StickyScroll = ({
       className="relative h-screen overflow-y-auto scrollbar-none rounded-md"
       ref={ref}
     >
-      <div className="flex flex-col lg:flex-row justify-center gap-10 lg:gap-20 px-4 lg:px-10 py-10">
+      <div className="relative flex flex-col lg:flex-row justify-center gap-10 lg:gap-20 px-4 lg:px-10 py-10">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <div className="w-2/3 h-2/3 bg-[#FF1E1E]/10 rounded-full blur-[120px]" />
+        </div>
         {/* Left Column - Scrolling Content */}
         <div className="w-full lg:w-1/2 max-w-2xl">
           {content.map((item, index) => (
             <div key={item.name + index} className="min-h-screen flex flex-col justify-center py-20">
               
-              {/* Mobile Image - shown on top, hidden on lg+ */}
+              {/* Mobile preview - shown on top, hidden on lg+ */}
               <div className="block lg:hidden mb-6">
-                <div className="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-white shadow-2xl" style={{ aspectRatio: '19/10' }}>
+                <div className="relative w-[200px] mx-auto rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl" style={{ aspectRatio: '9/19' }}>
                   <motion.div
                     key={`mobile-${activeCard}-${index}`}
                     initial={{ opacity: 0 }}
@@ -244,13 +247,24 @@ export const StickyScroll = ({
                     transition={{ duration: 0.3 }}
                     className="w-full h-full relative"
                   >
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      className="object-contain object-top"
-                      priority
-                    />
+                    {item.mobileVideo ? (
+                      <video
+                        src={item.mobileVideo}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    ) : (
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover object-top"
+                        priority
+                      />
+                    )}
                   </motion.div>
                 </div>
               </div>
@@ -313,7 +327,6 @@ export const StickyScroll = ({
         {/* Right Column - Sticky Image (desktop only) */}
         <div className="hidden lg:block lg:w-1/2 max-w-2xl">
           <div className="sticky top-10 h-[80vh] overflow-hidden flex items-center justify-center">
-            <div className="absolute inset-0 bg-linear-to-br from-[#FF1E1E]/20 to-transparent rounded-2xl blur-3xl" />
 
             {(content[activeCard].mobileImage || content[activeCard].mobileVideo) ? (
               /* Overlapping mockup: browser fills panel, phone floats over bottom-right */
@@ -342,7 +355,7 @@ export const StickyScroll = ({
                       src={content[activeCard].image}
                       alt={content[activeCard].name}
                       fill
-                      className="object-contain object-top"
+                      className="object-cover object-top"
                       sizes="45vw"
                       priority
                     />

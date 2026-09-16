@@ -11,9 +11,19 @@ const content = [
     industry: 'E-Commerce',
     name: 'Peak Activewear',
     description:
-      'A performance-driven Shopify store built to showcase a premium activewear brand, improve mobile shopping and drive conversions across all devices.',
-    services: ['E-Commerce Development', 'Mobile Optimisation', 'Conversion Optimisation'],
-    image: '/images/case-studies/peak-product-grid.png',
+      'A custom Shopify store built to launch a premium activewear brand with a seamless mobile shopping experience and a conversion-focused customer journey.',
+    services: [
+      'Custom Shopify Theme Development',
+      'Product Page Design & Build',
+      'Collections & Category Architecture',
+      'Mobile-First Shopping Experience',
+      'Checkout Flow Optimisation',
+      'Brand Visual Design',
+      'App Integration & Configuration',
+      'Speed & Performance Optimisation',
+      'Launch QA & Testing',
+    ],
+    image: '/images/case-studies/peak-homepage.png',
     mobileVideo: '/videos/peak-mobile.mov',
   },
   {
