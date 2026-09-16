@@ -326,7 +326,7 @@ export const StickyScroll = ({
                 {/* Desktop browser frame — fills most of the panel */}
                 <div
                   className="absolute flex flex-col rounded-xl overflow-hidden border border-white/15 bg-[#1a1a1a] shadow-2xl"
-                  style={{ top: '8%', left: '2%', right: '14%', bottom: '12%' }}
+                  style={{ top: '8%', left: '2%', width: '82%', aspectRatio: '19/10' }}
                 >
                   <div className="flex items-center gap-1.5 px-3 py-2 bg-[#2a2a2a] border-b border-white/10 shrink-0">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
