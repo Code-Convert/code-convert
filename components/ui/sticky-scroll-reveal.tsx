@@ -235,7 +235,7 @@ export const StickyScroll = ({
               
               {/* Mobile Image - shown on top, hidden on lg+ */}
               <div className="block lg:hidden mb-6">
-                <div className="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden border border-white/10 bg-white shadow-2xl">
+                <div className="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-white shadow-2xl" style={{ aspectRatio: '19/10' }}>
                   <motion.div
                     key={`mobile-${activeCard}-${index}`}
                     initial={{ opacity: 0 }}
