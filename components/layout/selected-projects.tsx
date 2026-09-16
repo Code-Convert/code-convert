@@ -9,11 +9,11 @@ import Link from 'next/link';
 const content = [
   {
     industry: 'E-Commerce',
-    name: 'StyleHub Fashion',
+    name: 'Peak Activewear',
     description:
-      'A premium fashion e-commerce experience designed to improve mobile shopping, streamline checkout journeys and increase conversions across all devices.',
+      'A performance-driven Shopify store built to showcase a premium activewear brand, improve mobile shopping and drive conversions across all devices.',
     services: ['E-Commerce Development', 'Mobile Optimisation', 'Conversion Optimisation'],
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=800&fit=crop',
+    image: '/images/case-studies/peak-activewear.png',
   },
   {
     industry: 'Luxury Retail',
