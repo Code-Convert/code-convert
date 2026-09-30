@@ -46,20 +46,23 @@ const content = [
     mobileVideoPoster: '/images/case-studies/jasonb-poster.jpg',
   },
   {
-    industry: 'Corporate / Fintech',
-    name: 'Fintech Solutions',
-    description:
-      'A conversion-focused corporate platform designed to establish authority, communicate services clearly and generate qualified leads.',
-    services: ['Lead Generation', 'SEO Foundations', 'Performance Optimisation'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop',
-  },
-  {
     industry: 'Property',
-    name: 'Prime Estates',
+    name: 'Nelson Chauke Properties',
     description:
-      'A modern property platform built to simplify discovery, improve user engagement and increase enquiry volume.',
-    services: ['Property Search Experience', 'Lead Capture', 'Mobile Optimisation'],
+      'Nelson Chauke Properties needed a digital platform that could present its property portfolio with the professionalism and sophistication of the brand. We designed and developed a modern real estate website that makes it easy for prospective buyers and renters to discover, filter and enquire about properties, while creating a seamless experience across desktop and mobile.',
+    services: [
+      'Custom Real Estate Website Development',
+      'Property Search & Filtering',
+      'Property Listings & Featured Properties',
+      'Lead Capture & Enquiry System',
+      'Responsive Mobile-First Design',
+      'Premium UI & Brand Design',
+      'Property Alert Integration',
+      'Website QA & Launch Testing',
+    ],
     image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=800&fit=crop',
+    mobileVideo: '/videos/ncp-mobile.mp4',
+    mobileVideoPoster: '/images/case-studies/ncp-poster.jpg',
   },
 ];
 
