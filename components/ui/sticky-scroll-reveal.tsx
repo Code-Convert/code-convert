@@ -178,6 +178,7 @@ export const StickyScroll = ({
     image: string;
     mobileImage?: string;
     mobileVideo?: string;
+    mobileVideoPoster?: string;
   }[];
   contentClassName?: string;
 }) => {
@@ -259,7 +260,7 @@ export const StickyScroll = ({
                     {item.mobileVideo ? (
                       <video
                         src={item.mobileVideo}
-                        poster="/images/case-studies/peak-mobile-poster.jpg"
+                        poster={item.mobileVideoPoster}
                         autoPlay
                         muted
                         loop
@@ -386,7 +387,7 @@ export const StickyScroll = ({
                       <video
                         ref={videoRef}
                         src={content[activeCard].mobileVideo}
-                        poster="/images/case-studies/peak-mobile-poster.jpg"
+                        poster={content[activeCard].mobileVideoPoster}
                         autoPlay
                         muted
                         loop

@@ -25,14 +25,25 @@ const content = [
     ],
     image: '/images/case-studies/peak-homepage.png',
     mobileVideo: '/videos/peak-mobile.mp4',
+    mobileVideoPoster: '/images/case-studies/peak-mobile-poster.jpg',
   },
   {
     industry: 'Luxury Retail',
-    name: 'Mbali Jewellery',
+    name: 'Jason B Jewellery',
     description:
-      'A luxury-focused digital storefront crafted to elevate brand perception, showcase collections and create a seamless online purchasing experience.',
-    services: ['Luxury UX Design', 'Mobile Commerce', 'Product Storytelling'],
+      'A refined e-commerce platform designed to showcase a curated collection of jewellery and watches through a premium, intuitive shopping experience — balancing luxury brand presentation with a seamless customer journey across desktop and mobile.',
+    services: [
+      'Custom E-Commerce Development',
+      'Product & Collection Architecture',
+      'Premium Brand Visual Design',
+      'Mobile-First Shopping Experience',
+      'Yoco Payment Integration',
+      'Product Page Optimisation',
+      'Launch QA & Testing',
+    ],
     image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&h=800&fit=crop',
+    mobileVideo: '/videos/jasonb-mobile.mp4',
+    mobileVideoPoster: '/images/case-studies/jasonb-poster.jpg',
   },
   {
     industry: 'Corporate / Fintech',
